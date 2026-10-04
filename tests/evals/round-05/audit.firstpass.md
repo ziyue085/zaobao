@@ -22,7 +22,7 @@
 
 ### c02 · UPDATED
 
-- 标题：商务部对原产于欧盟的进口对硝基甲苯反倾销立案调查：公布调查问卷
+- 标题：商务部公布欧盟进口对硝基甲苯反倾销立案调查问卷
 - 栏目：universal_policy｜声明状态：UPDATED｜证据：VERIFIED_PRIMARY
 - Gate：structure PASS✓  freshness PASS✓  evidence PASS✓  duplication PASS✓  importance PASS✓  category PASS✓  output PASS✓
 - 派生：窗口内=True｜一手=True｜交叉来源=1｜历史命中=True｜实质事件=True｜可输出=True

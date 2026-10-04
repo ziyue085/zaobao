@@ -1,0 +1,38 @@
+name: CI
+
+# 最小可用 CI：push / PR 到 main 时按顺序跑五层检查。
+# 任一步返回非零，整个 job 即为失败 —— 不使用 `|| true`，不吞掉失败。
+# 零依赖项目，除标准库外不装任何包，因此不做缓存。
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 配置体检（check-config，有 BLOCK 即失败）
+        run: python scripts/zaobao_check.py check-config --repo .
+
+      - name: 回归测试
+        run: python tests/run_regression.py
+
+      - name: CLI 冒烟
+        run: python tests/run_cli_smoke.py
+
+      - name: 变异测试
+        run: python tests/mutate.py
+
+      - name: 输出可读性检查
+        run: python tests/check_output_readability.py

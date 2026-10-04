@@ -146,6 +146,10 @@ git clone https://github.com/ziyue085/zaobao.git morning-intelligence
 让它直接读取 `SKILL.md`，再把 `prompts/` 与 `references/` 里的文件按需提供给它。
 最小可用集合是 `SKILL.md` + `config/watchlist.yaml`。
 
+> **先改 `config/watchlist.yaml` 再跑。** 仓库里这份默认值是**作者本人的关注项**
+> （投资栏目尤其如此）。关注项决定哪些主体能进候选、投资条目能否通过主体绑定校验，
+> 所以装好后建议先按自己的关注范围改一遍 —— 只改这个文件，不用动代码。
+
 ### 日常使用
 
 ```bash
@@ -403,19 +407,13 @@ OpenAI 今日在其官网发布支持视频输入的多模态模型。官方文�
 2. **词表是穷举式的。** 新出现的标题党词、新的"分析味"表述不会自动被拦。
    需要每周人工回看并补充 `scripts/zaobao_check.py` 顶部的词表并重跑测试。
 3. **规则层校验不了"标题是否被这条 URL 支持"。** 它能校验 URL 是否可引用、
-   是否落在可信清单里，但校验不了一条标题是不是超出了来源能支持的范围。
-   round-05 就出现过标题写成"公布调查问卷"、来源页其实是"答记者问"的情形。
-
-### 一处尚未修掉的排版瑕疵
-
-`tests/check_output_readability.py` 按"标题 ≤ 30 字"检查输出，当前 9 期里有 1 期超标
-（`round-05` 的 31 字标题 `商务部对原产于欧盟的进口对硝基甲苯反倾销立案调查：公布调查问卷`）。
-原因是渲染器对标题长度只做宽口径的上限校验（`TITLE_MAX_CHARS = 45`），没有针对微信阅读收紧。
-这是 **v0.1.2 的第一顺位待办**，本轮未就地修，因为没有为了让自己新写的检查变绿而放宽阈值。
+   是否落在可信清单里，但校验不了一条标题是不是超出了来源能支持的范围 ——
+   它不看来源页的内容。标题与来源是否一致，目前只能靠人工复核
+   （见 `tests/regression-checklist.md` 第四段）。
 
 ### 测试覆盖面
 
-- 回归测试：15 用例 / 85 步骤，全绿；变异测试 25/25 捕获；CLI 冒烟 29/29；可读性检查 9 期 8 通过。
+- 回归测试：15 用例 / 85 步骤，全绿；变异测试 25/25 捕获；CLI 冒烟 29/29；可读性检查 9 期 9 通过。
 - 规则层共 80+ 个 code，夹具中被**正面断言**的有 60 余个。其余由 CLI 冒烟覆盖（`HISTORY_*` / `CONFIG_*`）
   或属于需要构造非法输入的畸形分支。详见 `tests/test-cases.md` 第五节的覆盖矩阵。
 - 夹具是**合成数据**，证明的是规则逻辑。**「真实网络环境下到底行不行」由实战评估层回答** ——
@@ -441,12 +439,12 @@ OpenAI 今日在其官网发布支持视频输入的多模态模型。官方文�
 
 | 想看什么 | 去哪 |
 |---|---|
-| 模型运行时怎么执行 | `SKILL.md` |
-| 为什么这么设计、阈值依据 | `docs/design-notes.md` |
-| 怎么加规则、怎么加测试 | `docs/design-notes.md` 第十节 |
-| 实战效果到底怎么样、怎么复现 | `docs/evaluation.md` |
-| 已知断点的完整清单 | `references/reliability-gaps.md` |
-| 改完要怎么验证 | `tests/regression-checklist.md` |
+| 模型运行时怎么执行 | [SKILL.md](SKILL.md) |
+| 为什么这么设计、阈值依据 | [docs/design-notes.md](docs/design-notes.md) |
+| 怎么加规则、怎么加测试 | [docs/design-notes.md](docs/design-notes.md) 第十节 |
+| 实战效果到底怎么样、怎么复现 | [docs/evaluation.md](docs/evaluation.md) |
+| 已知断点的完整清单 | [references/reliability-gaps.md](references/reliability-gaps.md) |
+| 改完要怎么验证 | [tests/regression-checklist.md](tests/regression-checklist.md) |
 
 ## 许可
 

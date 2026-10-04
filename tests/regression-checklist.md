@@ -88,15 +88,14 @@ v0.1.1 又踩了同一类坑两次：M07 的目标片段因合并条件行改动
 python tests/check_output_readability.py
 ```
 
-期望：`TERMINAL_STATUS=PASS`。
+期望：`TERMINAL_STATUS=PASS`（9 期全过）。
 
 它检查六件事：标题 ≤ 30 字、每段 ≤ 3 句、单段 ≤ 180 字、无 Markdown 表格、
 来源链接必须是 http(s) 绝对地址、整期阅读时长 ≤ 5 分钟。
 
-**注意**：当前 9 期里有 1 期标题超标（`round-05`，31 字），所以这条现在会返回 FAIL。
-这是**已知的、记录在案的**待办（收紧渲染器的 `TITLE_MAX_CHARS`，属 v0.1.2），
-不是回归 —— 判断方式是看 FAIL 的条目是不是 `round-05` 那一条。
-**不要为了让这条变绿而放宽阈值。**
+**注意**：出现 FAIL 就是回归，逐条定位即可 —— **不要为了让它变绿而放宽
+`check_output_readability.py` 的阈值**（`MAX_TITLE` 等）。历史上曾有 1 期标题超标
+（`round-05`，31 字），那是把**标题压回 30 字以内**解决的，不是调阈值解决的。
 
 ---
 
@@ -148,7 +147,7 @@ python tests/check_output_readability.py
 [ ] python tests/run_regression.py    → REGRESSION_STATUS=PASS
 [ ] python tests/run_cli_smoke.py     → CLI_SMOKE_STATUS=PASS
 [ ] python tests/mutate.py            → MUTATION_STATUS=PASS
-[ ] python tests/check_output_readability.py  → 只允许已知的 3 条标题超长
+[ ] python tests/check_output_readability.py  → TERMINAL_STATUS=PASS（9/9）
 [ ] python scripts/zaobao_check.py check-config --repo .   → 无 BLOCK、无 WARN
 [ ] 人工回归四段（语气 / 事实 / 判断 / 词表来源维护）过一遍
 [ ] SKILL.md 字符数 < 6000

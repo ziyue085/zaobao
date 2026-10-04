@@ -103,15 +103,27 @@ MUTATION_STATUS=PASS        25/25
   `OLD_EXPECTATION= / WHY_WRONG= / NEW_EXPECTATION=` 记录在 `docs/evaluation.md`，
   没有为了让测试变绿而偷偷改 expectation。
 
+### 发布收尾修正（同一版本内）
+
+发布前对 GitHub 呈现做了一轮收尾，**不改核心逻辑**：
+
+- **可读性检查 8/9 → 9/9。** `round-05` 那条 31 字标题压缩到 24 字（事实与事件含义不变），
+  **没有调 `check_output_readability.py` 的 `MAX_TITLE`**；`zaobao_check.py` 的
+  硬闸门 `TITLE_MAX_CHARS = 45` 也未动。
+- **文档数字与产物对齐。** README / `docs/evaluation.md` / `tests/regression-checklist.md` /
+  `docs/design-notes.md` / `references/reliability-gaps.md` 中残留的「8/9」「31 字」「v0.1.2 待办」
+  表述统一改为已修复后的实际结果。
+- **README 首页轻量优化。** 「更多文档」表改为可点击链接；安装说明处补充
+  `config/watchlist.yaml` 是作者本人的关注项、建议安装后先改。
+- **新增最小 CI。** `.github/workflows/ci.yml`：push / PR 到 `main` 时按顺序跑
+  `check-config` → 回归 → CLI 冒烟 → 变异 → 可读性，任一失败即失败。
+
 ### 未修项（明确留到 v0.1.2）
 
-1. **标题长度没有按微信阅读收紧。** 渲染器的 `TITLE_MAX_CHARS = 45` 是宽松硬上限；
-   新加的可读性检查按 30 字判，9 期里 1 期超标（`round-05`，31 字）。
-   **没有为了让新写的检查变绿而调阈值**，保留 FAIL 记录在案。
-2. **重要性判断仍是模型在做。** 本轮 5 条误收全部来自这一类。可归纳的两个模式
+1. **重要性判断仍是模型在做。** 本轮 5 条误收全部来自这一类。可归纳的两个模式
    （例行公事／照稿表态、同类尺度不一致）已写入 `references/reliability-gaps.md`，
    但没有可判定的实现方案。
-3. **栏目归类仍是模型在做。** 程序只校验栏目在不在 priority 里。
+2. **栏目归类仍是模型在做。** 程序只校验栏目在不在 priority 里。
 
 ### 本轮实际修掉的缺陷
 
