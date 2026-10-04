@@ -9,6 +9,8 @@
 - 许可：MIT
 - 依赖：**零**（Python 3.8+ 标准库即可运行；装了 PyYAML 会用，不装也能跑）
 
+[![CI](https://github.com/ziyue085/zaobao/actions/workflows/ci.yml/badge.svg)](https://github.com/ziyue085/zaobao/actions/workflows/ci.yml)
+
 ---
 
 ## 1. 这是什么
@@ -66,6 +68,7 @@ morning-intelligence/
 ├── CHANGELOG.md
 ├── LICENSE                      MIT
 ├── .gitignore / .gitattributes
+├── .github/workflows/ci.yml     CI：push / PR 到 main 时跑五层检查
 ├── config/
 │   ├── watchlist.yaml           关注什么（日常唯一需要改的文件）
 │   └── sources.yaml             来源优先级
@@ -111,6 +114,7 @@ morning-intelligence/
 | 增加 `tests/run_cli_smoke.py` | 回归测试跑的是函数，不能证明命令行入口可用 |
 | `examples/` 增加 `sample-output-bad.md` 与 `README.md` | 只有正面样例不足以说明"什么会被拦下" |
 | 保留 `data/.gitkeep`，但 `.gitignore` 排除 `data/*.jsonl` | 历史记录是个人运行数据，必须本地持久化，但不应上传 |
+| 增加 `.github/workflows/ci.yml` | 五层测试需要有人替我们每次跑；CI 与本地命令完全一致，不另立一套 |
 
 ## 5. 安装与使用
 
