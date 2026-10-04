@@ -1,0 +1,146 @@
+{
+  "id": "case-06",
+  "title": "微博热搜八卦",
+  "maps_to": "用户 Case 6",
+  "rule": "只有传闻 → REJECT；非常热门且当事人正式确认 → 可以进入社会热点",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "触发：只有微博传闻，没有当事人确认，却写成事实",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某演员被曝已办理离婚手续",
+            "section": "social",
+            "topic_type": "celebrity",
+            "subject_confirmed": false,
+            "entity": "某演员",
+            "action": "被曝",
+            "object": "已办理离婚手续",
+            "event_date": "2026-10-04T01:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://weibo.com/1234567890/status/xyz",
+                "publisher": "微博话题",
+                "tier": "discovery_only"
+              }
+            ],
+            "primary_url": "https://weibo.com/1234567890/status/xyz",
+            "body_facts": ["社交平台上出现该演员已办理离婚手续的说法。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": [
+          "GOSSIP_UNCONFIRMED",
+          "DISCOVERY_ONLY_AS_SOLE_EVIDENCE",
+          "PRIMARY_SOURCE_MISSING"
+        ],
+        "severity": {
+          "GOSSIP_UNCONFIRMED": "BLOCK",
+          "DISCOVERY_ONLY_AS_SOLE_EVIDENCE": "BLOCK"
+        }
+      }
+    },
+    {
+      "desc": "修正：整条判为 REJECTED，不再进入输出",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某演员被曝已办理离婚手续",
+            "section": "social",
+            "topic_type": "celebrity",
+            "subject_confirmed": false,
+            "entity": "某演员",
+            "action": "被曝",
+            "object": "已办理离婚手续",
+            "event_date": "2026-10-04T01:00:00+08:00",
+            "status": "LOW_VALUE",
+            "evidence_status": "REJECTED",
+            "reject_reason": "只有传闻，无当事人或官方确认",
+            "sources": [
+              {
+                "url": "https://weibo.com/1234567890/status/xyz",
+                "publisher": "微博话题",
+                "tier": "discovery_only"
+              }
+            ],
+            "body_facts": ["社交平台上出现该演员已办理离婚手续的说法。"],
+            "has_material_event": true
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "any_codes": ["EVIDENCE_REJECTED"],
+        "severity": { "EVIDENCE_REJECTED": "INFO" },
+        "stats": { "pass": 0 },
+        "render_block_count": 0,
+        "render_excludes": ["某演员被曝已办理离婚手续"]
+      }
+    },
+    {
+      "desc": "当事人本人账号正式确认 —— 可以进入社会热点（但保留 1 条 WARN 提示来源层级）",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某演员本人确认已办理离婚手续",
+            "section": "social",
+            "topic_type": "celebrity",
+            "subject_confirmed": true,
+            "entity": "某演员",
+            "action": "确认",
+            "object": "已办理离婚手续",
+            "event_date": "2026-10-04T01:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://weibo.com/actor-official/status/abc",
+                "publisher": "某演员本人微博",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "发布账号即当事人本人认证账号，属一手来源"
+              }
+            ],
+            "primary_url": "https://weibo.com/actor-official/status/abc",
+            "body_facts": ["该演员今日在本人认证微博账号发布声明，确认已办理离婚手续。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_codes": ["DISCOVERY_DOMAIN_AS_PRIMARY"],
+        "severity": { "DISCOVERY_DOMAIN_AS_PRIMARY": "WARN" },
+        "stats": { "pass": 1 },
+        "render_block_count": 0
+      }
+    }
+  ]
+}

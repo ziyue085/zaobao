@@ -1,0 +1,153 @@
+{
+  "id": "case-04",
+  "title": "3 天前的事件今天发布正式调查结果",
+  "maps_to": "用户 Case 4",
+  "rule": "UPDATED，可以输出新进展",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "触发：事件 3 天前，今天出了正式调查结果，却仍标 NEW",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "市场监管总局公布某食品企业抽检调查结果",
+            "section": "social",
+            "topic_type": "food",
+            "entity": "市场监管总局",
+            "action": "公布",
+            "object": "某食品企业抽检调查结果",
+            "event_date": "2026-10-01T10:00:00+08:00",
+            "new_progress_at": "2026-10-04T08:30:00+08:00",
+            "new_progress_type": "investigation_result",
+            "status": "NEW",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.samr.gov.cn/xw/zj/20261004.html",
+                "publisher": "国家市场监督管理总局",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.samr.gov.cn/xw/zj/20261004.html",
+            "body_facts": [
+              "国家市场监督管理总局今日公布调查结果。",
+              "抽样检验共涉及 12 个批次产品。"
+            ],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["STATUS_SHOULD_BE_UPDATED"],
+        "severity": { "STATUS_SHOULD_BE_UPDATED": "BLOCK" }
+      }
+    },
+    {
+      "desc": "修正：标为 UPDATED，可以正常输出",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "市场监管总局公布某食品企业抽检调查结果",
+            "section": "social",
+            "topic_type": "food",
+            "entity": "市场监管总局",
+            "action": "公布",
+            "object": "某食品企业抽检调查结果",
+            "event_date": "2026-10-01T10:00:00+08:00",
+            "new_progress_at": "2026-10-04T08:30:00+08:00",
+            "new_progress_type": "investigation_result",
+            "status": "UPDATED",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "市场监管总局公布某食品企业抽检调查结果。",
+            "sources": [
+              {
+                "url": "https://www.samr.gov.cn/xw/zj/20261004.html",
+                "publisher": "国家市场监督管理总局",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.samr.gov.cn/xw/zj/20261004.html",
+            "body_facts": [
+              "国家市场监督管理总局今日公布调查结果。",
+              "抽样检验共涉及 12 个批次产品。"
+            ],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "stats": { "pass": 1, "top_pick": 1 },
+        "render_block_count": 0,
+        "render_contains": ["市场监管总局公布某食品企业抽检调查结果"]
+      }
+    },
+    {
+      "desc": "反例：new_progress_type 缺失 —— 未检查不等于已通过，不得凭 new_progress_at 升级",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "市场监管总局公布某食品企业抽检调查结果",
+            "section": "social",
+            "topic_type": "food",
+            "entity": "市场监管总局",
+            "action": "公布",
+            "object": "某食品企业抽检调查结果",
+            "event_date": "2026-10-01T10:00:00+08:00",
+            "new_progress_at": "2026-10-04T08:30:00+08:00",
+            "status": "UPDATED",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.samr.gov.cn/xw/zj/20261004.html",
+                "publisher": "国家市场监督管理总局",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.samr.gov.cn/xw/zj/20261004.html",
+            "body_facts": ["国家市场监督管理总局今日公布调查结果。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["TIME_OUT_OF_WINDOW", "STATUS_SHOULD_BE_OLD"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "id": "case-05",
+  "title": "重大国外 AI 消息只有二手可靠报道",
+  "maps_to": "用户 Case 5",
+  "rule": "足够重要时可以收录，但必须按证据强度标注「尚未见一手确认」或「待核实」",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "触发：只有一家可信二手报道，却按一手信息发出",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "Anthropic 发布新的长上下文模型",
+            "section": "ai",
+            "entity": "Anthropic",
+            "action": "发布",
+            "object": "新的长上下文模型",
+            "event_date": "2026-10-04T03:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "SECONDARY_ONLY",
+            "sources": [
+              {
+                "url": "https://techcrunch.com/2026/10/03/anthropic-long-context/",
+                "publisher": "TechCrunch",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://techcrunch.com/2026/10/03/anthropic-long-context/",
+            "body_facts": ["据 TechCrunch 报道，Anthropic 发布了支持更长上下文的模型。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["MISSING_DISCLOSURE"],
+        "severity": { "MISSING_DISCLOSURE": "BLOCK" }
+      }
+    },
+    {
+      "desc": "修正：标注「尚未见一手确认」后放行，输出中必须出现该标注",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "Anthropic 发布新的长上下文模型",
+            "section": "ai",
+            "entity": "Anthropic",
+            "action": "发布",
+            "object": "新的长上下文模型",
+            "event_date": "2026-10-04T03:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "SECONDARY_ONLY",
+            "disclosure": "尚未见一手确认",
+            "sources": [
+              {
+                "url": "https://techcrunch.com/2026/10/03/anthropic-long-context/",
+                "publisher": "TechCrunch",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://techcrunch.com/2026/10/03/anthropic-long-context/",
+            "body_facts": ["据 TechCrunch 报道，Anthropic 发布了支持更长上下文的模型。"],
+            "has_material_event": true,
+            "top_pick": true,
+            "top_pick_line": "Anthropic 发布新的长上下文模型（二手报道）。",
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "stats": { "pass": 1 },
+        "absent_codes": ["MISSING_DISCLOSURE"],
+        "render_block_count": 0,
+        "render_contains": ["尚未见一手确认"]
+      }
+    },
+    {
+      "desc": "多家独立可信媒体相互印证：升级为 VERIFIED_CROSS_SOURCE，无需披露标记",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "Anthropic 发布新的长上下文模型",
+            "section": "ai",
+            "entity": "Anthropic",
+            "action": "发布",
+            "object": "新的长上下文模型",
+            "event_date": "2026-10-04T03:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_CROSS_SOURCE",
+            "sources": [
+              {
+                "url": "https://techcrunch.com/2026/10/03/anthropic-long-context/",
+                "publisher": "TechCrunch",
+                "tier": "trusted_secondary"
+              },
+              {
+                "url": "https://www.theverge.com/2026/10/3/anthropic-context",
+                "publisher": "The Verge",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://techcrunch.com/2026/10/03/anthropic-long-context/",
+            "body_facts": ["两家媒体报道，Anthropic 发布了支持更长上下文的模型。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "stats": { "pass": 1 },
+        "render_block_count": 0
+      }
+    },
+    {
+      "desc": "反例一：UNVERIFIED 出现在 AI 栏目 —— 国内普通新闻来源不足应直接删除",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某国产模型上下文窗口提升至千万级",
+            "section": "ai",
+            "entity": "某国产模型",
+            "action": "提升",
+            "object": "上下文窗口至千万级",
+            "event_date": "2026-10-04T03:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "UNVERIFIED",
+            "sources": [
+              {
+                "url": "https://techcrunch.com/2026/10/03/unknown/",
+                "publisher": "TechCrunch",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://techcrunch.com/2026/10/03/unknown/",
+            "body_facts": ["有报道称某国产模型上下文窗口提升至千万级。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["MISSING_DISCLOSURE", "UNVERIFIED_NOT_ALLOWED"]
+      }
+    },
+    {
+      "desc": "反例二：极重要的国外消息确实无法完整确认 —— 允许放行，但必须标「待核实」",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某国外实验室称实现关键材料量产突破",
+            "section": "unexpected",
+            "unexpected_gate": "major_science_breakthrough",
+            "entity": "某国外实验室",
+            "action": "称",
+            "object": "实现关键材料量产突破",
+            "event_date": "2026-10-04T02:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "UNVERIFIED",
+            "disclosure": "待核实",
+            "sources": [
+              {
+                "url": "https://www.reuters.com/business/2026-10-03-lab-breakthrough/",
+                "publisher": "路透社",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://www.reuters.com/business/2026-10-03-lab-breakthrough/",
+            "body_facts": ["路透社援引该实验室声明称，相关材料已进入量产验证阶段。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "render_block_count": 0,
+        "render_contains": ["待核实"]
+      }
+    }
+  ]
+}

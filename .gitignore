@@ -1,0 +1,38 @@
+# ── 运行时数据（个人化，不进仓库）────────────────────────
+# data/history.jsonl 是跨日去重的本地状态，属于个人运行数据。
+# 它必须在本地持久化，但不应上传。
+data/history.jsonl
+data/*.jsonl
+data/out/
+data/runs/
+
+# ── 本地草稿与产物 ──────────────────────────────────────
+drafts/
+output/
+*.local.*
+*.private.*
+
+# ── Python ────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# ── 编辑器 / 系统 ──────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── 临时文件 ───────────────────────────────────────────
+*.tmp
+*.bak
+*~
+
+# 保留占位文件
+!data/.gitkeep

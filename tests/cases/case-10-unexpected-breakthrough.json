@@ -1,0 +1,241 @@
+{
+  "id": "case-10",
+  "title": "用户没有长期关注、但极重大的科技突破",
+  "maps_to": "用户 Case 10",
+  "rule": "可进入「意外但重要」；每日最多 3 条，门槛必须明显高于普通新闻",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "正常：一手来源（论文原文）+ 高门槛类型声明，允许进入「意外但重要」",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "研究团队在论文中报告一种新型固态电解质",
+            "section": "unexpected",
+            "unexpected_gate": "major_science_breakthrough",
+            "entity": "某研究团队",
+            "action": "报告",
+            "object": "一种新型固态电解质",
+            "event_date": "2026-10-04T02:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "研究团队报告一种新型固态电解质。",
+            "sources": [
+              {
+                "url": "https://arxiv.org/abs/2610.01234",
+                "publisher": "arXiv",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://arxiv.org/abs/2610.01234",
+            "body_facts": [
+              "该团队在预印本论文中报告了一种新型固态电解质材料。",
+              "论文给出的室温离子电导率为 1.2×10⁻² S/cm。"
+            ],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "stats": { "pass": 1 },
+        "render_block_count": 0,
+        "render_contains": ["意外但重要"]
+      }
+    },
+    {
+      "desc": "触发：一天塞进 4 条「意外但重要」，超过每日上限 3 条",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "e1",
+            "title": "研究团队报告一种新型固态电解质",
+            "section": "unexpected",
+            "unexpected_gate": "major_science_breakthrough",
+            "entity": "某研究团队甲",
+            "action": "报告",
+            "object": "一种新型固态电解质",
+            "event_date": "2026-10-04T02:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://arxiv.org/abs/2610.01234",
+                "publisher": "arXiv",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://arxiv.org/abs/2610.01234",
+            "body_facts": ["该团队在预印本论文中报告了一种新型固态电解质材料。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "e2",
+            "title": "国际清算银行发布跨境支付系统调整方案",
+            "section": "unexpected",
+            "unexpected_gate": "major_intl_econ_finance",
+            "entity": "国际清算银行",
+            "action": "发布",
+            "object": "跨境支付系统调整方案",
+            "event_date": "2026-10-04T03:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.bis.org/press/p261004.htm",
+                "publisher": "国际清算银行",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "机构官网新闻稿"
+              }
+            ],
+            "primary_url": "https://www.bis.org/press/p261004.htm",
+            "body_facts": ["国际清算银行今日在其官网发布跨境支付系统调整方案。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "e3",
+            "title": "欧洲央行宣布调整存款机制利率",
+            "section": "unexpected",
+            "unexpected_gate": "critical_new_institution",
+            "entity": "欧洲央行",
+            "action": "宣布",
+            "object": "调整存款机制利率",
+            "event_date": "2026-10-04T04:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp261004.en.html",
+                "publisher": "欧洲央行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp261004.en.html",
+            "body_facts": ["欧洲央行今日公告调整存款机制利率。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "e4",
+            "title": "世界卫生组织更新某种病原体监测级别",
+            "section": "unexpected",
+            "unexpected_gate": "major_public_safety",
+            "entity": "世界卫生组织",
+            "action": "更新",
+            "object": "某种病原体监测级别",
+            "event_date": "2026-10-04T05:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.who.int/news/item/2026-10-04-pathogen",
+                "publisher": "世界卫生组织",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.who.int/news/item/2026-10-04-pathogen",
+            "body_facts": ["世界卫生组织今日更新某种病原体的监测级别。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["UNEXPECTED_OVER_LIMIT"],
+        "severity": { "UNEXPECTED_OVER_LIMIT": "BLOCK" },
+        "stats": { "pass": 4 }
+      }
+    },
+    {
+      "desc": "反例：进了「意外但重要」却没声明属于哪一类高门槛事件",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某公司发布新款智能手表",
+            "section": "unexpected",
+            "entity": "某公司",
+            "action": "发布",
+            "object": "新款智能手表",
+            "event_date": "2026-10-04T02:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.example-vendor.com/press/watch",
+                "publisher": "某公司",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司官网新闻稿"
+              }
+            ],
+            "primary_url": "https://www.example-vendor.com/press/watch",
+            "body_facts": ["该公司今日发布新款智能手表。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["UNEXPECTED_GATE_MISSING"],
+        "severity": { "UNEXPECTED_GATE_MISSING": "BLOCK" }
+      }
+    }
+  ]
+}

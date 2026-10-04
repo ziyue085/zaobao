@@ -1,0 +1,192 @@
+# 早间情报 · 来源优先级
+#
+# 三层结构：
+#   primary            一手来源。政府官网、监管机构、交易所、公司公告与官网、
+#                      官方博客/新闻稿/GitHub、正式论文、作者原文、官方产品文档。
+#   trusted_secondary  高质量新闻媒体。只用于发现线索、交叉核验、补充背景。
+#   discovery_only     社交平台。只用于发现线索，除非发帖者本身就是当事人、
+#                      官方账号、公司或项目负责人、论文作者。
+#
+# 重要：下面这份清单**不可能覆盖全部新闻**，它只是「已知来源的默认定级」。
+# 遇到清单之外的域名时，按上面的定义自行判断层级，并把判断写进候选的
+# sources[].tier 与 sources[].tier_reason。
+#
+# quasi_primary：新华社 / 央视 / 人民日报对**中央文件、国务院文件**的发布，
+# 在实际操作中常常就是首发渠道。这类来源用于普适性政策时，可视为准一手，
+# 但必须标注「准一手」，不得静默升级为 primary。
+
+version: "0.1.0"
+updated: "2026-10-04"
+
+primary:
+  domains:
+    # —— 政府与监管 ——
+    - gov.cn
+    - pbc.gov.cn
+    - mof.gov.cn
+    - chinatax.gov.cn
+    - ndrc.gov.cn
+    - nfra.gov.cn
+    - csrc.gov.cn
+    - stats.gov.cn
+    - mohrss.gov.cn
+    - nhsa.gov.cn
+    - moe.gov.cn
+    - nhc.gov.cn
+    - miit.gov.cn
+    - samr.gov.cn
+    - nea.gov.cn
+    - customs.gov.cn
+    - safe.gov.cn
+    - mofcom.gov.cn
+    - mot.gov.cn
+    - mwr.gov.cn
+    - moa.gov.cn
+    - mca.gov.cn
+    - court.gov.cn
+    - spp.gov.cn
+    - cac.gov.cn
+    # —— 交易所与登记结算 ——
+    - sse.com.cn
+    - szse.cn
+    - bse.cn
+    - chinaclear.cn
+    - cninfo.com.cn
+    - neeq.com.cn
+    - cffex.com.cn
+    - shclearing.com.cn
+    # —— 境外官方 ——
+    - federalreserve.gov
+    - sec.gov
+    - esma.europa.eu
+    - ecb.europa.eu
+    - boj.or.jp
+    - imf.org
+    - worldbank.org
+    - oecd.org
+    - who.int
+    - un.org
+    - europa.eu
+    - whitehouse.gov
+    - congress.gov
+    - ecfr.gov
+    # —— 公司与组织官方 ——
+    - openai.com
+    - blog.google
+    - deepmind.google
+    - anthropic.com
+    - ai.meta.com
+    - x.ai
+    - microsoft.com
+    - nvidia.com
+    - github.com
+    - huggingface.co
+    - arxiv.org
+    - nature.com
+    - science.org
+    - deepseek.com
+    - aliyun.com
+    - seed.bytedance.com
+    - tencent.com
+    - baidu.com
+    - huawei.com
+    - zhipuai.cn
+    - moonshot.cn
+    - minimax.io
+    - iflytek.com
+    - smic.com
+    - sinopec.com
+    - hengshun.com.cn
+    - offcn.com
+  note: "公司官网与官方博客按域名定级；同一母公司的不同站点（如 x.ai / x.com）需分别登记。"
+
+trusted_secondary:
+  domains:
+    - news.cn
+    - xinhuanet.com
+    - cctv.com
+    - people.com.cn
+    - chinanews.com.cn
+    - cls.cn
+    - stcn.com
+    - cnstock.com
+    - cs.com.cn
+    - zqrb.cn
+    - yicai.com
+    - thepaper.cn
+    - jiemian.com
+    - caixin.com
+    - 21jingji.com
+    - eeo.com.cn
+    - nbd.com.cn
+    - finance.sina.com.cn
+    - jrj.com.cn
+    - reuters.com
+    - bloomberg.com
+    - ft.com
+    - wsj.com
+    - cnbc.com
+    - techcrunch.com
+    - theverge.com
+    - arstechnica.com
+    - wired.com
+    - jiqizhixin.com
+    - qbitai.com
+    - 36kr.com
+    - latepost.com
+    - leiphone.com
+    - infoq.cn
+  quasi_primary:
+    - news.cn
+    - xinhuanet.com
+    - cctv.com
+    - people.com.cn
+
+discovery_only:
+  domains:
+    - weibo.com
+    - zhihu.com
+    - xueqiu.com
+    - xiaohongshu.com
+    - x.com
+    - twitter.com
+    - reddit.com
+    - news.ycombinator.com
+    - v2ex.com
+    - toutiao.com
+    - douyin.com
+    - youtube.com
+    - tieba.baidu.com
+    - t.me
+    - linkedin.com
+    - bilibili.com
+  note: "只用于发现线索。除非发帖账号本身就是当事人/官方账号/公司或项目负责人/论文作者，否则不得单独作为重要事实的证据。"
+
+# 搜索引擎与内容农场得到的 URL **永远不能**作为来源引用。
+# 这些域名一旦出现在 sources[].url 或 primary_url 中，直接判 REJECT。
+never_a_source:
+  - baidu.com/s
+  - www.baidu.com/s
+  - google.com/search
+  - bing.com/search
+  - sogou.com
+  - so.com
+  - sm.cn
+  - baijiahao.baidu.com
+  - zhidao.baidu.com
+  - wenku.baidu.com
+  - answers.com
+
+# 专业工具优先：能用专项工具拿到的一手数据，不要用搜索引擎摘要替代。
+tool_priority:
+  - name: 行情工具
+    use_for: [股票价格, 指数点位, 指数成分调整]
+  - name: 公司公告 / 财务工具
+    use_for: [财报, 业绩预告, 公司公告, 股权变化, 回购, 增减持]
+  - name: 官方数据库
+    use_for: [宏观经济数据, 人口数据, 就业数据]
+  - name: 官网直取
+    use_for: [美联储, 人民银行, 交易所, 监管机构, 公司官网, GitHub 仓库, 论文原文]
+  - name: 联网搜索
+    use_for: [发现新闻, 找原文, 交叉验证, 补充上下文]
+    constraint: "搜索结果摘要不得作为最终证据"

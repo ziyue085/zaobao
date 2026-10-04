@@ -1,0 +1,387 @@
+{
+  "id": "case-07",
+  "title": "当天只有 2 条真正重要新闻",
+  "maps_to": "用户 Case 7",
+  "rule": "只输出 2 条；不得生成「今天最值得看的3件事」中的第三条凑数",
+  "now": "2026-10-04T10:00:00+08:00",
+  "steps": [
+    {
+      "desc": "正常：2 条合格且都进 Top，标题按实际数量写「2件事」",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展6000亿元中期借贷便利操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "6000亿元中期借贷便利操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "中国人民银行开展6000亿元中期借贷便利操作。",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
+            "body_facts": [
+              "中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。",
+              "公告显示本次操作利率与上次持平。"
+            ],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "c02",
+            "title": "中芯国际发布2026年三季度报告",
+            "section": "investment",
+            "entity": "中芯国际",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "中芯国际发布2026年三季度报告。",
+            "sources": [
+              {
+                "url": "https://www.smic.com/investor/announcement/2026q3.html",
+                "publisher": "中芯国际",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司投资者关系页面的正式公告"
+              }
+            ],
+            "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
+            "body_facts": [
+              "中芯国际今日发布2026年三季度报告。",
+              "报告披露三季度营业收入170.2亿元。"
+            ],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "stats": { "pass": 2, "top_pick": 2 },
+        "render_block_count": 0,
+        "render_contains": ["今天最值得看的2件事"],
+        "render_excludes": ["今天最值得看的3件事"]
+      }
+    },
+    {
+      "desc": "触发：只有 2 条，却把标题写成「3件事」—— 这就是凑数",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展6000亿元中期借贷便利操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "6000亿元中期借贷便利操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "中国人民银行开展6000亿元中期借贷便利操作。",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
+            "body_facts": ["中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "c02",
+            "title": "中芯国际发布2026年三季度报告",
+            "section": "investment",
+            "entity": "中芯国际",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "中芯国际发布2026年三季度报告。",
+            "sources": [
+              {
+                "url": "https://www.smic.com/investor/announcement/2026q3.html",
+                "publisher": "中芯国际",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司投资者关系页面的正式公告"
+              }
+            ],
+            "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
+            "body_facts": ["中芯国际今日发布2026年三季度报告。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "render_text": "# 早间情报 · 2026-10-04\n\n统计窗口：2026-10-03 10:00 → 2026-10-04 10:00（北京时间）\n\n## 今天最值得看的3件事\n\n- 中国人民银行开展6000亿元中期借贷便利操作。\n- 中芯国际发布2026年三季度报告。\n\n## 普适性政策\n\n**中国人民银行开展6000亿元中期借贷便利操作**\n\n中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。\n\n来源：[中国人民银行](https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html)\n\n## 投资\n\n**中芯国际发布2026年三季度报告**\n\n中芯国际今日发布2026年三季度报告。\n\n来源：[中芯国际](https://www.smic.com/investor/announcement/2026q3.html)\n",
+      "expect": {
+        "render_block_count": 1,
+        "render_codes": ["TOP_COUNT_MISMATCH"],
+        "severity": { "TOP_COUNT_MISMATCH": "BLOCK" }
+      }
+    },
+    {
+      "desc": "触发：把未通过的条目塞进 Top 列表凑第三条",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展6000亿元中期借贷便利操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "6000亿元中期借贷便利操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "中国人民银行开展6000亿元中期借贷便利操作。",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
+            "body_facts": ["中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "c03",
+            "title": "某AI公司发布新版产品宣传材料",
+            "section": "ai",
+            "entity": "某AI公司",
+            "action": "发布",
+            "object": "新版产品宣传材料",
+            "event_date": "2026-10-04T07:00:00+08:00",
+            "status": "LOW_VALUE",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "reject_reason": "没有技术内容的宣传稿",
+            "top_pick": true,
+            "top_pick_line": "某AI公司更新了官网文案。",
+            "sources": [
+              {
+                "url": "https://www.example-ai.com/press",
+                "publisher": "某AI公司",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司官网新闻稿"
+              }
+            ],
+            "body_facts": ["该公司今日更新了官网产品页面文案。"],
+            "has_material_event": true
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["STATUS_NOT_PASS"],
+        "severity": { "STATUS_NOT_PASS": "BLOCK" }
+      }
+    },
+    {
+      "desc": "触发：4 条全部塞进 Top —— 「今天最值得看的3件事」最多只能有 3 条",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "t1",
+            "title": "中国人民银行开展6000亿元中期借贷便利操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "6000亿元中期借贷便利操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "中国人民银行开展6000亿元中期借贷便利操作。",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
+            "body_facts": ["中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "t2",
+            "title": "中芯国际发布2026年三季度报告",
+            "section": "investment",
+            "entity": "中芯国际",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "中芯国际发布2026年三季度报告。",
+            "sources": [
+              {
+                "url": "https://www.smic.com/investor/announcement/2026q3.html",
+                "publisher": "中芯国际",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司投资者关系页面的正式公告"
+              }
+            ],
+            "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
+            "body_facts": ["中芯国际今日发布2026年三季度报告。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "t3",
+            "title": "应急管理部通报某地事故救援进展",
+            "section": "social",
+            "topic_type": "public_safety",
+            "entity": "应急管理部",
+            "action": "通报",
+            "object": "某地事故救援进展",
+            "event_date": "2026-10-04T07:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "应急管理部通报某地事故救援进展。",
+            "sources": [
+              {
+                "url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004.shtml",
+                "publisher": "应急管理部",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004.shtml",
+            "body_facts": ["应急管理部今日通报某地事故救援进展。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "t4",
+            "title": "OpenAI 发布支持视频输入的多模态模型",
+            "section": "ai",
+            "entity": "OpenAI",
+            "action": "发布",
+            "object": "支持视频输入的多模态模型",
+            "event_date": "2026-10-04T01:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "OpenAI 发布支持视频输入的多模态模型。",
+            "sources": [
+              {
+                "url": "https://openai.com/index/video-input-model/",
+                "publisher": "OpenAI",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://openai.com/index/video-input-model/",
+            "body_facts": ["OpenAI 今日在其官网发布支持视频输入的多模态模型。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["TOP3_PADDING"],
+        "severity": { "TOP3_PADDING": "BLOCK" },
+        "stats": { "pass": 4, "top_pick": 4 }
+      }
+    }
+  ]
+}

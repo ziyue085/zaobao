@@ -1,0 +1,207 @@
+{
+  "id": "case-02",
+  "title": "同一件事被新华社、财联社、公司官网同时报道",
+  "maps_to": "用户 Case 2",
+  "rule": "只输出一次，优先公司官网或原始来源；同一事件换标题转载必须识别为重复",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "触发：三条都标 PASS，且主体写法不同（全称／简称／英文名）",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "新华社：中国石化发布2026年三季度报告",
+            "section": "investment",
+            "entity": "中国石油化工股份有限公司",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "SECONDARY_ONLY",
+            "disclosure": "尚未见一手确认",
+            "sources": [
+              {
+                "url": "https://www.news.cn/fortune/20261004a.htm",
+                "publisher": "新华社",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://www.news.cn/fortune/20261004a.htm",
+            "body_facts": ["中国石化今日发布2026年三季度报告。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "c02",
+            "title": "中石化三季报出炉",
+            "section": "investment",
+            "entity": "中石化",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T08:05:00+08:00",
+            "status": "PASS",
+            "evidence_status": "SECONDARY_ONLY",
+            "disclosure": "尚未见一手确认",
+            "sources": [
+              {
+                "url": "https://www.cls.cn/detail/1234567",
+                "publisher": "财联社",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://www.cls.cn/detail/1234567",
+            "body_facts": ["中石化今日披露2026年三季度报告。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "c03",
+            "title": "中国石化发布2026年三季度报告",
+            "section": "investment",
+            "entity": "Sinopec",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T07:30:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.sinopec.com/listco/announcement/2026q3.html",
+                "publisher": "中国石化",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sinopec.com/listco/announcement/2026q3.html",
+            "body_facts": ["中国石化今日在上交所披露2026年三季度报告。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 2,
+        "block_codes": ["DUPLICATE_IN_ISSUE"],
+        "fingerprint_same": [["c01", "c02"], ["c01", "c03"], ["c02", "c03"]],
+        "kept_id": "c03"
+      }
+    },
+    {
+      "desc": "修正：只保留公司官网一条，另两条判 DUPLICATE",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "新华社：中国石化发布2026年三季度报告",
+            "section": "investment",
+            "entity": "中国石油化工股份有限公司",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "DUPLICATE",
+            "evidence_status": "SECONDARY_ONLY",
+            "disclosure": "尚未见一手确认",
+            "reject_reason": "与公司官网公告同一事件",
+            "sources": [
+              {
+                "url": "https://www.news.cn/fortune/20261004a.htm",
+                "publisher": "新华社",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "body_facts": ["中国石化今日发布2026年三季度报告。"],
+            "has_material_event": true
+          },
+          {
+            "id": "c02",
+            "title": "中石化三季报出炉",
+            "section": "investment",
+            "entity": "中石化",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T08:05:00+08:00",
+            "status": "DUPLICATE",
+            "evidence_status": "SECONDARY_ONLY",
+            "disclosure": "尚未见一手确认",
+            "reject_reason": "同一事件换标题转载",
+            "sources": [
+              {
+                "url": "https://www.cls.cn/detail/1234567",
+                "publisher": "财联社",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "body_facts": ["中石化今日披露2026年三季度报告。"],
+            "has_material_event": true
+          },
+          {
+            "id": "c03",
+            "title": "中国石化发布2026年三季度报告",
+            "section": "investment",
+            "entity": "Sinopec",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T07:30:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.sinopec.com/listco/announcement/2026q3.html",
+                "publisher": "中国石化",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sinopec.com/listco/announcement/2026q3.html",
+            "body_facts": ["中国石化今日在上交所披露2026年三季度报告。"],
+            "has_material_event": true,
+            "top_pick": true,
+            "top_pick_line": "中国石化披露2026年三季报。",
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "stats": { "candidates": 3, "pass": 1, "kept": 1, "dropped": 2 },
+        "kept_id": "c03",
+        "render_block_count": 0,
+        "render_contains": [
+          "https://www.sinopec.com/listco/announcement/2026q3.html"
+        ],
+        "render_excludes": ["新华社：中国石化发布2026年三季度报告", "中石化三季报出炉"]
+      }
+    }
+  ]
+}

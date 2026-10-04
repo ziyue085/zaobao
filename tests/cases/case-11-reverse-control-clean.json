@@ -1,0 +1,143 @@
+{
+  "id": "case-11",
+  "title": "反向对照：一个完全合格的期次",
+  "maps_to": "反向对照用例（防「一律拦截」）",
+  "rule": "完全合规的输入必须 0 BLOCK、0 WARN，且不得出现规则层任何一个已知 code",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "三条跨栏目合格条目，来源均为一手，Top 按实际数量 2 条",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "OpenAI 发布支持视频输入的多模态模型",
+            "section": "ai",
+            "entity": "OpenAI",
+            "action": "发布",
+            "object": "支持视频输入的多模态模型",
+            "event_date": "2026-10-04T01:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "OpenAI 发布支持视频输入的多模态模型。",
+            "sources": [
+              {
+                "url": "https://openai.com/index/video-input-model/",
+                "publisher": "OpenAI",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://openai.com/index/video-input-model/",
+            "body_facts": [
+              "OpenAI 今日在其官网发布支持视频输入的多模态模型。",
+              "官方文档列出两种输入规格。"
+            ],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "c02",
+            "title": "研究团队发布论文提出推理模型评测新方法",
+            "section": "people_ideas",
+            "entity": "某研究团队",
+            "action": "发布",
+            "object": "推理模型评测新方法论文",
+            "event_date": "2026-10-04T02:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "idea_signal": {
+              "new_view": false,
+              "new_data": false,
+              "new_method": true,
+              "new_judgment": false,
+              "new_technical_detail": false
+            },
+            "sources": [
+              {
+                "url": "https://arxiv.org/abs/2610.05678",
+                "publisher": "arXiv",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://arxiv.org/abs/2610.05678",
+            "body_facts": [
+              "该团队在预印本论文中提出一种推理模型评测方法。",
+              "论文给出该方法在两个公开数据集上的对照结果。"
+            ],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "c03",
+            "title": "应急管理部通报某地事故救援进展",
+            "section": "social",
+            "topic_type": "public_safety",
+            "entity": "应急管理部",
+            "action": "通报",
+            "object": "某地事故救援进展",
+            "event_date": "2026-10-04T03:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "应急管理部通报某地事故救援进展。",
+            "sources": [
+              {
+                "url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004.shtml",
+                "publisher": "应急管理部",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004.shtml",
+            "body_facts": [
+              "应急管理部今日通报某地事故救援进展。",
+              "通报称现场救援仍在进行。"
+            ],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "info_count": 0,
+        "absent_all_known_codes": true,
+        "stats": { "candidates": 3, "pass": 3, "top_pick": 2 },
+        "render_block_count": 0,
+        "render_warn_count": 0,
+        "render_contains": [
+          "今天最值得看的2件事",
+          "## AI",
+          "## 社会热点",
+          "## 人物与思想信号"
+        ]
+      }
+    }
+  ]
+}

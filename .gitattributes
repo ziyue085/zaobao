@@ -1,0 +1,13 @@
+# 统一文本处理：中文为主，强制 LF，避免 Windows 换行把测试夹具搅乱
+* text=auto eol=lf
+
+*.md   text eol=lf
+*.yaml text eol=lf
+*.yml  text eol=lf
+*.json text eol=lf
+*.py   text eol=lf
+
+# 二进制
+*.png binary
+*.jpg binary
+*.webp binary

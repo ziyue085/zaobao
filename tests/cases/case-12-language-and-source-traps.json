@@ -1,0 +1,320 @@
+{
+  "id": "case-12",
+  "title": "标题、来源与栏目的字面陷阱",
+  "maps_to": "标题要求 / 来源规则 / 禁用栏目 / 输出格式",
+  "rule": "标题党、投资建议、影响分析、搜索引擎当来源、禁用栏目、Markdown 表格 —— 一律拦下",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "触发：情绪化标题 + 「要涨」式预测",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "央行重磅出手，A股要涨了",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["CLICKBAIT_TITLE", "ANALYSIS_LEAK"],
+        "severity": { "CLICKBAIT_TITLE": "BLOCK", "ANALYSIS_LEAK": "BLOCK" }
+      }
+    },
+    {
+      "desc": "触发：标题干净，但背景句里写「构成利好」",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "background": "市场普遍认为这对资金面构成利好。",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["ANALYSIS_LEAK"]
+      }
+    },
+    {
+      "desc": "触发：把百度搜索结果页当成来源",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.baidu.com/s?wd=央行逆回购",
+                "publisher": "百度搜索",
+                "tier": "primary"
+              }
+            ],
+            "primary_url": "https://www.baidu.com/s?wd=央行逆回购",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["SEARCH_URL_AS_SOURCE"],
+        "severity": { "SEARCH_URL_AS_SOURCE": "BLOCK" }
+      }
+    },
+    {
+      "desc": "触发：使用被明确排除的栏目「高校动态」",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某高校公布2027年硕士研究生招生简章",
+            "section": "高校动态",
+            "entity": "某高校",
+            "action": "公布",
+            "object": "2027年硕士研究生招生简章",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.example-univ.edu.cn/news/2026/1004.html",
+                "publisher": "某高校",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "学校官网通知"
+              }
+            ],
+            "primary_url": "https://www.example-univ.edu.cn/news/2026/1004.html",
+            "body_facts": ["该校今日公布2027年硕士研究生招生简章。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["BANNED_SECTION"]
+      }
+    },
+    {
+      "desc": "触发：输出里用了 Markdown 表格",
+      "input": { "date": "2026-10-04", "candidates": [] },
+      "render_text": "# 早间情报 · 2026-10-04\n\n| 栏目 | 条数 |\n| --- | --- |\n| AI | 1 |\n",
+      "expect": {
+        "render_codes": ["TABLE_NOT_ALLOWED"],
+        "severity": { "TABLE_NOT_ALLOWED": "BLOCK" }
+      }
+    },
+    {
+      "desc": "修正：标题陈述事实、来源为官网、栏目合法、输出无表格",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "5000亿元逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
+            "body_facts": [
+              "中国人民银行今日公告开展5000亿元逆回购操作，期限7天。",
+              "公告显示本次操作利率为1.5%。"
+            ],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "info_count": 0,
+        "absent_all_known_codes": true,
+        "render_block_count": 0,
+        "render_warn_count": 0
+      }
+    },
+    {
+      "desc": "触发：正文干净，但 Top 一句话概述里写了「重磅」—— 只有渲染层能拦住",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行决定下调金融机构存款准备金率0.5个百分点",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "下调",
+            "object": "金融机构存款准备金率0.5个百分点",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "央行重磅降准，市场沸腾。",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/20261004.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/20261004.html",
+            "body_facts": ["中国人民银行今日公告下调金融机构存款准备金率0.5个百分点。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "render_codes": ["CLICKBAIT_TITLE"],
+        "severity": { "CLICKBAIT_TITLE": "BLOCK" }
+      }
+    },
+    {
+      "desc": "触发：正文夹带投资建议「建议买入」",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某上市公司发布2026年三季度业绩预告",
+            "section": "investment",
+            "entity": "某上市公司",
+            "action": "发布",
+            "object": "2026年三季度业绩预告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "has_material_event": true,
+            "sources": [
+              {
+                "url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_yjyg.html",
+                "publisher": "上海证券交易所",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_yjyg.html",
+            "body_facts": ["该公司今日发布2026年三季度业绩预告。", "部分分析师建议买入该公司股票。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["ADVICE_LEAK"],
+        "severity": { "ADVICE_LEAK": "BLOCK" }
+      }
+    }
+  ]
+}

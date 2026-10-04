@@ -1,0 +1,219 @@
+{
+  "id": "case-01",
+  "title": "过去 24 小时没有高价值新闻",
+  "maps_to": "用户 Case 1",
+  "rule": "允许只输出极少内容，不凑数；合格信息少时就少写",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "触发：把宣传稿、榜单、纯预告凑成 3 条并全部标 PASS",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某AI公司完成B轮融资",
+            "section": "ai",
+            "entity": "某AI公司",
+            "action": "完成",
+            "object": "B轮融资",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.example-ai.com/news/b-round",
+                "publisher": "某AI公司",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司官网新闻页"
+              }
+            ],
+            "primary_url": "https://www.example-ai.com/news/b-round",
+            "body_facts": ["该公司今日公告完成B轮融资。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "c02",
+            "title": "某机构发布2026年8月AI应用榜单",
+            "section": "ai",
+            "entity": "某机构",
+            "action": "发布",
+            "object": "2026年8月AI应用榜单",
+            "event_date": "2026-10-04T07:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.example-rank.org/report/202608",
+                "publisher": "某机构",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "机构官网报告页"
+              }
+            ],
+            "primary_url": "https://www.example-rank.org/report/202608",
+            "body_facts": ["该榜单按月统计应用下载量。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          },
+          {
+            "id": "c03",
+            "title": "某公司发布新版产品宣传材料",
+            "section": "ai",
+            "entity": "某公司",
+            "action": "发布",
+            "object": "新版产品宣传材料",
+            "event_date": "2026-10-04T06:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.example-vendor.com/press",
+                "publisher": "某公司",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司官网新闻稿"
+              }
+            ],
+            "primary_url": "https://www.example-vendor.com/press",
+            "body_facts": ["该公司今日更新了官网产品页面文案。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_codes": ["LOW_VALUE_BOILERPLATE"],
+        "stats": { "pass": 3 }
+      }
+    },
+    {
+      "desc": "修正：三条全部改判 LOW_VALUE，本期输出 0 条 —— 信息少就少写",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某AI公司完成B轮融资",
+            "section": "ai",
+            "entity": "某AI公司",
+            "action": "完成",
+            "object": "B轮融资",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "LOW_VALUE",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "reject_reason": "属于 AI 栏目明确过滤的「普通融资」",
+            "sources": [
+              {
+                "url": "https://www.example-ai.com/news/b-round",
+                "publisher": "某AI公司",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司官网新闻页"
+              }
+            ],
+            "body_facts": ["该公司今日公告完成B轮融资。"],
+            "has_material_event": true
+          },
+          {
+            "id": "c02",
+            "title": "某机构发布2026年8月AI应用榜单",
+            "section": "ai",
+            "entity": "某机构",
+            "action": "发布",
+            "object": "2026年8月AI应用榜单",
+            "event_date": "2026-10-04T07:00:00+08:00",
+            "status": "LOW_VALUE",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "reject_reason": "单纯榜单",
+            "sources": [
+              {
+                "url": "https://www.example-rank.org/report/202608",
+                "publisher": "某机构",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "机构官网报告页"
+              }
+            ],
+            "body_facts": ["该榜单按月统计应用下载量。"],
+            "has_material_event": true
+          },
+          {
+            "id": "c03",
+            "title": "某公司发布新版产品宣传材料",
+            "section": "ai",
+            "entity": "某公司",
+            "action": "发布",
+            "object": "新版产品宣传材料",
+            "event_date": "2026-10-04T06:00:00+08:00",
+            "status": "LOW_VALUE",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "reject_reason": "没有技术内容的宣传稿",
+            "sources": [
+              {
+                "url": "https://www.example-vendor.com/press",
+                "publisher": "某公司",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司官网新闻稿"
+              }
+            ],
+            "body_facts": ["该公司今日更新了官网产品页面文案。"],
+            "has_material_event": true
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "stats": { "pass": 0, "top_pick": 0 },
+        "render_block_count": 0,
+        "render_contains": ["本期未检索到符合收录标准的条目"],
+        "render_excludes": ["今天最值得看的"]
+      }
+    },
+    {
+      "desc": "空候选期次：无内容不等于出错，渲染必须走标准表述",
+      "input": { "date": "2026-10-04", "candidates": [] },
+      "expect": {
+        "block_count": 0,
+        "any_codes": ["ISSUE_NO_CANDIDATES"],
+        "severity": { "ISSUE_NO_CANDIDATES": "INFO" },
+        "render_block_count": 0,
+        "render_contains": ["本期未检索到符合收录标准的条目"]
+      }
+    },
+    {
+      "desc": "反例：把「没搜索到」写成「没有新闻」",
+      "input": { "date": "2026-10-04", "candidates": [] },
+      "render_text": "# 早间情报 · 2026-10-04\n\n今天没有新闻。\n",
+      "expect": {
+        "render_block_count": 2,
+        "render_codes": ["NO_NEWS_FALLACY", "EMPTY_ISSUE_PHRASE_MISSING"]
+      }
+    }
+  ]
+}

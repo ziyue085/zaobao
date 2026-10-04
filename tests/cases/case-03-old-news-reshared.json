@@ -1,0 +1,145 @@
+{
+  "id": "case-03",
+  "title": "3 天前的 AI 新闻今天重新上热搜",
+  "maps_to": "用户 Case 3",
+  "rule": "OLD，不输出。单纯转载、重新讨论、媒体二次包装不算新进展",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "触发：事件在 3 天前，今天只是被重新讨论，却标成 NEW",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "OpenAI 发布新一代推理模型",
+            "section": "ai",
+            "entity": "OpenAI",
+            "action": "发布",
+            "object": "新一代推理模型",
+            "event_date": "2026-10-01T22:00:00+08:00",
+            "status": "NEW",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://openai.com/index/new-reasoning-model/",
+                "publisher": "OpenAI",
+                "tier": "primary",
+                "is_first_party": true
+              },
+              {
+                "url": "https://weibo.com/1234567890/status/abcdef",
+                "publisher": "微博热议话题",
+                "tier": "discovery_only"
+              }
+            ],
+            "primary_url": "https://openai.com/index/new-reasoning-model/",
+            "body_facts": ["该模型于 10 月 1 日发布，今日在社交平台被重新讨论。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["TIME_OUT_OF_WINDOW", "STATUS_SHOULD_BE_OLD"],
+        "severity": {
+          "TIME_OUT_OF_WINDOW": "BLOCK",
+          "STATUS_SHOULD_BE_OLD": "BLOCK"
+        }
+      }
+    },
+    {
+      "desc": "修正：判为 OLD 后不再阻断，但绝不进入输出",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "OpenAI 发布新一代推理模型",
+            "section": "ai",
+            "entity": "OpenAI",
+            "action": "发布",
+            "object": "新一代推理模型",
+            "event_date": "2026-10-01T22:00:00+08:00",
+            "status": "OLD",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "reject_reason": "事件已 3 天，今日无实质新进展，仅是社交平台重新讨论",
+            "sources": [
+              {
+                "url": "https://openai.com/index/new-reasoning-model/",
+                "publisher": "OpenAI",
+                "tier": "primary",
+                "is_first_party": true
+              },
+              {
+                "url": "https://weibo.com/1234567890/status/abcdef",
+                "publisher": "微博热议话题",
+                "tier": "discovery_only"
+              }
+            ],
+            "body_facts": ["该模型于 10 月 1 日发布，今日在社交平台被重新讨论。"],
+            "has_material_event": true
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "severity": { "TIME_OUT_OF_WINDOW": "INFO" },
+        "stats": { "pass": 0 },
+        "render_block_count": 0,
+        "render_contains": ["本期未检索到符合收录标准的条目"],
+        "render_excludes": ["OpenAI 发布新一代推理模型"]
+      }
+    },
+    {
+      "desc": "同类反例：把「社交平台重新讨论」当成新进展，试图用 new_progress 绕开窗口",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "OpenAI 发布新一代推理模型，引发热议",
+            "section": "ai",
+            "entity": "OpenAI",
+            "action": "发布",
+            "object": "新一代推理模型",
+            "event_date": "2026-10-01T22:00:00+08:00",
+            "new_progress_at": "2026-10-04T08:00:00+08:00",
+            "status": "UPDATED",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://openai.com/index/new-reasoning-model/",
+                "publisher": "OpenAI",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://openai.com/index/new-reasoning-model/",
+            "body_facts": ["该模型今日在社交平台被大量讨论。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["TIME_OUT_OF_WINDOW", "STATUS_SHOULD_BE_OLD"],
+        "agent_note": "new_progress_type 未填写（null），因此 UPDATED 不成立 —— 仅靠 new_progress_at 不足以升级状态"
+      }
+    }
+  ]
+}

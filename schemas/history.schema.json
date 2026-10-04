@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ziyue085/zaobao/blob/main/schemas/history.schema.json",
+  "title": "早间情报历史事件记录",
+  "description": "跨日去重用的最小记录。一行一条存于 data/history.jsonl（JSONL），不使用数据库。默认保留 30 天，至少保留 7 天。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "date",
+    "entity",
+    "action",
+    "title",
+    "primary_url",
+    "fingerprint"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "历史记录唯一标识，建议 <date>-<fingerprint 前 8 位>。"
+    },
+    "date": {
+      "type": "string",
+      "description": "该事件被输出的日期（输出当天的本地日期），格式 YYYY-MM-DD。"
+    },
+    "entity": {
+      "type": "string",
+      "description": "归一化后的主体。"
+    },
+    "action": {
+      "type": "string",
+      "description": "归一化后的核心动作。"
+    },
+    "object": {
+      "type": ["string", "null"],
+      "description": "归一化后的核心事件。fingerprint 的组成部分，建议填写。"
+    },
+    "title": {
+      "type": "string",
+      "description": "当时输出的标题。仅用于人工回溯，不参与去重判断。"
+    },
+    "primary_url": {
+      "type": "string",
+      "description": "当时引用的来源 URL。"
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "去重主键：主体 + 核心动作 + 核心事件 归一化后拼接。刻意不含标题，因此换标题转载会被识别为同一件事。"
+    },
+    "section": {
+      "type": ["string", "null"],
+      "description": "当时的栏目。"
+    },
+    "evidence_status": {
+      "type": ["string", "null"],
+      "description": "当时的证据状态。"
+    },
+    "was_update": {
+      "type": "boolean",
+      "description": "该条是否为对已有事件的「新进展」输出。"
+    },
+    "superseded_fingerprint": {
+      "type": ["string", "null"],
+      "description": "若本条是对某条历史事件的新进展，记录被更新的原 fingerprint。"
+    }
+  }
+}

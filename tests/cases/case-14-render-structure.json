@@ -1,0 +1,182 @@
+{
+  "id": "case-14",
+  "title": "渲染层的结构与格式缺陷",
+  "maps_to": "规范第十四节（输出结构）与第二十一节（自检）",
+  "rule": "来源引用、空白栏目、Top 标题、多余空行 —— 都在渲染层再查一遍",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "来源行的 URL 与候选里的 primary_url 不一致（引了清单外的链接）",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "5000亿元逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "render_text": "# 早间情报 · 2026-10-04\n\n统计窗口：2026-10-03 09:00 → 2026-10-04 09:00（北京时间）\n\n## 普适性政策\n\n**中国人民银行开展5000亿元逆回购操作**\n\n中国人民银行今日公告开展5000亿元逆回购操作。\n\n来源：[中国人民银行](https://www.pbc.gov.cn/other-page.html)\n",
+      "expect": {
+        "render_codes": ["CITATION_MISSING", "CITATION_UNKNOWN_SOURCE"],
+        "severity": { "CITATION_MISSING": "BLOCK", "CITATION_UNKNOWN_SOURCE": "WARN" }
+      }
+    },
+    {
+      "desc": "渲染出了没有内容的栏目，且有多余空行",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "5000亿元逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "render_text": "# 早间情报 · 2026-10-04\n\n## 普适性政策\n\n**中国人民银行开展5000亿元逆回购操作**\n\n\n\n\n中国人民银行今日公告开展5000亿元逆回购操作。\n\n来源：[中国人民银行](https://www.pbc.gov.cn/a.html)\n\n## 投资\n\n本栏目今日无内容。\n",
+      "expect": {
+        "render_codes": ["EMPTY_SECTION_RENDERED", "FORMAT_BLANK_LINES"],
+        "severity": { "EMPTY_SECTION_RENDERED": "BLOCK", "FORMAT_BLANK_LINES": "WARN" }
+      }
+    },
+    {
+      "desc": "有 top_pick 条目，但输出里没有 Top 段",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "5000亿元逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "中国人民银行开展5000亿元逆回购操作。",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "render_text": "# 早间情报 · 2026-10-04\n\n## 普适性政策\n\n**中国人民银行开展5000亿元逆回购操作**\n\n中国人民银行今日公告开展5000亿元逆回购操作。\n\n来源：[中国人民银行](https://www.pbc.gov.cn/a.html)\n",
+      "expect": {
+        "render_codes": ["TOP_SECTION_MISSING", "TOP_LINE_MISSING"],
+        "severity": { "TOP_SECTION_MISSING": "WARN", "TOP_LINE_MISSING": "WARN" },
+        "render_block_count": 0
+      }
+    },
+    {
+      "desc": "合格输出：同一条候选走完整渲染，0 BLOCK 0 WARN",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "5000亿元逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "render_block_count": 0,
+        "render_warn_count": 0,
+        "render_contains": ["来源：[中国人民银行](https://www.pbc.gov.cn/a.html)"]
+      }
+    }
+  ]
+}

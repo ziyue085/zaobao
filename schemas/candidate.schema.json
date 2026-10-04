@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ziyue085/zaobao/blob/main/schemas/candidate.schema.json",
+  "title": "早间情报候选条目",
+  "description": "一条候选新闻在内部流转时的完整状态。只有 status=PASS 且 gates 全为 true 的候选才允许进入最终输出。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "section",
+    "entity",
+    "action",
+    "object",
+    "event_date",
+    "status",
+    "evidence_status",
+    "sources",
+    "gates",
+    "body_facts"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "候选在本期内的短标识，如 c01。",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "description": "直接表达事实的标题。禁止标题党、禁止情绪词、禁止疑问句。",
+      "minLength": 4,
+      "maxLength": 60
+    },
+    "section": {
+      "type": "string",
+      "description": "栏目。必须出现在 watchlist.yaml 的 priority 中。",
+      "enum": [
+        "universal_policy",
+        "investment",
+        "ai",
+        "social",
+        "people_ideas",
+        "unexpected"
+      ]
+    },
+    "entity": {
+      "type": "string",
+      "description": "主体。用于生成 fingerprint。",
+      "minLength": 1
+    },
+    "action": {
+      "type": "string",
+      "description": "核心动作，如 发布 / 获批 / 处罚 / 增持。用于生成 fingerprint。",
+      "minLength": 1
+    },
+    "object": {
+      "type": "string",
+      "description": "核心事件或对象，如 2026年三季报。用于生成 fingerprint。",
+      "minLength": 1
+    },
+    "fingerprint": {
+      "type": ["string", "null"],
+      "description": "留空则由 entity+action+object 自动生成；显式填写时以填写值为准。"
+    },
+    "event_date": {
+      "type": "string",
+      "description": "原始事件发生时间，ISO 8601。"
+    },
+    "first_confirmed_at": {
+      "type": ["string", "null"],
+      "description": "该事件首次获得官方确认的时间。"
+    },
+    "new_progress_at": {
+      "type": ["string", "null"],
+      "description": "过去 24 小时内出现实质新进展的时间。"
+    },
+    "new_progress_type": {
+      "type": ["string", "null"],
+      "description": "新进展的类型。OLD 事件只有在填写本字段并给出 new_progress_at 时才允许升级为 UPDATED。",
+      "enum": [
+        "official_confirmation",
+        "new_announcement",
+        "official_document",
+        "new_data",
+        "penalty_or_judgment",
+        "investigation_result",
+        "product_launch",
+        "rumor_confirmed",
+        "rumor_refuted",
+        null
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "候选状态机。只有 PASS 可以进入最终输出。",
+      "enum": [
+        "NEW",
+        "UPDATED",
+        "OLD",
+        "DUPLICATE",
+        "UNVERIFIED",
+        "LOW_VALUE",
+        "PASS"
+      ]
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "VERIFIED_PRIMARY",
+        "VERIFIED_CROSS_SOURCE",
+        "SECONDARY_ONLY",
+        "UNVERIFIED",
+        "REJECTED"
+      ]
+    },
+    "disclosure": {
+      "type": ["string", "null"],
+      "description": "披露标记。SECONDARY_ONLY 必须填写「尚未见一手确认」，UNVERIFIED 必须填写「待核实」。",
+      "enum": ["尚未见一手确认", "待核实", null]
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "publisher", "tier"],
+        "properties": {
+          "url": { "type": "string" },
+          "publisher": { "type": "string" },
+          "tier": {
+            "type": "string",
+            "enum": ["primary", "trusted_secondary", "discovery_only"]
+          },
+          "is_first_party": {
+            "type": "boolean",
+            "description": "发布者是否就是事件主体本身（公司官网、监管机构、论文作者）。"
+          },
+          "published_at": { "type": ["string", "null"] },
+          "tier_reason": {
+            "type": ["string", "null"],
+            "description": "域名不在 sources.yaml 中时，必须说明为何定在这一层。"
+          }
+        }
+      }
+    },
+    "primary_url": {
+      "type": ["string", "null"],
+      "description": "最终输出中引用的来源 URL，必须能在 sources 中找到。"
+    },
+    "body_facts": {
+      "type": "array",
+      "description": "1—3 句已经确认的事实陈述。不得包含分析、预测、建议。",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": { "type": "string" }
+    },
+    "background": {
+      "type": ["string", "null"],
+      "description": "最多一句很短的背景。不得做影响分析。"
+    },
+    "top_pick": {
+      "type": "boolean",
+      "description": "是否进入「今天最值得看的3件事」。总数不得超过 3，且不得为凑数而设。"
+    },
+    "top_pick_line": {
+      "type": ["string", "null"],
+      "description": "top_pick 为 true 时的一句话概述。"
+    },
+    "has_material_event": {
+      "type": "boolean",
+      "description": "是否存在实质事件。仅有正常价格波动时必须为 false，否则判 LOW_VALUE。"
+    },
+    "topic_type": {
+      "type": ["string", "null"],
+      "description": "社会热点子类型。entertainment / celebrity 需通过当事人确认门槛。",
+      "enum": [
+        "public_safety",
+        "food",
+        "medical",
+        "education",
+        "traffic",
+        "major_event",
+        "national_attention",
+        "entertainment",
+        "celebrity",
+        null
+      ]
+    },
+    "subject_confirmed": {
+      "type": ["boolean", "null"],
+      "description": "八卦类条目：当事人或官方是否已正式确认。"
+    },
+    "unexpected_gate": {
+      "type": ["string", "null"],
+      "description": "进入「意外但重要」必须声明属于哪一类高门槛事件。",
+      "enum": [
+        "possible_historic_event",
+        "major_science_breakthrough",
+        "major_intl_econ_finance",
+        "major_public_safety",
+        "critical_new_institution",
+        "abnormal_important_data",
+        null
+      ]
+    },
+    "idea_signal": {
+      "type": ["object", "null"],
+      "description": "人物与思想信号栏目专用：必须至少命中一项。",
+      "additionalProperties": false,
+      "properties": {
+        "new_view": { "type": "boolean" },
+        "new_data": { "type": "boolean" },
+        "new_method": { "type": "boolean" },
+        "new_judgment": { "type": "boolean" },
+        "new_technical_detail": { "type": "boolean" }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "description": "三态检查闸门。铁律：未检查 ≠ 已通过 —— 字段缺席即 BLOCK，不得默认 false。",
+      "additionalProperties": false,
+      "required": [
+        "time_window_checked",
+        "history_dedup_checked",
+        "issue_dedup_checked",
+        "primary_source_checked",
+        "url_checked",
+        "no_analysis_checked"
+      ],
+      "properties": {
+        "time_window_checked": { "type": "boolean" },
+        "history_dedup_checked": { "type": "boolean" },
+        "issue_dedup_checked": { "type": "boolean" },
+        "primary_source_checked": { "type": "boolean" },
+        "url_checked": { "type": "boolean" },
+        "no_analysis_checked": { "type": "boolean" }
+      }
+    },
+    "reject_reason": {
+      "type": ["string", "null"],
+      "description": "status 非 PASS 时说明原因，便于复盘为什么没发。"
+    }
+  }
+}

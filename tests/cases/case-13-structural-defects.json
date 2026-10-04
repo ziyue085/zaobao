@@ -1,0 +1,725 @@
+{
+  "id": "case-13",
+  "title": "结构性与证据充分性缺陷",
+  "maps_to": "规范第九、十、十一节（信息核验规则与证据状态）",
+  "rule": "结构性问题任何时候都拦；证据充分性问题只在真的要输出时才拦",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "来源 URL 没有协议头",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              { "url": "www.pbc.gov.cn/a.html", "publisher": "中国人民银行", "tier": "primary" }
+            ],
+            "primary_url": "www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": { "block_codes": ["URL_INVALID"], "severity": { "URL_INVALID": "BLOCK" } }
+    },
+    {
+      "desc": "声称一手来源，但域名不在清单里，也没写清理由",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某公司发布2026年三季度报告",
+            "section": "investment",
+            "entity": "某公司",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "has_material_event": true,
+            "sources": [
+              { "url": "https://www.example-corp.com/ir/2026q3.html", "publisher": "某公司", "tier": "primary" }
+            ],
+            "primary_url": "https://www.example-corp.com/ir/2026q3.html",
+            "body_facts": ["该公司今日发布2026年三季度报告。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["PRIMARY_TIER_NOT_JUSTIFIED"],
+        "severity": { "PRIMARY_TIER_NOT_JUSTIFIED": "BLOCK" }
+      }
+    },
+    {
+      "desc": "sources 为空",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": { "block_codes": ["SOURCE_MISSING"], "severity": { "SOURCE_MISSING": "BLOCK" } }
+    },
+    {
+      "desc": "entity 为空 —— fingerprint 无法构造，去重会失效",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["FINGERPRINT_INCOMPLETE"],
+        "severity": { "FINGERPRINT_INCOMPLETE": "BLOCK" }
+      }
+    },
+    {
+      "desc": "event_date 无法解析",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "昨天下午",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["TIME_FIELD_MISSING"],
+        "severity": { "TIME_FIELD_MISSING": "BLOCK" }
+      }
+    },
+    {
+      "desc": "事件时间落在未来",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-06T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": { "block_codes": ["TIME_IN_FUTURE"], "severity": { "TIME_IN_FUTURE": "BLOCK" } }
+    },
+    {
+      "desc": "status 取值非法",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "APPROVED",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "body_facts": ["中国人民银行公告开展5000亿元逆回购操作。"]
+          }
+        ]
+      },
+      "expect": { "block_codes": ["STATUS_INVALID"], "severity": { "STATUS_INVALID": "BLOCK" } }
+    },
+    {
+      "desc": "事实句数量越界",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": [],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["BODY_FACT_COUNT_INVALID"],
+        "severity": { "BODY_FACT_COUNT_INVALID": "BLOCK" }
+      }
+    },
+    {
+      "desc": "栏目不在 watchlist 里",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某行业协会发布2026年8月行业运行数据",
+            "section": "industry_news",
+            "entity": "某行业协会",
+            "action": "发布",
+            "object": "2026年8月行业运行数据",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.example-assoc.org/data/202608.html",
+                "publisher": "某行业协会",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "协会官网数据页"
+              }
+            ],
+            "primary_url": "https://www.example-assoc.org/data/202608.html",
+            "body_facts": ["该协会今日发布2026年8月行业运行数据。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["SECTION_NOT_IN_WATCHLIST"],
+        "severity": { "SECTION_NOT_IN_WATCHLIST": "BLOCK" }
+      }
+    },
+    {
+      "desc": "条目总数超出常规区间",
+      "expand": [
+        {
+          "id_prefix": "n",
+          "count": 13,
+          "template": {
+            "title": "中国人民银行开展逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行今日公告开展逆回购操作。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        }
+      ],
+      "input": { "date": "2026-10-04", "candidates": [] },
+      "expect": {
+        "warn_codes": ["TOO_MANY_ITEMS"],
+        "severity": { "TOO_MANY_ITEMS": "WARN" },
+        "stats": { "pass": 13 }
+      }
+    },
+    {
+      "desc": "闸门字段显式为 false，却标 PASS",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/a.html",
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": false,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["GATE_NOT_PASSED"],
+        "severity": { "GATE_NOT_PASSED": "BLOCK" }
+      }
+    },
+    {
+      "desc": "声称多源互证，实际只有一家",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某国际组织发布全球贸易展望报告",
+            "section": "unexpected",
+            "unexpected_gate": "major_intl_econ_finance",
+            "entity": "某国际组织",
+            "action": "发布",
+            "object": "全球贸易展望报告",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_CROSS_SOURCE",
+            "sources": [
+              {
+                "url": "https://www.cls.cn/detail/999999",
+                "publisher": "财联社",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://www.cls.cn/detail/999999",
+            "body_facts": ["据财联社报道，该组织发布了全球贸易展望报告。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["INSUFFICIENT_CROSS_SOURCE"],
+        "severity": { "INSUFFICIENT_CROSS_SOURCE": "BLOCK" }
+      }
+    },
+    {
+      "desc": "可输出条目缺 primary_url",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "逆回购操作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["PRIMARY_URL_MISSING"],
+        "severity": { "PRIMARY_URL_MISSING": "BLOCK" }
+      }
+    },
+    {
+      "desc": "已判 REJECTED 的条目被塞进 Top",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某演员被曝已办理离婚手续",
+            "section": "social",
+            "topic_type": "celebrity",
+            "subject_confirmed": false,
+            "entity": "某演员",
+            "action": "被曝",
+            "object": "已办理离婚手续",
+            "event_date": "2026-10-04T01:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "REJECTED",
+            "top_pick": true,
+            "top_pick_line": "某演员被曝已办理离婚手续。",
+            "sources": [
+              {
+                "url": "https://www.news.cn/ent/20261004.htm",
+                "publisher": "新华社",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://www.news.cn/ent/20261004.htm",
+            "body_facts": ["社交平台上出现该演员已办理离婚手续的说法。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["REJECTED_IN_OUTPUT"],
+        "severity": { "REJECTED_IN_OUTPUT": "BLOCK" }
+      }
+    },
+    {
+      "desc": "社会热点缺少 topic_type",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某地通报一起道路交通事故处置情况",
+            "section": "social",
+            "entity": "某地公安交管部门",
+            "action": "通报",
+            "object": "一起道路交通事故处置情况",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.mot.gov.cn/xw/20261004.html",
+                "publisher": "交通运输部",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.mot.gov.cn/xw/20261004.html",
+            "body_facts": ["某地公安交管部门今日通报一起道路交通事故处置情况。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["SOCIAL_TOPIC_TYPE_MISSING"],
+        "severity": { "SOCIAL_TOPIC_TYPE_MISSING": "BLOCK" }
+      }
+    },
+    {
+      "desc": "人物与思想信号没有命中任何一项新信息",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某企业家在公开活动中发表演讲",
+            "section": "people_ideas",
+            "entity": "某企业家",
+            "action": "发表",
+            "object": "公开演讲",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.example-firm.com/news/speech",
+                "publisher": "某企业",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司官网活动记录"
+              }
+            ],
+            "primary_url": "https://www.example-firm.com/news/speech",
+            "body_facts": ["该企业家在某公开活动中发表演讲，勉励年轻人坚持长期主义。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["IDEA_SIGNAL_MISSING"],
+        "severity": { "IDEA_SIGNAL_MISSING": "BLOCK" }
+      }
+    },
+    {
+      "desc": "普适性政策只有二手来源 —— 不阻断，但必须留 WARN",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "国务院常务会议部署下一阶段重点工作",
+            "section": "universal_policy",
+            "entity": "国务院",
+            "action": "部署",
+            "object": "下一阶段重点工作",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "SECONDARY_ONLY",
+            "disclosure": "尚未见一手确认",
+            "sources": [
+              {
+                "url": "https://www.cls.cn/detail/888888",
+                "publisher": "财联社",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://www.cls.cn/detail/888888",
+            "body_facts": ["据财联社报道，国务院常务会议部署了下一阶段重点工作。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_codes": ["POLICY_PRIMARY_MISSING"],
+        "severity": { "POLICY_PRIMARY_MISSING": "WARN" }
+      }
+    },
+    {
+      "desc": "普适性政策使用新华社通稿 —— 视为准一手，但留 INFO 记录",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "国务院印发关于促进服务消费高质量发展的意见",
+            "section": "universal_policy",
+            "entity": "国务院",
+            "action": "印发",
+            "object": "关于促进服务消费高质量发展的意见",
+            "event_date": "2026-10-04T09:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "SECONDARY_ONLY",
+            "disclosure": "尚未见一手确认",
+            "sources": [
+              {
+                "url": "https://www.news.cn/politics/20261004.htm",
+                "publisher": "新华社",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://www.news.cn/politics/20261004.htm",
+            "body_facts": ["新华社通稿称，国务院印发了关于促进服务消费高质量发展的意见。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "any_codes": ["QUASI_PRIMARY_USED"],
+        "severity": { "QUASI_PRIMARY_USED": "INFO" }
+      }
+    }
+  ]
+}

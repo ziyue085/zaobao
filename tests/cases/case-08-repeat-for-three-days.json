@@ -1,0 +1,214 @@
+{
+  "id": "case-08",
+  "title": "同一公司同一事件连续 3 天被媒体报道",
+  "maps_to": "用户 Case 8",
+  "rule": "没有新进展不得重复；只有实质新进展才允许再次发送并标记 UPDATED",
+  "now": "2026-10-04T09:00:00+08:00",
+  "history": [
+    {
+      "event_id": "2026-10-01-中芯国际",
+      "date": "2026-10-01",
+      "entity": "中芯国际",
+      "action": "发布",
+      "object": "2026年三季度报告",
+      "title": "中芯国际发布2026年三季度报告",
+      "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
+      "fingerprint": "中芯国际#发布#2026年三季度报告",
+      "section": "investment",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "was_update": false,
+      "superseded_fingerprint": null
+    },
+    {
+      "event_id": "2026-10-02-中芯国际",
+      "date": "2026-10-02",
+      "entity": "中芯国际",
+      "action": "发布",
+      "object": "2026年三季度报告",
+      "title": "中芯国际三季报披露",
+      "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
+      "fingerprint": "中芯国际#发布#2026年三季度报告",
+      "section": "investment",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "was_update": false,
+      "superseded_fingerprint": null
+    }
+  ],
+  "steps": [
+    {
+      "desc": "触发：第 3 天同一事件再发一次，无新进展，标成 NEW",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中芯国际三季报持续引发讨论",
+            "section": "investment",
+            "entity": "中芯国际",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "NEW",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.smic.com/investor/announcement/2026q3.html",
+                "publisher": "中芯国际",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司投资者关系页面的正式公告"
+              }
+            ],
+            "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
+            "body_facts": ["媒体继续讨论该公司三季报内容。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["DUPLICATE_HISTORY"],
+        "severity": { "DUPLICATE_HISTORY": "BLOCK" }
+      }
+    },
+    {
+      "desc": "修正：判为 DUPLICATE 后不再阻断，也不进入输出",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中芯国际三季报持续引发讨论",
+            "section": "investment",
+            "entity": "中芯国际",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "DUPLICATE",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "reject_reason": "与 10-01 / 10-02 已输出事件同一 fingerprint，无新进展",
+            "sources": [
+              {
+                "url": "https://www.smic.com/investor/announcement/2026q3.html",
+                "publisher": "中芯国际",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司投资者关系页面的正式公告"
+              }
+            ],
+            "body_facts": ["媒体继续讨论该公司三季报内容。"],
+            "has_material_event": true
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "any_codes": ["DUPLICATE_HISTORY"],
+        "severity": { "DUPLICATE_HISTORY": "INFO" },
+        "stats": { "pass": 0 },
+        "render_block_count": 0,
+        "render_excludes": ["中芯国际三季报持续引发讨论"]
+      }
+    },
+    {
+      "desc": "允许重发的情形：同一事件出现实质新进展，标 UPDATED",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中芯国际发布2026年三季度报告，上交所对其问询函作出回复",
+            "section": "investment",
+            "entity": "中芯国际",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-01T08:00:00+08:00",
+            "new_progress_at": "2026-10-04T08:30:00+08:00",
+            "new_progress_type": "new_announcement",
+            "status": "UPDATED",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_1.html",
+                "publisher": "上海证券交易所",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_1.html",
+            "body_facts": [
+              "上海证券交易所今日披露中芯国际对问询函的回复公告。",
+              "回复公告共 6 页。"
+            ],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "any_codes": ["HISTORY_MATCH_UPDATED"],
+        "severity": { "HISTORY_MATCH_UPDATED": "INFO" },
+        "stats": { "pass": 1 },
+        "render_block_count": 0
+      }
+    },
+    {
+      "desc": "精度：换用公司全称、换掉标题，仍必须识别为同一事件",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "SMIC 三季度业绩说明会纪要流出",
+            "section": "investment",
+            "entity": "SMIC",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "NEW",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.smic.com/investor/announcement/2026q3.html",
+                "publisher": "中芯国际",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "公司投资者关系页面的正式公告"
+              }
+            ],
+            "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
+            "body_facts": ["有媒体转载该公司三季度业绩说明会纪要。"],
+            "has_material_event": true,
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["DUPLICATE_HISTORY"],
+        "fingerprint_equals": { "c01": "中芯国际#发布#2026年三季度报告" }
+      }
+    }
+  ]
+}

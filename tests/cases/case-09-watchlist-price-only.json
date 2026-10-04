@@ -1,0 +1,219 @@
+{
+  "id": "case-09",
+  "title": "固定关注股票当日只有正常价格波动",
+  "maps_to": "用户 Case 9",
+  "rule": "不因为用户关注它就强行输出；无公告、无异常事件即判 LOW_VALUE",
+  "now": "2026-10-04T16:00:00+08:00",
+  "steps": [
+    {
+      "desc": "触发：恒顺醋业今日只有正常价格波动，却因为「在关注列表里」被标 PASS",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "恒顺醋业今日收盘上涨2.1%",
+            "section": "investment",
+            "entity": "恒顺醋业",
+            "action": "价格波动",
+            "object": "2026-10-04 收盘",
+            "event_date": "2026-10-04T15:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "has_material_event": false,
+            "sources": [
+              {
+                "url": "https://www.sse.com.cn/market/price/600305/",
+                "publisher": "上海证券交易所",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sse.com.cn/market/price/600305/",
+            "body_facts": ["恒顺醋业今日收盘价较前一交易日上涨2.1%。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["LOW_VALUE_PRICE_ONLY"],
+        "severity": { "LOW_VALUE_PRICE_ONLY": "BLOCK" }
+      }
+    },
+    {
+      "desc": "修正：判 LOW_VALUE，不进入输出",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "恒顺醋业今日收盘上涨2.1%",
+            "section": "investment",
+            "entity": "恒顺醋业",
+            "action": "价格波动",
+            "object": "2026-10-04 收盘",
+            "event_date": "2026-10-04T15:00:00+08:00",
+            "status": "LOW_VALUE",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "has_material_event": false,
+            "reject_reason": "仅有正常价格波动，无公告与异常事件",
+            "sources": [
+              {
+                "url": "https://www.sse.com.cn/market/price/600305/",
+                "publisher": "上海证券交易所",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "body_facts": ["恒顺醋业今日收盘价较前一交易日上涨2.1%。"]
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "any_codes": ["LOW_VALUE_PRICE_ONLY"],
+        "severity": { "LOW_VALUE_PRICE_ONLY": "INFO" },
+        "stats": { "pass": 0 },
+        "render_block_count": 0,
+        "render_excludes": ["恒顺醋业今日收盘上涨2.1%"]
+      }
+    },
+    {
+      "desc": "反例：has_material_event 字段整体缺席 —— 未检查 ≠ 已通过",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "恒顺醋业今日收盘上涨2.1%",
+            "section": "investment",
+            "entity": "恒顺醋业",
+            "action": "价格波动",
+            "object": "2026-10-04 收盘",
+            "event_date": "2026-10-04T15:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.sse.com.cn/market/price/600305/",
+                "publisher": "上海证券交易所",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sse.com.cn/market/price/600305/",
+            "body_facts": ["恒顺醋业今日收盘价较前一交易日上涨2.1%。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["GATE_FIELD_UNCHECKED"],
+        "severity": { "GATE_FIELD_UNCHECKED": "BLOCK" }
+      }
+    },
+    {
+      "desc": "有实质事件时正常输出：恒顺醋业发布股东减持计划公告",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "恒顺醋业股东披露减持计划",
+            "section": "investment",
+            "entity": "恒顺醋业",
+            "action": "披露",
+            "object": "股东减持计划",
+            "event_date": "2026-10-04T08:30:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "has_material_event": true,
+            "sources": [
+              {
+                "url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_hengshun.html",
+                "publisher": "上海证券交易所",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_hengshun.html",
+            "body_facts": [
+              "恒顺醋业今日披露股东减持计划公告。",
+              "公告显示拟减持比例不超过总股本的1%。"
+            ],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "stats": { "pass": 1 },
+        "render_block_count": 0,
+        "render_contains": ["恒顺醋业股东披露减持计划"]
+      }
+    },
+    {
+      "desc": "反例：gates 字典里少了一个闸门键 —— 契约缺席即视同未检查",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "恒顺醋业股东披露减持计划",
+            "section": "investment",
+            "entity": "恒顺醋业",
+            "action": "披露",
+            "object": "股东减持计划",
+            "event_date": "2026-10-04T08:30:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "has_material_event": true,
+            "sources": [
+              {
+                "url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_hengshun.html",
+                "publisher": "上海证券交易所",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_hengshun.html",
+            "body_facts": ["恒顺醋业今日披露股东减持计划公告。"],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": ["GATE_FIELD_UNCHECKED"],
+        "severity": { "GATE_FIELD_UNCHECKED": "BLOCK" }
+      }
+    }
+  ]
+}
