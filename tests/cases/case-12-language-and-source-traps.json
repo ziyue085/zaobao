@@ -29,7 +29,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
-            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "body_facts": [
+              "中国人民银行今日公告开展5000亿元逆回购操作。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -43,8 +45,14 @@
         ]
       },
       "expect": {
-        "block_codes": ["CLICKBAIT_TITLE", "ANALYSIS_LEAK"],
-        "severity": { "CLICKBAIT_TITLE": "BLOCK", "ANALYSIS_LEAK": "BLOCK" }
+        "block_codes": [
+          "CLICKBAIT_TITLE",
+          "ANALYSIS_LEAK"
+        ],
+        "severity": {
+          "CLICKBAIT_TITLE": "BLOCK",
+          "ANALYSIS_LEAK": "BLOCK"
+        }
       }
     },
     {
@@ -72,7 +80,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
-            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "body_facts": [
+              "中国人民银行今日公告开展5000亿元逆回购操作。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -86,7 +96,9 @@
         ]
       },
       "expect": {
-        "block_codes": ["ANALYSIS_LEAK"]
+        "block_codes": [
+          "ANALYSIS_LEAK"
+        ]
       }
     },
     {
@@ -112,7 +124,9 @@
               }
             ],
             "primary_url": "https://www.baidu.com/s?wd=央行逆回购",
-            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "body_facts": [
+              "中国人民银行今日公告开展5000亿元逆回购操作。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -126,8 +140,12 @@
         ]
       },
       "expect": {
-        "block_codes": ["SEARCH_URL_AS_SOURCE"],
-        "severity": { "SEARCH_URL_AS_SOURCE": "BLOCK" }
+        "block_codes": [
+          "SEARCH_URL_AS_SOURCE"
+        ],
+        "severity": {
+          "SEARCH_URL_AS_SOURCE": "BLOCK"
+        }
       }
     },
     {
@@ -155,7 +173,9 @@
               }
             ],
             "primary_url": "https://www.example-univ.edu.cn/news/2026/1004.html",
-            "body_facts": ["该校今日公布2027年硕士研究生招生简章。"],
+            "body_facts": [
+              "该校今日公布2027年硕士研究生招生简章。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -168,16 +188,25 @@
         ]
       },
       "expect": {
-        "block_codes": ["BANNED_SECTION"]
+        "block_codes": [
+          "BANNED_SECTION"
+        ]
       }
     },
     {
       "desc": "触发：输出里用了 Markdown 表格",
-      "input": { "date": "2026-10-04", "candidates": [] },
+      "input": {
+        "date": "2026-10-04",
+        "candidates": []
+      },
       "render_text": "# 早间情报 · 2026-10-04\n\n| 栏目 | 条数 |\n| --- | --- |\n| AI | 1 |\n",
       "expect": {
-        "render_codes": ["TABLE_NOT_ALLOWED"],
-        "severity": { "TABLE_NOT_ALLOWED": "BLOCK" }
+        "render_codes": [
+          "TABLE_NOT_ALLOWED"
+        ],
+        "severity": {
+          "TABLE_NOT_ALLOWED": "BLOCK"
+        }
       }
     },
     {
@@ -207,16 +236,7 @@
             "body_facts": [
               "中国人民银行今日公告开展5000亿元逆回购操作，期限7天。",
               "公告显示本次操作利率为1.5%。"
-            ],
-            "has_material_event": true,
-            "gates": {
-              "time_window_checked": true,
-              "history_dedup_checked": true,
-              "issue_dedup_checked": true,
-              "primary_source_checked": true,
-              "url_checked": true,
-              "no_analysis_checked": true
-            }
+            ]
           }
         ]
       },
@@ -255,7 +275,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/20261004.html",
-            "body_facts": ["中国人民银行今日公告下调金融机构存款准备金率0.5个百分点。"],
+            "body_facts": [
+              "中国人民银行今日公告下调金融机构存款准备金率0.5个百分点。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -270,8 +292,12 @@
       },
       "expect": {
         "block_count": 0,
-        "render_codes": ["CLICKBAIT_TITLE"],
-        "severity": { "CLICKBAIT_TITLE": "BLOCK" }
+        "render_codes": [
+          "CLICKBAIT_TITLE"
+        ],
+        "severity": {
+          "CLICKBAIT_TITLE": "BLOCK"
+        }
       }
     },
     {
@@ -299,7 +325,10 @@
               }
             ],
             "primary_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_yjyg.html",
-            "body_facts": ["该公司今日发布2026年三季度业绩预告。", "部分分析师建议买入该公司股票。"],
+            "body_facts": [
+              "该公司今日发布2026年三季度业绩预告。",
+              "部分分析师建议买入该公司股票。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -307,13 +336,18 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "中芯国际"
           }
         ]
       },
       "expect": {
-        "block_codes": ["ADVICE_LEAK"],
-        "severity": { "ADVICE_LEAK": "BLOCK" }
+        "block_codes": [
+          "ADVICE_LEAK"
+        ],
+        "severity": {
+          "ADVICE_LEAK": "BLOCK"
+        }
       }
     }
   ]

@@ -1,0 +1,1046 @@
+{
+  "id": "case-15",
+  "title": "v0.1.1 事实字段优先：模型自报不再作数，结论由程序算",
+  "maps_to": "v0.1.1 新增 T1—T8，以及 T9—T16",
+  "rule": "能由程序根据原始字段计算的判断，不允许继续依赖模型自报；来源判定正向证据优先",
+  "now": "2026-10-04T09:00:00+08:00",
+  "steps": [
+    {
+      "desc": "T1 自报 time_window_checked=true，但发布时间在 30 小时前 —— 自报不作数，仍按窗外处理",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "OpenAI 更新多模态模型文档",
+            "section": "ai",
+            "entity": "OpenAI",
+            "action": "更新",
+            "object": "多模态模型文档",
+            "event_date": "2026-10-03T03:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "has_material_event": true,
+            "sources": [
+              {
+                "url": "https://openai.com/index/docs-update/",
+                "publisher": "OpenAI",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://openai.com/index/docs-update/",
+            "body_facts": [
+              "OpenAI 更新了多模态模型文档。"
+            ],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": [
+          "TIME_OUT_OF_WINDOW",
+          "STATUS_SHOULD_BE_OLD"
+        ],
+        "severity": {
+          "TIME_OUT_OF_WINDOW": "BLOCK"
+        },
+        "stats": {
+          "pass": 1,
+          "deliverable": 0
+        },
+        "derived": {
+          "c01": {
+            "is_within_24h": false
+          }
+        }
+      }
+    },
+    {
+      "desc": "T2 自报 primary_checked=true，但唯一来源是搜索摘要页 —— Evidence Gate 不认它为一手",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某公司发布新一代推理模型",
+            "section": "ai",
+            "entity": "某公司",
+            "action": "发布",
+            "object": "新一代推理模型",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "has_material_event": true,
+            "sources": [
+              {
+                "url": "https://www.baidu.com/s?wd=reasoning-model",
+                "publisher": "百度搜索",
+                "tier": "discovery_only"
+              }
+            ],
+            "primary_url": "https://www.baidu.com/s?wd=reasoning-model",
+            "body_facts": [
+              "某公司发布新一代推理模型。"
+            ],
+            "gates": {
+              "time_window_checked": true,
+              "history_dedup_checked": true,
+              "issue_dedup_checked": true,
+              "primary_source_checked": true,
+              "url_checked": true,
+              "no_analysis_checked": true
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": [
+          "SEARCH_URL_AS_SOURCE"
+        ],
+        "severity": {
+          "SEARCH_URL_AS_SOURCE": "BLOCK"
+        },
+        "stats": {
+          "pass": 1,
+          "deliverable": 0
+        },
+        "derived": {
+          "c01": {
+            "has_primary_source": false,
+            "verification_source_count": 0
+          }
+        }
+      }
+    },
+    {
+      "desc": "T3 只给事实字段（一手 URL + 发布时间 + material_update）—— 程序自行推出全部派生状态，0 BLOCK 0 WARN 0 INFO",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "Anthropic 发布新模型技术报告",
+            "section": "ai",
+            "entity": "Anthropic",
+            "action": "发布",
+            "object": "新模型技术报告",
+            "event_date": "2026-10-04T07:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.anthropic.com/research/tech-report",
+                "publisher": "Anthropic",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.anthropic.com/research/tech-report",
+            "body_facts": [
+              "Anthropic 今日发布新模型技术报告。",
+              "报告给出模型在公开基准上的测评结果。"
+            ],
+            "material_update": {
+              "claim": "Anthropic 官网发布新模型技术报告",
+              "published_at": "2026-10-04T07:00:00+08:00",
+              "source_url": "https://www.anthropic.com/research/tech-report"
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "info_count": 0,
+        "stats": {
+          "candidates": 1,
+          "pass": 1
+        },
+        "derived": {
+          "c01": {
+            "has_primary_source": true,
+            "is_within_24h": true,
+            "has_material_event": true,
+            "verification_source_count": 1,
+            "history_match": false,
+            "is_output_eligible": true
+          }
+        }
+      }
+    },
+    {
+      "desc": "T4 相同 fingerprint、不同标题 —— 判重复，只保留来源最好的一条",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "应急管理部通报某地事故救援进展",
+            "section": "social",
+            "topic_type": "public_safety",
+            "entity": "应急管理部",
+            "action": "通报",
+            "object": "某地事故救援进展",
+            "event_date": "2026-10-04T03:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004a.shtml",
+                "publisher": "应急管理部",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004a.shtml",
+            "body_facts": [
+              "应急管理部今日通报某地事故救援进展。"
+            ]
+          },
+          {
+            "id": "c02",
+            "title": "某地事故救援最新情况公布",
+            "section": "social",
+            "topic_type": "public_safety",
+            "entity": "应急管理部",
+            "action": "通报",
+            "object": "某地事故救援进展",
+            "event_date": "2026-10-04T03:20:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004b.shtml",
+                "publisher": "应急管理部",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004b.shtml",
+            "body_facts": [
+              "应急管理部今日公布某地事故救援最新情况。"
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 1,
+        "block_codes": [
+          "DUPLICATE_IN_ISSUE"
+        ],
+        "fingerprint_same": [
+          [
+            "c01",
+            "c02"
+          ]
+        ],
+        "kept_id": "c01",
+        "stats": {
+          "candidates": 2,
+          "pass": 1
+        }
+      }
+    },
+    {
+      "desc": "T5 旧事件同 fingerprint，但有窗口内 material_update —— 判 UPDATED 且可输出",
+      "history": [
+        {
+          "event_id": "2026-10-02-abc",
+          "date": "2026-10-02",
+          "entity": "中芯国际",
+          "action": "发布",
+          "object": "2026年三季度报告",
+          "title": "中芯国际发布2026年三季度报告",
+          "primary_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261002_smic.html",
+          "fingerprint": "中芯国际#发布#2026年三季度报告"
+        }
+      ],
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中芯国际三季度报告正式版本披露",
+            "section": "investment",
+            "entity": "中芯国际",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-02T10:00:00+08:00",
+            "status": "UPDATED",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_smic.html",
+                "publisher": "上海证券交易所",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_smic.html",
+            "body_facts": [
+              "上海证券交易所今日披露中芯国际2026年三季度报告正式版本。",
+              "报告正文页数较业绩快报版本增加。"
+            ],
+            "material_update": {
+              "claim": "上交所披露中芯国际三季度报告正式版本",
+              "published_at": "2026-10-04T08:00:00+08:00",
+              "source_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_smic.html"
+            },
+            "watchlist_subject": "中芯国际"
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "any_codes": [
+          "HISTORY_MATCH_UPDATED"
+        ],
+        "severity": {
+          "HISTORY_MATCH_UPDATED": "INFO"
+        },
+        "stats": {
+          "pass": 1
+        },
+        "derived": {
+          "c01": {
+            "history_match": true,
+            "is_material_update": true,
+            "has_new_progress": true
+          }
+        }
+      }
+    },
+    {
+      "desc": "T5b 标 UPDATED 但 material_update 缺 published_at —— 未自证，不得升级",
+      "history": [
+        {
+          "event_id": "2026-10-02-abc",
+          "date": "2026-10-02",
+          "entity": "中芯国际",
+          "action": "发布",
+          "object": "2026年三季度报告",
+          "title": "中芯国际发布2026年三季度报告",
+          "primary_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261002_smic.html",
+          "fingerprint": "中芯国际#发布#2026年三季度报告"
+        }
+      ],
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中芯国际三季度报告正式版本披露",
+            "section": "investment",
+            "entity": "中芯国际",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-02T10:00:00+08:00",
+            "status": "UPDATED",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_smic.html",
+                "publisher": "上海证券交易所",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_smic.html",
+            "body_facts": [
+              "上海证券交易所今日披露中芯国际2026年三季度报告正式版本。"
+            ],
+            "material_update": {
+              "claim": "上交所披露中芯国际三季度报告正式版本",
+              "source_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_smic.html"
+            },
+            "watchlist_subject": "中芯国际"
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": [
+          "UPDATED_NOT_SUBSTANTIATED",
+          "MATERIAL_UPDATE_UNSUBSTANTIATED"
+        ],
+        "severity": {
+          "UPDATED_NOT_SUBSTANTIATED": "BLOCK",
+          "MATERIAL_UPDATE_UNSUBSTANTIATED": "BLOCK"
+        },
+        "stats": {
+          "pass": 1,
+          "deliverable": 0
+        },
+        "derived": {
+          "c01": {
+            "has_new_progress": false,
+            "is_material_update": false
+          }
+        }
+      }
+    },
+    {
+      "desc": "T6 只有搜索结果页 —— 两条搜索页也不构成证据，派生计数保持 0",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某银行调整存款利率",
+            "section": "universal_policy",
+            "entity": "某银行",
+            "action": "调整",
+            "object": "存款利率",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_CROSS_SOURCE",
+            "sources": [
+              {
+                "url": "https://www.google.com/search?q=deposit+rate",
+                "publisher": "Google",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "声称是首发"
+              },
+              {
+                "url": "https://www.bing.com/search?q=deposit+rate",
+                "publisher": "Bing",
+                "tier": "primary",
+                "is_first_party": true,
+                "tier_reason": "声称是首发"
+              }
+            ],
+            "primary_url": "https://www.google.com/search?q=deposit+rate",
+            "body_facts": [
+              "某银行调整存款利率。"
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": [
+          "SEARCH_URL_AS_SOURCE"
+        ],
+        "severity": {
+          "SEARCH_URL_AS_SOURCE": "BLOCK"
+        },
+        "derived": {
+          "c01": {
+            "has_primary_source": false,
+            "verification_source_count": 0,
+            "has_cross_source_verification": false
+          }
+        }
+      }
+    },
+    {
+      "desc": "T7 官方原文与媒体转载同时存在 —— 输出优先引用官方原文",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国石化发布2026年三季度报告",
+            "section": "investment",
+            "entity": "中国石化",
+            "action": "发布",
+            "object": "2026年三季度报告",
+            "event_date": "2026-10-04T07:30:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.news.cn/fortune/20261004a.htm",
+                "publisher": "新华社",
+                "tier": "trusted_secondary"
+              },
+              {
+                "url": "https://www.sinopec.com/listco/announcement/2026q3.html",
+                "publisher": "中国石化",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sinopec.com/listco/announcement/2026q3.html",
+            "body_facts": [
+              "中国石化今日披露2026年三季度报告。",
+              "报告在其官网与上交所同步发布。"
+            ],
+            "material_update": {
+              "claim": "中国石化官网发布2026年三季度报告",
+              "published_at": "2026-10-04T07:30:00+08:00",
+              "source_url": "https://www.sinopec.com/listco/announcement/2026q3.html"
+            },
+            "watchlist_subject": "中国石化"
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "derived": {
+          "c01": {
+            "has_primary_source": true,
+            "verification_source_count": 2
+          }
+        },
+        "render_block_count": 0,
+        "render_contains": [
+          "来源：[中国石化](https://www.sinopec.com/listco/announcement/2026q3.html)"
+        ],
+        "render_excludes": [
+          "https://www.news.cn/fortune/20261004a.htm"
+        ]
+      }
+    },
+    {
+      "desc": "T8 只有 2 条高价值信息 —— 就输出 2 条，不凑数",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "中国人民银行开展5000亿元逆回购操作",
+            "section": "universal_policy",
+            "entity": "中国人民银行",
+            "action": "开展",
+            "object": "5000亿元逆回购操作",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "中国人民银行开展5000亿元逆回购操作。",
+            "sources": [
+              {
+                "url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
+                "publisher": "中国人民银行",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
+            "body_facts": [
+              "中国人民银行今日公告开展5000亿元逆回购操作。"
+            ]
+          },
+          {
+            "id": "c02",
+            "title": "应急管理部通报某地事故救援进展",
+            "section": "social",
+            "topic_type": "public_safety",
+            "entity": "应急管理部",
+            "action": "通报",
+            "object": "某地事故救援进展",
+            "event_date": "2026-10-04T03:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "top_pick": true,
+            "top_pick_line": "应急管理部通报某地事故救援进展。",
+            "sources": [
+              {
+                "url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004.shtml",
+                "publisher": "应急管理部",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004.shtml",
+            "body_facts": [
+              "应急管理部今日通报某地事故救援进展。"
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_count": 0,
+        "stats": {
+          "candidates": 2,
+          "pass": 2,
+          "top_pick": 2
+        },
+        "render_block_count": 0,
+        "render_contains": [
+          "今天最值得看的2件事"
+        ],
+        "render_excludes": [
+          "今天最值得看的3件事"
+        ]
+      }
+    },
+    {
+      "desc": "T9 清单外域名 + 声明 trusted_secondary + tier_reason —— 凭理由计入可信二手，交叉验证成立",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某部委就全国性事项发布实施通告",
+            "section": "universal_policy",
+            "entity": "某部委",
+            "action": "发布",
+            "object": "全国性事项实施通告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_CROSS_SOURCE",
+            "sources": [
+              {
+                "url": "https://www.industry-news-a.com.cn/news/1",
+                "publisher": "甲行业报",
+                "tier": "trusted_secondary",
+                "tier_reason": "国家级行业报，站点不在清单内"
+              },
+              {
+                "url": "https://www.industry-news-b.com.cn/news/1",
+                "publisher": "乙行业报",
+                "tier": "trusted_secondary",
+                "tier_reason": "同领域独立媒体，站点不在清单内"
+              }
+            ],
+            "primary_url": "https://www.industry-news-a.com.cn/news/1",
+            "body_facts": [
+              "某部委今日发布全国性事项实施通告。"
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "warn_codes": [
+          "POLICY_PRIMARY_MISSING"
+        ],
+        "any_codes": [
+          "SOURCE_TIER_JUSTIFIED"
+        ],
+        "severity": {
+          "SOURCE_TIER_JUSTIFIED": "INFO"
+        },
+        "derived": {
+          "c01": {
+            "verification_source_count": 2
+          }
+        }
+      }
+    },
+    {
+      "desc": "T10 清单外域名声明 trusted_secondary 却给不出理由 —— 不计入交叉验证，仍按来源不足处理",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某部委就全国性事项发布实施通告",
+            "section": "universal_policy",
+            "entity": "某部委",
+            "action": "发布",
+            "object": "全国性事项实施通告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_CROSS_SOURCE",
+            "sources": [
+              {
+                "url": "https://www.industry-news-a.com.cn/news/1",
+                "publisher": "甲行业报",
+                "tier": "trusted_secondary"
+              },
+              {
+                "url": "https://www.industry-news-b.com.cn/news/1",
+                "publisher": "乙行业报",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://www.industry-news-a.com.cn/news/1",
+            "body_facts": [
+              "某部委今日发布全国性事项实施通告。"
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": [
+          "INSUFFICIENT_CROSS_SOURCE"
+        ],
+        "derived": {
+          "c01": {
+            "verification_source_count": 0,
+            "has_cross_source_verification": false
+          }
+        }
+      }
+    },
+    {
+      "desc": "T11 同一家媒体的两个子域 —— 只算一家发布者，不构成交叉验证",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某部委就全国性事项发布实施通告",
+            "section": "universal_policy",
+            "entity": "某部委",
+            "action": "发布",
+            "object": "全国性事项实施通告",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_CROSS_SOURCE",
+            "sources": [
+              {
+                "url": "https://finance.people.com.cn/n1/2026/1004/a.html",
+                "publisher": "人民网",
+                "tier": "trusted_secondary"
+              },
+              {
+                "url": "https://society.people.com.cn/n1/2026/1004/b.html",
+                "publisher": "人民网",
+                "tier": "trusted_secondary"
+              }
+            ],
+            "primary_url": "https://finance.people.com.cn/n1/2026/1004/a.html",
+            "body_facts": [
+              "某部委今日发布全国性事项实施通告。"
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "block_codes": [
+          "INSUFFICIENT_CROSS_SOURCE"
+        ],
+        "derived": {
+          "c01": {
+            "verification_source_count": 1,
+            "verification_publishers": [
+              "人民网"
+            ],
+            "has_cross_source_verification": false
+          }
+        }
+      }
+    },
+    {
+      "desc": "T13 合格条目超过 12 条 —— 给出 TOO_MANY_ITEMS 警告但不阻断（数量上限是提醒，不是硬闸）",
+      "expand": [
+        {
+          "id_prefix": "x",
+          "count": 13,
+          "template": {
+            "title": "某部委通报某类事项的处置进展",
+            "section": "universal_policy",
+            "entity": "某部委",
+            "action": "通报",
+            "object": "某类事项处置进展",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.mem.gov.cn/xw/bndt/202610/t20261004_1.shtml",
+                "publisher": "应急管理部",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.mem.gov.cn/xw/bndt/202610/t20261004_1.shtml",
+            "body_facts": [
+              "某部委今日通报某类事项处置进展。"
+            ]
+          }
+        }
+      ],
+      "input": {
+        "date": "2026-10-04"
+      },
+      "expect": {
+        "block_count": 0,
+        "any_codes": [
+          "TOO_MANY_ITEMS"
+        ],
+        "severity": {
+          "TOO_MANY_ITEMS": "WARN"
+        },
+        "stats": {
+          "candidates": 13,
+          "pass": 13
+        }
+      }
+    },
+    {
+      "desc": "T12 声明「仅有可信二手」却给不出一条可信来源 —— 放行依据由程序算，不由声明决定",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某聚合站称某企业将启动新一轮裁员",
+            "section": "universal_policy",
+            "entity": "某企业",
+            "action": "启动",
+            "object": "新一轮裁员",
+            "event_date": "2026-10-04T07:30:00+08:00",
+            "status": "PASS",
+            "evidence_status": "SECONDARY_ONLY",
+            "disclosure": "尚未见一手确认",
+            "sources": [
+              {
+                "url": "https://agg-unknown.example.com/post/1",
+                "publisher": "某聚合站",
+                "tier": "discovery_only"
+              }
+            ],
+            "primary_url": "https://agg-unknown.example.com/post/1",
+            "body_facts": [
+              "某聚合站发文称某企业将启动新一轮裁员。"
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 1,
+        "block_codes": [
+          "SECONDARY_SOURCE_MISSING"
+        ],
+        "derived": {
+          "c01": {
+            "verification_source_count": 0,
+            "has_primary_source": false
+          }
+        }
+      }
+    },
+    {
+      "desc": "T14 三条内容共用同一个来源 URL —— 报 SOURCE_URL_REUSED，提示没找到各自的一手来源",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "title": "某部委通报甲事项处置进展",
+            "section": "universal_policy",
+            "entity": "某部委",
+            "action": "通报",
+            "object": "甲事项处置进展",
+            "event_date": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.mem.gov.cn/xw/bndt/202610/t20261004_9.shtml",
+                "publisher": "应急管理部",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.mem.gov.cn/xw/bndt/202610/t20261004_9.shtml",
+            "body_facts": [
+              "某部委今日通报甲事项处置进展。"
+            ]
+          },
+          {
+            "id": "c02",
+            "title": "某部委通报乙事项处置进展",
+            "section": "universal_policy",
+            "entity": "某部委",
+            "action": "通报",
+            "object": "乙事项处置进展",
+            "event_date": "2026-10-04T08:10:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.mem.gov.cn/xw/bndt/202610/t20261004_9.shtml",
+                "publisher": "应急管理部",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.mem.gov.cn/xw/bndt/202610/t20261004_9.shtml",
+            "body_facts": [
+              "某部委今日通报乙事项处置进展。"
+            ]
+          },
+          {
+            "id": "c03",
+            "title": "某部委通报丙事项处置进展",
+            "section": "universal_policy",
+            "entity": "某部委",
+            "action": "通报",
+            "object": "丙事项处置进展",
+            "event_date": "2026-10-04T08:20:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.mem.gov.cn/xw/bndt/202610/t20261004_9.shtml",
+                "publisher": "应急管理部",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.mem.gov.cn/xw/bndt/202610/t20261004_9.shtml",
+            "body_facts": [
+              "某部委今日通报丙事项处置进展。"
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "any_codes": [
+          "SOURCE_URL_REUSED"
+        ],
+        "severity": {
+          "SOURCE_URL_REUSED": "WARN"
+        },
+        "stats": {
+          "candidates": 3,
+          "pass": 3
+        }
+      }
+    },
+    {
+      "desc": "T14 投资条目声明 watchlist_subject 且确实落在关注清单内 —— 程序对 config 查得到，放行",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "section": "investment",
+            "entity": "中国石化",
+            "action": "发布",
+            "object": "前三季度业绩预告",
+            "title": "中国石化发布前三季度业绩预告",
+            "published_at": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.sinopec.com/listco/gsgg/2026/1004.shtml",
+                "publisher": "中国石化",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sinopec.com/listco/gsgg/2026/1004.shtml",
+            "body_facts": [
+              "中国石化发布2026年前三季度业绩预告。"
+            ],
+            "material_update": {
+              "claim": "中国石化发布2026年前三季度业绩预告。",
+              "published_at": "2026-10-04T08:00:00+08:00",
+              "source_url": "https://www.sinopec.com/listco/gsgg/2026/1004.shtml"
+            },
+            "watchlist_subject": "中国石化"
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 0,
+        "info_count": 0,
+        "warn_count": 0,
+        "derived": {
+          "c01": {
+            "watchlist_subject_bound": true
+          }
+        }
+      }
+    },
+    {
+      "desc": "T15 投资条目没声明 watchlist_subject —— 主体准入无从校验，条目不得输出",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "section": "investment",
+            "entity": "中国石化",
+            "action": "发布",
+            "object": "前三季度业绩预告",
+            "title": "中国石化发布前三季度业绩预告",
+            "published_at": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.sinopec.com/listco/gsgg/2026/1004.shtml",
+                "publisher": "中国石化",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sinopec.com/listco/gsgg/2026/1004.shtml",
+            "body_facts": [
+              "中国石化发布2026年前三季度业绩预告。"
+            ],
+            "material_update": {
+              "claim": "中国石化发布2026年前三季度业绩预告。",
+              "published_at": "2026-10-04T08:00:00+08:00",
+              "source_url": "https://www.sinopec.com/listco/gsgg/2026/1004.shtml"
+            }
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 1,
+        "block_codes": [
+          "INVESTMENT_SUBJECT_UNBOUND"
+        ],
+        "derived": {
+          "c01": {
+            "watchlist_subject_bound": false
+          }
+        }
+      }
+    },
+    {
+      "desc": "T16 投资条目声明的主体不在关注清单里 —— 声明一个引用，程序当场否掉",
+      "input": {
+        "date": "2026-10-04",
+        "candidates": [
+          {
+            "id": "c01",
+            "section": "investment",
+            "entity": "某半导体设备公司",
+            "action": "发布",
+            "object": "前三季度业绩预告",
+            "title": "某半导体设备公司拟收购荷兰传感器企业",
+            "published_at": "2026-10-04T08:00:00+08:00",
+            "status": "PASS",
+            "evidence_status": "VERIFIED_PRIMARY",
+            "sources": [
+              {
+                "url": "https://www.sse.com.cn/assortment/stock/list/info/announcement/index.shtml",
+                "publisher": "上海证券交易所",
+                "tier": "primary",
+                "is_first_party": true
+              }
+            ],
+            "primary_url": "https://www.sse.com.cn/assortment/stock/list/info/announcement/index.shtml",
+            "body_facts": [
+              "某半导体设备公司公告拟以现金收购境外传感器企业全部股份。"
+            ],
+            "material_update": {
+              "claim": "某半导体设备公司公告拟以现金收购境外传感器企业全部股份。",
+              "published_at": "2026-10-04T08:00:00+08:00",
+              "source_url": "https://www.sse.com.cn/assortment/stock/list/info/announcement/index.shtml"
+            },
+            "watchlist_subject": "某半导体设备公司"
+          }
+        ]
+      },
+      "expect": {
+        "block_count": 1,
+        "block_codes": [
+          "INVESTMENT_SUBJECT_UNKNOWN"
+        ]
+      }
+    }
+  ]
+}

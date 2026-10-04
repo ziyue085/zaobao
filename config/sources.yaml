@@ -15,7 +15,7 @@
 # 在实际操作中常常就是首发渠道。这类来源用于普适性政策时，可视为准一手，
 # 但必须标注「准一手」，不得静默升级为 primary。
 
-version: "0.1.0"
+version: "0.1.1"
 updated: "2026-10-04"
 
 primary:
@@ -107,6 +107,11 @@ trusted_secondary:
     - cctv.com
     - people.com.cn
     - chinanews.com.cn
+    # 移动端与站点别名：同一家媒体换域名时，别漏登记，
+    # 否则真实报道会被算成「清单外域名」，白白损失一条可信来源。
+    - chinanews.com
+    - gmw.cn
+    - cnr.cn
     - cls.cn
     - stcn.com
     - cnstock.com

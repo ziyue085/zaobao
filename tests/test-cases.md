@@ -43,14 +43,15 @@ python tests/run_cli_smoke.py             # 命令行端到端冒烟
 | `case-06` | 3 | 用户 Case 6 | 只有传闻 → REJECT；当事人确认后可进社会热点（保留 1 条 WARN 留痕） |
 | `case-07` | 4 | 用户 Case 7 | Top 按实际数量；**声明 3 条实际 2 条即 BLOCK**；非可输出状态不得进 Top |
 | `case-08` | 4 | 用户 Case 8 | 跨日去重；有新进展才允许重发；换标题／换全称仍识别为同一事件 |
-| `case-09` | 5 | 用户 Case 9 | 只有价格波动 → LOW_VALUE；`has_material_event` 缺席即 BLOCK；有实质事件正常输出 |
+| `case-09` | 5 | 用户 Case 9 | 只有价格波动 → LOW_VALUE；`has_material_event` 缺席不再阻断（v0.1.1：降级为 INFO，放行看派生状态）；有实质事件正常输出 |
 | `case-10` | 3 | 用户 Case 10 | 「意外但重要」可收录；每日上限 3 条；必须有高门槛类型声明 |
 | `case-11` | 1 | **反向对照** | 完全合格的期次 → 0 BLOCK / 0 WARN / 0 INFO，且 83 个已知 code 一个都不触发 |
 | `case-12` | 8 | 标题与来源要求 | 标题党、影响分析、投资建议、搜索 URL、禁用栏目、Markdown 表格、Top 一句话里的禁词 |
 | `case-13` | 18 | 核验与证据规则 | 结构性缺陷（URL／来源／fingerprint／时间／枚举／计数／闸门）与证据充分性缺陷 |
 | `case-14` | 4 | 输出结构 | 来源引用缺失、引用了清单外链接、空栏目、多余空行、Top 段缺失 |
+| `case-15` | 18 | **v0.1.1 事实优先推导** | T1—T16（含 T5b）：自报字段失效后，放行依据全部改由程序按事实字段算出 |
 
-合计 **14 个用例 / 67 个断言步骤**。
+合计 **15 个用例 / 85 个断言步骤**。
 
 ## 四、`case-12` 与 `case-13` 的分工
 
@@ -62,34 +63,44 @@ python tests/run_cli_smoke.py             # 命令行端到端冒烟
 
 ## 五、规则 code 覆盖矩阵
 
-规则层现有 **83 个** code，夹具中被正面断言（必须出现）的有 **54 个**。
+规则层现有 **94 个** code，夹具中被正面断言（必须出现）的有 **61 个**。
 
 统计方式（可复现）：
 
 ```
-KNOWN_CODES   = 扫描 scripts/zaobao_check.py 中所有 fnd("CODE" 的出现
-ASSERTED      = 夹具 expect 中 block_codes ∪ warn_codes ∪ any_codes ∪ render_codes ∪ severity(非 null)
+KNOWN_CODES   = 扫描 scripts/zaobao_check.py 中所有 fnd("CODE" 的出现，
+                并补上 HISTORY_* / CONFIG_* / RENDER_* / LEGACY_* 前缀的字符串字面量
+ASSERTED      = 遍历 tests/cases/*.json，取 expect.{block_codes,warn_codes,any_codes,render_codes,codes}
+                ∪ expect.severity 的键
 ```
 
-### 未被正面断言的 29 个
+### 未被正面断言的 33 个
 
 ```text
-CANDIDATE_NOT_OBJECT        CONFIG_ALIASES_EMPTY          CONFIG_BANNED_SECTION_IN_PRIORITY
-CONFIG_HISTORY_RETENTION_SHORT  CONFIG_NEVER_SOURCE_EMPTY CONFIG_PRIORITY_MISSING
-CONFIG_SECTION_UNDEFINED    CONFIG_SECTION_UNKNOWN        CONFIG_SOURCE_TIER_EMPTY
-CONFIG_SOURCE_TIER_OVERLAP  CONFIG_UNEXPECTED_LIMIT_MISSING  CONFIG_UNEXPECTED_LIMIT_RAISED
-CONFIG_USING_MINI_YAML      CONFIG_WINDOW_CHANGED         CROSS_SOURCE_HAS_PRIMARY
-EMPTY_ISSUE                 EVIDENCE_STATUS_INVALID       HISTORY_LINE_INVALID
-HISTORY_PRUNED              HISTORY_RECORDED              OUTPUT_ITEM_MISSING
-PRIMARY_URL_NOT_IN_SOURCES  RENDER_NOT_TEXT               SECTION_HEADING_MISSING
-SECTION_NOT_IN_PRIORITY     SOURCE_TIER_INVALID           TITLE_NOT_FACTUAL
-TITLE_TOO_LONG              TITLE_TOO_SHORT
+CANDIDATE_NOT_OBJECT            CONFIG_ALIASES_EMPTY
+CONFIG_BANNED_SECTION_IN_PRIORITY  CONFIG_HISTORY_RETENTION_SHORT
+CONFIG_INVESTMENT_SUBJECTS_EMPTY   CONFIG_NEVER_SOURCE_EMPTY
+CONFIG_PRIORITY_MISSING         CONFIG_SECTION_UNDEFINED
+CONFIG_SECTION_UNKNOWN          CONFIG_SOURCE_TIER_EMPTY
+CONFIG_SOURCE_TIER_OVERLAP      CONFIG_UNEXPECTED_LIMIT_MISSING
+CONFIG_UNEXPECTED_LIMIT_RAISED  CONFIG_USING_MINI_YAML
+CONFIG_WINDOW_CHANGED           CROSS_SOURCE_HAS_PRIMARY
+EMPTY_ISSUE                     EVIDENCE_STATUS_INVALID
+HISTORY_LINE_INVALID            HISTORY_PRUNED
+HISTORY_RECORDED                LEGACY_CHECKED_FIELDS_IGNORED
+LEGACY_MATERIAL_FLAG            MATERIAL_UPDATE_INVALID
+OUTPUT_ITEM_MISSING             PRIMARY_URL_NOT_IN_SOURCES
+RENDER_NOT_TEXT                 SECTION_HEADING_MISSING
+SECTION_NOT_IN_PRIORITY         SOURCE_TIER_INVALID
+TITLE_NOT_FACTUAL               TITLE_TOO_LONG
+TITLE_TOO_SHORT
 ```
 
 其中：
 
 - `HISTORY_RECORDED` / `HISTORY_PRUNED` / `CONFIG_*` 由 `tests/run_cli_smoke.py` 在**命令行层面**覆盖（该脚本断言的是退出码与文件内容，不经过夹具断言机制）。
 - `OUTPUT_ITEM_MISSING` / `SECTION_HEADING_MISSING` 在 `examples/sample-output-bad.md` 的实际判定中出现过，但未写成夹具断言。
+- `LEGACY_*` 三个是 v0.1.1 新增的**降级提示**，属于"应当出现但无害"的 INFO，写在 `round-01` 等实战轮次的审计里，不写成夹具断言 —— 因为一旦写成断言，就等于在测试里固化旧字段的读取行为。
 - 其余属于"输入畸形"或"配置被改坏"分支，需要人为构造非法输入才能触发，当前未覆盖。
 
 **这是已知的覆盖缺口，不是"全都测过了"。** 见 `references/reliability-gaps.md`。

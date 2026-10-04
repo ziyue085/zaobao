@@ -1,0 +1,388 @@
+{
+  "date": "2026-10-04",
+  "window_start": "2026-10-03T09:00:00+08:00",
+  "window_end": "2026-10-04T09:00:00+08:00",
+  "note": "Round 1 真实候选集。所有 URL 均来自真实检索结果。只掌握到『日期』精度的来源，published_at 按当日 12:00 记录（详见 audit.md 已知限制一节）。",
+  "candidates": [
+    {
+      "id": "c01",
+      "title": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查",
+      "section": "universal_policy",
+      "entity": "商务部",
+      "action": "发起",
+      "object": "对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+      "event_date": "2026-10-03T12:00:00+08:00",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "top_pick": true,
+      "top_pick_line": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查。",
+      "importance_reason": "部委级贸易救济立案，对国内相关化工产业构成制度性变更，属普适性政策范畴。",
+      "sources": [
+        {
+          "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html",
+          "publisher": "商务部",
+          "tier": "primary",
+          "is_first_party": true,
+          "published_at": "2026-10-03T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html",
+      "body_facts": [
+        "商务部公告2026年第44号称，自2026年10月3日起对原产于欧盟的进口对硝基甲苯进行反倾销立案调查。",
+        "本次倾销调查期为2025年7月1日至2026年6月30日，产业损害调查期为2022年1月1日至2026年6月30日。"
+      ],
+      "background": "该调查由国内产业于2026年9月14日提出申请。",
+      "material_update": {
+        "claim": "商务部发布公告2026年第44号，对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+        "published_at": "2026-10-03T12:00:00+08:00",
+        "source_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html"
+      }
+    },
+    {
+      "id": "c02",
+      "title": "应急管理部视频调度国庆假期安全防范工作",
+      "section": "social",
+      "topic_type": "public_safety",
+      "entity": "应急管理部",
+      "action": "调度",
+      "object": "国庆假期安全防范工作",
+      "event_date": "2026-10-03T18:00:00+08:00",
+      "published_at": "2026-10-03T18:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "importance_reason": "部级机构对全国假期安全防范的正式调度，涉森林草原火险与假期应急值守。",
+      "sources": [
+        {
+          "url": "https://www.mem.gov.cn/xw/bndt/202610/t20261003_718206.shtml",
+          "publisher": "应急管理部",
+          "tier": "primary",
+          "is_first_party": true,
+          "published_at": "2026-10-03T18:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.mem.gov.cn/xw/bndt/202610/t20261003_718206.shtml",
+      "body_facts": [
+        "10月3日，应急管理部视频调度国庆假期安全防范工作。",
+        "假期期间部、省累计派出检查组4200余个，发现问题隐患40300余个。"
+      ]
+    },
+    {
+      "id": "c03",
+      "title": "中国海油流花油田二次开发项目累产原油突破200万吨",
+      "section": "investment",
+      "entity": "中国海油",
+      "action": "宣布",
+      "object": "流花油田二次开发累产原油突破200万吨",
+      "watchlist_subject": "大型央企",
+      "event_date": "2026-10-03T12:09:33+08:00",
+      "published_at": "2026-10-03T12:09:33+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "top_pick": true,
+      "top_pick_line": "中国海油流花油田二次开发项目累产原油突破200万吨。",
+      "importance_reason": "大型央企重大产能项目的里程碑式运营数据，属可核实的实质事件。",
+      "sources": [
+        {
+          "url": "https://news.cctv.com/2026/10/03/ARTITaFrMKfSKwdSIgJnvDPr261003.shtml",
+          "publisher": "央视网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T12:09:33+08:00"
+        },
+        {
+          "url": "https://finance.people.com.cn/n1/2026/1004/c1004-40809280.html",
+          "publisher": "人民网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-04T07:38:00+08:00"
+        }
+      ],
+      "primary_url": "https://news.cctv.com/2026/10/03/ARTITaFrMKfSKwdSIgJnvDPr261003.shtml",
+      "body_facts": [
+        "中国海油10月3日称，流花油田二次开发项目累计生产和外输原油突破200万吨。",
+        "该项目位于珠江口盆地海域，作业平均水深305米，已投产32口生产井，最高日产原油3900吨。"
+      ],
+      "material_update": {
+        "claim": "流花油田二次开发项目累产原油突破200万吨，第53船次提油作业完成",
+        "published_at": "2026-10-03T12:09:33+08:00",
+        "source_url": "https://news.cctv.com/2026/10/03/ARTITaFrMKfSKwdSIgJnvDPr261003.shtml"
+      }
+    },
+    {
+      "id": "c04",
+      "title": "Aleph Alpha 开源发布 Kolibri-1 模型",
+      "section": "ai",
+      "entity": "Aleph Alpha",
+      "action": "发布",
+      "object": "Kolibri-1 开源模型",
+      "event_date": "2026-10-03T16:54:00+08:00",
+      "published_at": "2026-10-03T16:54:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "top_pick": true,
+      "top_pick_line": "Aleph Alpha 开源发布 780 亿参数模型 Kolibri-1。",
+      "importance_reason": "欧洲主权模型代表作，Apache 2.0 全权重开放，属模型能力与许可条款的实质变化。",
+      "sources": [
+        {
+          "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1",
+          "publisher": "Hugging Face",
+          "tier": "primary",
+          "is_first_party": true,
+          "published_at": "2026-10-03T16:54:00+08:00"
+        },
+        {
+          "url": "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model",
+          "publisher": "Aleph Alpha",
+          "tier": "primary",
+          "is_first_party": true,
+          "tier_reason": "Aleph Alpha 官方博客，发布者即模型开发方本人",
+          "published_at": "2026-10-03T16:54:00+08:00"
+        }
+      ],
+      "primary_url": "https://huggingface.co/Aleph-Alpha/Kolibri-1",
+      "body_facts": [
+        "Aleph Alpha 于10月3日发布并开源混合专家模型 Kolibri-1，总参数780亿、每 token 激活34.6亿。",
+        "模型采用 Apache 2.0 许可，权重发布于 Hugging Face，原生上下文262144 token，验证至1048576 token。"
+      ],
+      "material_update": {
+        "claim": "Aleph Alpha 在 Hugging Face 发布 Kolibri-1 全权重，Apache 2.0 许可",
+        "published_at": "2026-10-03T16:54:00+08:00",
+        "source_url": "https://huggingface.co/Aleph-Alpha/Kolibri-1"
+      }
+    },
+    {
+      "id": "c05",
+      "title": "国铁集团优化老年旅客淡季购票优惠措施",
+      "section": "universal_policy",
+      "entity": "中国国家铁路集团",
+      "action": "优化",
+      "object": "老年旅客淡季购票优惠",
+      "event_date": "2026-10-03T12:00:00+08:00",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "importance_reason": "面向全国老年旅客的票价优惠规则调整，具有明确的公共政策属性。",
+      "sources": [
+        {
+          "url": "https://m.chinanews.com/wap/detail/cht/zw/10707395.shtml",
+          "publisher": "中国新闻网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T12:00:00+08:00"
+        },
+        {
+          "url": "https://m.gmw.cn/2026-10/04/content_1304571700.htm",
+          "publisher": "光明网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-04T08:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://m.chinanews.com/wap/detail/cht/zw/10707395.shtml",
+      "body_facts": [
+        "国铁集团10月3日称，年满60周岁老年人购买10月18日至12月30日标注「敬」字车次的火车票可享执行票价9折的「折上折」优惠。",
+        "本次优惠不再限定周中时段，相关优惠车票自10月4日起陆续发售。"
+      ]
+    },
+    {
+      "id": "c06",
+      "title": "工信部公布8月末5G基站总数达519.5万个",
+      "section": "universal_policy",
+      "entity": "工业和信息化部",
+      "action": "公布",
+      "object": "8月末5G基站总数",
+      "event_date": "2026-10-03T12:00:00+08:00",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "status": "LOW_VALUE",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "importance_reason": "属例行月度统计数据发布，不构成政策变化或重大事件，不值得占用版面。",
+      "reject_reason": "例行统计发布，不进入输出。",
+      "sources": [
+        {
+          "url": "https://www.gov.cn/lianbo/202610/content_7082625.htm",
+          "publisher": "中国政府网",
+          "tier": "primary",
+          "is_first_party": true,
+          "published_at": "2026-10-03T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.gov.cn/lianbo/202610/content_7082625.htm",
+      "body_facts": [
+        "工业和信息化部日前发布数据显示，截至8月末我国5G基站总数达519.5万个，占移动基站总数的39.7%。"
+      ]
+    },
+    {
+      "id": "c07",
+      "title": "民政部提示防范以「民惠通」等为名的非法养老App诈骗",
+      "section": "universal_policy",
+      "entity": "民政部",
+      "action": "提示",
+      "object": "防范非法养老App诈骗",
+      "event_date": "2026-09-22T10:00:00+08:00",
+      "published_at": "2026-09-22T10:00:00+08:00",
+      "status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "一手发布为2026年9月22日，超出24小时窗口；10月3日的报道属二次传播。",
+      "sources": [
+        {
+          "url": "http://news.big5.enorth.com.cn/system/2026/10/03/059834003.shtml",
+          "publisher": "北方网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "http://news.big5.enorth.com.cn/system/2026/10/03/059834003.shtml",
+      "body_facts": [
+        "民政部养老服务司9月22日发布提示称，近期一些非法养老App以「民惠通」等为名实施诈骗。"
+      ]
+    },
+    {
+      "id": "c08",
+      "title": "市场监管总局发布《国家统一推行自愿性认证制度管理办法（试行）》",
+      "section": "universal_policy",
+      "entity": "市场监管总局",
+      "action": "发布",
+      "object": "国家统一推行自愿性认证制度管理办法（试行）",
+      "event_date": "2026-09-30T10:00:00+08:00",
+      "published_at": "2026-09-30T10:00:00+08:00",
+      "status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "总局官网公告日期为2026年9月30日，超出24小时窗口；10月3—4日的报道属二次传播。",
+      "sources": [
+        {
+          "url": "https://www.cnr.cn/newscenter/native/gd/20261004/t20261004_527833875.shtml",
+          "publisher": "央广网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-04T12:56:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.cnr.cn/newscenter/native/gd/20261004/t20261004_527833875.shtml",
+      "body_facts": [
+        "市场监管总局9月30日发布公告，公布《国家统一推行自愿性认证制度管理办法（试行）》，自公布之日起施行。"
+      ]
+    },
+    {
+      "id": "c09",
+      "title": "Google 原型卫星搭载4枚TPU芯片发射升空",
+      "section": "ai",
+      "entity": "Google",
+      "action": "发射",
+      "object": "搭载TPU芯片的原型卫星",
+      "event_date": "2026-10-01T12:00:00+08:00",
+      "published_at": "2026-10-01T12:00:00+08:00",
+      "status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "卫星于2026年10月1日发射，媒体报道集中在10月3日；事件本体超出24小时窗口。",
+      "sources": [
+        {
+          "url": "https://news.cgtn.com/news/2026-10-03/Google-launches-AI-chip-satellite-to-test-performance-in-space-1QVTHe6fuqk/share_amp.html",
+          "publisher": "CGTN",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T12:00:00+08:00"
+        },
+        {
+          "url": "https://news.cri.cn/20261003/b8d7ede7-538f-4b12-9479-e78540f6ecb0.html",
+          "publisher": "国际在线",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://news.cgtn.com/news/2026-10-03/Google-launches-AI-chip-satellite-to-test-performance-in-space-1QVTHe6fuqk/share_amp.html",
+      "body_facts": [
+        "Google 一颗搭载4枚自研TPU芯片的原型卫星于当地时间10月1日发射升空，属「太阳捕手」计划首次在轨测试。"
+      ]
+    },
+    {
+      "id": "c10",
+      "title": "Google 发布新一代前沿模型 Gemini 4 Argon",
+      "section": "ai",
+      "entity": "Google",
+      "action": "发布",
+      "object": "Gemini 4 Argon 模型",
+      "event_date": "2026-10-01T04:00:00+08:00",
+      "published_at": "2026-10-01T04:00:00+08:00",
+      "status": "OLD",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "reject_reason": "官方博客发布日期为2026年9月30日（美国时间），已超出24小时窗口；10月2—3日的报道属二次传播。",
+      "sources": [
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+          "publisher": "Google 官方博客",
+          "tier": "primary",
+          "is_first_party": true,
+          "published_at": "2026-10-01T04:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+      "body_facts": [
+        "Google 官方博客发布新一代前沿模型 Gemini 4 Argon，面向软件工程、企业知识工作与网络安全防御。",
+        "该模型将输出上限提升至100万 token，并通过 Fairwind 计划向受信任的网络安全防御人员开放。"
+      ]
+    },
+    {
+      "id": "c11",
+      "title": "国家发展改革委民营局向民营企业公开推介52个投资项目",
+      "section": "universal_policy",
+      "entity": "国家发展改革委",
+      "action": "推介",
+      "object": "民营企业投资项目52个",
+      "event_date": "2026-10-02T12:00:00+08:00",
+      "published_at": "2026-10-02T12:00:00+08:00",
+      "status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "新华社10月2日发布，超出24小时窗口。",
+      "sources": [
+        {
+          "url": "https://big5.china.com.cn/gate/big5/news.china.com.cn/2026-10/02/content_118720696.shtml",
+          "publisher": "中国网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-02T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://big5.china.com.cn/gate/big5/news.china.com.cn/2026-10/02/content_118720696.shtml",
+      "body_facts": [
+        "国家发展改革委民营局日前向民营企业推介52个制造业领域投资项目，预计总投资524亿元，拟引入民间资本155亿元。"
+      ]
+    },
+    {
+      "id": "c12",
+      "title": "我国首个深水油田二次开发项目累产原油突破200万吨",
+      "section": "investment",
+      "entity": "中国海油",
+      "action": "宣布",
+      "object": "流花油田二次开发累产原油突破200万吨",
+      "watchlist_subject": "大型央企",
+      "event_date": "2026-10-03T19:00:00+08:00",
+      "published_at": "2026-10-03T19:00:00+08:00",
+      "status": "DUPLICATE",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "importance_reason": "同 c03，不同媒体转载版本，用于验证本期内部去重。",
+      "sources": [
+        {
+          "url": "https://politics.gmw.cn/2026-10/03/content_39031696.htm",
+          "publisher": "光明网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T19:00:00+08:00"
+        },
+        {
+          "url": "https://finance.people.com.cn/BIG5/n1/2026/1004/c1004-40809280.html",
+          "publisher": "人民网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-04T07:38:00+08:00"
+        }
+      ],
+      "primary_url": "https://politics.gmw.cn/2026-10/03/content_39031696.htm",
+      "body_facts": [
+        "我国首个深水油田流花油田二次开发项目累计生产原油突破200万吨。",
+        "截至目前，流花油田已生产原油超过4000万吨，日产量达到投产22年来新高。"
+      ],
+      "material_update": {
+        "claim": "流花油田二次开发项目累产原油突破200万吨",
+        "published_at": "2026-10-03T19:00:00+08:00",
+        "source_url": "https://politics.gmw.cn/2026-10/03/content_39031696.htm"
+      },
+      "reject_reason": "本期内部重复，保留 c03"
+    }
+  ]
+}

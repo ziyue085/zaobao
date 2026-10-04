@@ -1,0 +1,17 @@
+{
+  "round": "round-05-day3",
+  "date": "2026-10-04",
+  "window": "2026-10-03T09:00+08:00 → 2026-10-04T09:00+08:00",
+  "issue_note": "Round 5 链路第三步：同一 fingerprint 再次出现，但这次带着窗口内可核实的实质新进展（官方确认暂停训练 + 通报百余家机构）。系统判 UPDATED，允许输出，0 BLOCK，只有 HISTORY_MATCH_UPDATED 一条 INFO。三步链路 (PASS → DUPLICATE → UPDATED) 全部成立。",
+  "items": [
+    {
+      "id": "c01",
+      "title": "OpenAI 确认已暂停最先进模型训练并通报百余家机构",
+      "label": "GOOD",
+      "note": "从『媒体披露』升级为『官方确认 + 具体动作』，是实质新进展；两条独立可信来源。来源仍标『尚未见一手确认』，因为没拿到 OpenAI 官网原文。"
+    }
+  ],
+  "rejected_review": [],
+  "missed_important": [],
+  "comment": "这一条同时补上了 Round 1—2 里『AI 线索只按新模型发布找、漏掉安全事件线』的那个盲区。"
+}

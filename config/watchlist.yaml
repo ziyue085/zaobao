@@ -6,7 +6,7 @@
 # 字段说明见 README.md「如何修改关注列表」。
 
 meta:
-  version: "0.1.0"
+  version: "0.1.1"
   updated: "2026-10-04"
   timezone: "+08:00"
   window_hours: 24

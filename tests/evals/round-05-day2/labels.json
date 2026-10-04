@@ -1,0 +1,12 @@
+{
+  "round": "round-05-day2",
+  "date": "2026-10-03",
+  "window": "2026-10-02T12:00+08:00 → 2026-10-03T12:00+08:00",
+  "issue_note": "Round 5 链路第二步：同一事件在窗口内被媒体再次讨论，但没有实质新进展。历史里已有同一 fingerprint，Gate 判 DUPLICATE_HISTORY 并阻断。系统零输出，且用的是标准表述『本期未检索到符合收录标准的条目』，没有写成『今天没有新闻』。",
+  "items": [],
+  "rejected_review": [
+    {"id": "c01", "label": "DUPLICATE", "agree": true, "note": "4 天前已输出过同一 fingerprint，且窗口内没有新进展。判重复正确 —— 这正是『旧闻不得重新包装成新闻』要防的情形。"}
+  ],
+  "missed_important": [],
+  "comment": "这一轮输出 0 条是正确结果，不算漏收。"
+}

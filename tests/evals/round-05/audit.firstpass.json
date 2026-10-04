@@ -1,0 +1,249 @@
+{
+  "date": "2026-10-04",
+  "now": "2026-10-04T09:00:00+08:00",
+  "candidates": 3,
+  "accepted_count": 2,
+  "rejected_count": 1,
+  "final_items": 2,
+  "stats": {
+    "candidates": 3,
+    "pass": 2,
+    "deliverable": 2,
+    "top_pick": 0,
+    "kept": 3,
+    "dropped": 0
+  },
+  "blocked_by_gate": {},
+  "rejected_by_gate": {
+    "duplication": 1
+  },
+  "accepted_by_status": {
+    "UPDATED": 1,
+    "PASS": 1
+  },
+  "accepted_by_section": {
+    "universal_policy": 2
+  },
+  "accepted": [
+    {
+      "id": "c02",
+      "title": "商务部对原产于欧盟的进口对硝基甲苯反倾销立案调查：公布调查问卷",
+      "section": "universal_policy",
+      "declared_status": "UPDATED",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "reject_reason": null,
+      "primary_url": "https://www.mofcom.gov.cn/syxwfb/art/2026/art_c1e2b099e84d4b6d8e10e7cef5928511.html",
+      "decision": "UPDATED",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "商务部#发起#对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+        "published_at": "2026-10-04T08:30:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": true,
+        "legacy_material_flag": false,
+        "material_update_substantiated": true,
+        "has_material_event": true,
+        "has_new_progress": true,
+        "source_classes": [
+          "PRIMARY_OFFICIAL"
+        ],
+        "source_class_counts": {
+          "PRIMARY_OFFICIAL": 1
+        },
+        "has_primary_source": true,
+        "primary_source_count": 1,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "商务部"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": true,
+        "history_match_count": 1,
+        "is_material_update": true,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c03",
+      "title": "教育部部署开展2027届高校毕业生校园招聘月活动",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://www.cqrb.cn/shishi/2026-10-03/2789259_pc.html",
+      "decision": "PASS",
+      "decision_reasons": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "教育部#部署#2027届高校毕业生校园招聘月活动",
+        "published_at": "2026-10-03T17:22:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "新华社（重庆日报网转载）"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "id": "c01",
+      "title": "青岛胶州湾第二隧道盾构掘进全部完成",
+      "section": "social",
+      "declared_status": "DUPLICATE",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": "与最近 7 天内已输出事件同一 fingerprint，且无实质新进展。",
+      "primary_url": "https://m.chinanews.com/wap/detail/chs/zw/10707223.shtml",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中铁十四局#完成#胶州湾第二隧道盾构掘进",
+        "published_at": "2026-10-04T08:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY",
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 2
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 2,
+        "verification_publishers": [
+          "中国新闻网",
+          "人民网"
+        ],
+        "has_cross_source_verification": true,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": true,
+        "history_match_count": 1,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    }
+  ],
+  "issue_findings": [
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c03",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "DUPLICATE_HISTORY",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "duplication",
+      "scope": "c01",
+      "message": "已正确判为历史重复",
+      "detail": "中铁十四局#完成#胶州湾第二隧道盾构掘进"
+    },
+    {
+      "code": "HISTORY_MATCH_UPDATED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "duplication",
+      "scope": "c02",
+      "message": "与历史事件同一 fingerprint，但存在实质新进展，按 UPDATED 输出",
+      "detail": "商务部#发起#对原产于欧盟的进口对硝基甲苯反倾销立案调查 (1 天前)"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c03",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.cqrb.cn/shishi/2026-10-03/2789259_pc.html"
+    }
+  ]
+}

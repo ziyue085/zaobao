@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-03",
+  "now": "2026-10-03T12:00:00+08:00",
+  "candidates": 1,
+  "accepted_count": 0,
+  "rejected_count": 1,
+  "final_items": 0,
+  "stats": {
+    "candidates": 1,
+    "pass": 1,
+    "deliverable": 0,
+    "top_pick": 0,
+    "kept": 1,
+    "dropped": 0
+  },
+  "blocked_by_gate": {
+    "duplication": 1,
+    "importance": 2
+  },
+  "rejected_by_gate": {
+    "duplication": 1
+  },
+  "accepted_by_status": {},
+  "accepted_by_section": {},
+  "accepted": [],
+  "rejected": [
+    {
+      "id": "c01",
+      "title": "OpenAI 取消发布新一代模型引发行业安全讨论",
+      "section": "ai",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://www.163.com/dy/article/L8CU5E8G0514R9OJ.html",
+      "decision": "BLOCKED",
+      "decision_reasons": [
+        "DUPLICATE_HISTORY",
+        "LOW_VALUE_PRICE_ONLY",
+        "MATERIAL_UPDATE_MISSING"
+      ],
+      "blocked_by": [
+        "DUPLICATE_HISTORY",
+        "LOW_VALUE_PRICE_ONLY",
+        "MATERIAL_UPDATE_MISSING"
+      ],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "BLOCK",
+        "importance": "BLOCK",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "openai#取消#gpt61astra的10月发布",
+        "published_at": "2026-10-03T10:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "环球网"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": true,
+        "history_match_count": 1,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    }
+  ],
+  "issue_findings": [
+    {
+      "code": "DUPLICATE_HISTORY",
+      "severity": "BLOCK",
+      "priority": 0,
+      "gate": "duplication",
+      "scope": "c01",
+      "message": "与最近 30 天内已输出事件重复，且无实质新进展",
+      "detail": "openai#取消#gpt61astra的10月发布（4 天前输出：OpenAI 取消新一代模型 GPT-6.1 Astra 的10月发布）"
+    },
+    {
+      "code": "LOW_VALUE_PRICE_ONLY",
+      "severity": "BLOCK",
+      "priority": 3,
+      "gate": "importance",
+      "scope": "c01",
+      "message": "仅有正常价格波动、无实质事件，不得因「用户关注」而强行输出",
+      "detail": ""
+    },
+    {
+      "code": "MATERIAL_UPDATE_MISSING",
+      "severity": "BLOCK",
+      "priority": 3,
+      "gate": "importance",
+      "scope": "c01",
+      "message": "投资／AI 条目必须给出 material_update 事实块，缺失即无法证明存在实质事件",
+      "detail": "应有字段：claim、published_at、source_url"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c01",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.163.com/dy/article/L8CU5E8G0514R9OJ.html"
+    }
+  ]
+}

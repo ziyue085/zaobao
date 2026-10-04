@@ -1,0 +1,303 @@
+[
+  {
+    "id": "c01",
+    "title": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "VERIFIED_PRIMARY",
+    "reject_reason": null,
+    "primary_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html",
+    "decision": "PASS",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "商务部#发起#对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": true,
+      "legacy_material_flag": false,
+      "material_update_substantiated": true,
+      "has_material_event": true,
+      "has_new_progress": true,
+      "source_classes": [
+        "PRIMARY_OFFICIAL"
+      ],
+      "source_class_counts": {
+        "PRIMARY_OFFICIAL": 1
+      },
+      "has_primary_source": true,
+      "primary_source_count": 1,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "商务部"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c02",
+    "title": "应急管理部视频调度国庆假期安全防范工作",
+    "section": "social",
+    "declared_status": "PASS",
+    "evidence_status": "VERIFIED_PRIMARY",
+    "reject_reason": null,
+    "primary_url": "https://www.mem.gov.cn/xw/bndt/202610/t20261003_718206.shtml",
+    "decision": "PASS",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "应急管理部#调度#国庆假期安全防范工作",
+      "published_at": "2026-10-03T18:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "PRIMARY_OFFICIAL"
+      ],
+      "source_class_counts": {
+        "PRIMARY_OFFICIAL": 1
+      },
+      "has_primary_source": true,
+      "primary_source_count": 1,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "应急管理部"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c03",
+    "title": "中国海油流花油田二次开发项目累产原油突破200万吨",
+    "section": "investment",
+    "declared_status": "PASS",
+    "evidence_status": "VERIFIED_CROSS_SOURCE",
+    "reject_reason": null,
+    "primary_url": "https://news.cctv.com/2026/10/03/ARTITaFrMKfSKwdSIgJnvDPr261003.shtml",
+    "decision": "PASS",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "中国海油#宣布#流花油田二次开发累产原油突破200万吨",
+      "published_at": "2026-10-03T12:09:33+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": true,
+      "legacy_material_flag": false,
+      "material_update_substantiated": true,
+      "has_material_event": true,
+      "has_new_progress": true,
+      "source_classes": [
+        "TRUSTED_SECONDARY",
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 2
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 2,
+      "verification_publishers": [
+        "人民网",
+        "央视网"
+      ],
+      "has_cross_source_verification": true,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": "大型央企",
+      "watchlist_subject_bound": true,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c04",
+    "title": "Aleph Alpha 开源发布 Kolibri-1 模型",
+    "section": "ai",
+    "declared_status": "PASS",
+    "evidence_status": "VERIFIED_PRIMARY",
+    "reject_reason": null,
+    "primary_url": "https://huggingface.co/Aleph-Alpha/Kolibri-1",
+    "decision": "PASS",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "alephalpha#发布#kolibri1开源模型",
+      "published_at": "2026-10-03T16:54:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": true,
+      "legacy_material_flag": false,
+      "material_update_substantiated": true,
+      "has_material_event": true,
+      "has_new_progress": true,
+      "source_classes": [
+        "PRIMARY_REPOSITORY",
+        "PRIMARY_OFFICIAL"
+      ],
+      "source_class_counts": {
+        "PRIMARY_REPOSITORY": 1,
+        "PRIMARY_OFFICIAL": 1
+      },
+      "has_primary_source": true,
+      "primary_source_count": 2,
+      "verification_source_count": 2,
+      "verification_publishers": [
+        "Aleph Alpha",
+        "Hugging Face"
+      ],
+      "has_cross_source_verification": true,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c05",
+    "title": "国铁集团优化老年旅客淡季购票优惠措施",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "VERIFIED_CROSS_SOURCE",
+    "reject_reason": null,
+    "primary_url": "https://m.chinanews.com/wap/detail/cht/zw/10707395.shtml",
+    "decision": "PASS",
+    "decision_reasons": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "blocked_by": [],
+    "warned_by": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "WARN",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "中国国家铁路#优化#老年旅客淡季购票优惠",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY",
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 2
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 2,
+      "verification_publishers": [
+        "中国新闻网",
+        "光明网"
+      ],
+      "has_cross_source_verification": true,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  }
+]

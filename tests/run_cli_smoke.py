@@ -128,6 +128,60 @@ def main(argv=None):
         check("含 BLOCK 的期次报出 PRIMARY_TIER_NOT_JUSTIFIED",
               "PRIMARY_TIER_NOT_JUSTIFIED" in payload["summary"]["codes"])
 
+        # 4b. v0.1.1：audit 子命令（逐条 decision / gate_results / derived）
+        aud_input, _ = step_input("case-11-reverse-control-clean.json", 0, tmp)
+        aud_md = os.path.join(tmp, "audit.md")
+        rc, payload = run_json([CHECK, "audit", aud_input, "--repo", REPO,
+                                "--out-md", aud_md,
+                                "--now", "2026-10-04T09:00:00+08:00"])
+        check("audit 退出码为 0", rc == 0, "rc=%s" % rc)
+        check("audit 报告含 accepted/rejected 与逐条 gate_results",
+              payload["accepted_count"] == 3
+              and all("gate_results" in a for a in payload["accepted"]),
+              json.dumps(payload.get("accepted_count"), ensure_ascii=False))
+        check("audit 写出 markdown", os.path.exists(aud_md)
+              and "逐条审计" in open(aud_md, encoding="utf-8").read())
+
+        # 4c. v0.1.1：derive 子命令（程序计算派生状态）
+        rc, payload = run_json([CHECK, "derive", aud_input, "--repo", REPO,
+                                "--now", "2026-10-04T09:00:00+08:00"])
+        rows = {r["id"]: r["derived"] for r in payload["derived"]}
+        check("derive 推出 has_primary_source", rows["c01"]["has_primary_source"] is True,
+              json.dumps(rows.get("c01"), ensure_ascii=False))
+        check("derive 推出 is_within_24h", rows["c01"]["is_within_24h"] is True)
+        check("derive 推出 has_material_event", rows["c01"]["has_material_event"] is True)
+
+        # 4d. v0.1.1：模型自报 checked 字段不作数
+        t2_input, _ = step_input("case-15-fact-first-derivation.json", 1, tmp)
+        rc, payload = run_json([CHECK, "check-issue", t2_input, "--repo", REPO,
+                                "--now", "2026-10-04T09:00:00+08:00"])
+        check("自报 primary_checked=true 但只有搜索页 → 仍报 SEARCH_URL_AS_SOURCE",
+              "SEARCH_URL_AS_SOURCE" in payload["summary"]["codes"],
+              json.dumps(payload["summary"], ensure_ascii=False))
+
+        t1_input, _ = step_input("case-15-fact-first-derivation.json", 0, tmp)
+        rc, payload = run_json([CHECK, "check-issue", t1_input, "--repo", REPO,
+                                "--now", "2026-10-04T09:00:00+08:00"])
+        check("自报 time_window_checked=true 但超出 24 小时 → 仍报 TIME_OUT_OF_WINDOW",
+              "TIME_OUT_OF_WINDOW" in payload["summary"]["codes"])
+
+        # 4e. v0.1.1：不写任何自报字段、只给事实字段 → 放行
+        t3_input, _ = step_input("case-15-fact-first-derivation.json", 2, tmp)
+        rc, payload = run_json([CHECK, "check-issue", t3_input, "--repo", REPO,
+                                "--now", "2026-10-04T09:00:00+08:00"])
+        check("事实字段齐全、无自报字段 → 无 BLOCK 无 WARN 无 INFO",
+              payload["summary"]["block"] == 0 and payload["summary"]["warn"] == 0
+              and payload["summary"]["info"] == 0,
+              json.dumps(payload["summary"], ensure_ascii=False))
+
+        # 4f. v0.1.1：投资／AI 缺 material_update → 不得放行
+        t5b_input, _ = step_input("case-15-fact-first-derivation.json", 5, tmp)
+        rc, payload = run_json([CHECK, "check-issue", t5b_input, "--repo", REPO,
+                                "--now", "2026-10-04T09:00:00+08:00"])
+        check("material_update 未自证 → UPDATED_NOT_SUBSTANTIATED",
+              "UPDATED_NOT_SUBSTANTIATED" in payload["summary"]["codes"],
+              json.dumps(payload["summary"], ensure_ascii=False))
+
         # 5. 历史写入
         history = os.path.join(tmp, "history.jsonl")
         args_rec = [CHECK, "record", ok_input, "--repo", REPO, "--history", history,

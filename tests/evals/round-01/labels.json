@@ -1,0 +1,61 @@
+{
+  "round": "round-01",
+  "date": "2026-10-04",
+  "window": "2026-10-03T09:00+08:00 → 2026-10-04T09:00+08:00",
+  "issue_note": "本轮第一次跑完后，系统新增了『投资条目必须声明 watchlist_subject，由程序对着 config 校验』这道 Category Gate 检查。中国海油不在 watchlist 的具名清单里，一度被拦；补上 watchlist_subject=大型央企（institutions 里的合法条目）后正常放行。这条链路正是本轮想要的形态：主体范围由 config 决定，不由模型说了算。",
+  "note": "逐条人工复核。标签取自固定词表：GOOD / SHOULD_NOT_INCLUDE / BAD_SOURCE / OLD / DUPLICATE / TOO_VERBOSE / WRONG_CATEGORY / UNVERIFIED。",
+  "items": [
+    {
+      "id": "c01",
+      "title": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查",
+      "label": "GOOD",
+      "note": "一手（商务部公告2026年第44号）可用，URL 可核，时间落在窗口内。"
+    },
+    {
+      "id": "c02",
+      "title": "应急管理部视频调度国庆假期安全防范工作",
+      "label": "SHOULD_NOT_INCLUDE",
+      "note": "事实与来源都没问题，但属假期例行调度，信息量低。行业务判断本应判 LOW_VALUE，本系统放行了 —— 说明 gate 之后仍缺一道『照稿例行公事』的筛子。"
+    },
+    {
+      "id": "c03",
+      "title": "中国海油流花油田二次开发项目累产原油突破200万吨",
+      "label": "GOOD",
+      "note": "两条独立可信来源（央视网、人民网）互证；material_update 齐备。"
+    },
+    {
+      "id": "c04",
+      "title": "Aleph Alpha 开源发布 780 亿参数模型 Kolibri-1",
+      "label": "GOOD",
+      "note": "一手（Hugging Face 模型页 + 公司官方博客）；属模型能力与许可条款的实质变化。"
+    },
+    {
+      "id": "c05",
+      "title": "国铁集团优化老年旅客淡季购票优惠措施",
+      "label": "GOOD",
+      "note": "两条独立媒体互证，事实清楚。唯一瑕疵：一手应为「中国铁路」微信公众号，未拿到可引用 URL，故留 POLICY_PRIMARY_MISSING 警告 —— 属可接受的降级。"
+    }
+  ],
+  "rejected_review": [
+    {"id": "c06", "label": "LOW_VALUE", "agree": true, "note": "例行月度统计，判 LOW_VALUE 正确。"},
+    {"id": "c07", "label": "OLD", "agree": true, "note": "民政部提示原始发布为 9 月 22 日，10 月 3 日报道属二次传播，判 OLD 正确。"},
+    {"id": "c08", "label": "OLD", "agree": true, "note": "总局官网公告日期为 9 月 30 日，判 OLD 正确。"},
+    {"id": "c09", "label": "OLD", "agree": true, "note": "卫星 10 月 1 日发射，判 OLD 正确。"},
+    {"id": "c10", "label": "OLD", "agree": true, "note": "官方博客 9 月 30 日发布，判 OLD 正确。"},
+    {"id": "c11", "label": "OLD", "agree": true, "note": "新华社 10 月 2 日发布，判 OLD 正确。"},
+    {"id": "c12", "label": "DUPLICATE", "agree": true, "note": "与 c03 同一事件的两条转载，判重复正确。"}
+  ],
+  "missed_important": [
+    {
+      "title": "OpenAI 暂停最先进模型训练并取消 GPT-6.1 Astra 的 10 月发布",
+      "reason": "检索覆盖不足。《华尔街日报》9 月 28 日披露取消决定，10 月 2—3 日 OpenAI 官方确认暂停训练并向 100 多家机构通报。本轮 AI 线索只按『新模型发布』找，没有覆盖『安全事件 / 人事变动』这条线，因此没进候选池。这是检索环节的漏，不是 Gate 的漏。",
+      "expected_gate": "ai / importance"
+    }
+  ],
+  "borderline": [
+    {
+      "title": "国际能源署：已释放约 3.25 亿桶战略石油储备",
+      "note": "G7 释储本体为当地时间 10 月 2 日，判 OLD 正确；但 IEA 10 月 3 日公布的『已释放 3.25 亿桶』属窗内新数据，本轮未收录，属边缘漏收。"
+    }
+  ]
+}

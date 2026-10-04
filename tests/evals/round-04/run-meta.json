@@ -1,0 +1,85 @@
+{
+  "round_dir": "round-04",
+  "date": "2026-10-02",
+  "now": "2026-10-02T22:00:00+08:00",
+  "window": {
+    "start": "2026-10-01T22:00:00+08:00",
+    "end": "2026-10-02T22:00:00+08:00"
+  },
+  "first_pass": {
+    "summary": {
+      "block": 0,
+      "warn": 0,
+      "info": 9,
+      "codes": [
+        "INSUFFICIENT_CROSS_SOURCE",
+        "POLICY_PRIMARY_MISSING",
+        "QUASI_PRIMARY_USED",
+        "SOURCE_TIER_JUSTIFIED"
+      ],
+      "by_gate": {
+        "evidence": {
+          "block": 0,
+          "warn": 0,
+          "info": 9
+        }
+      }
+    },
+    "stats": {
+      "candidates": 6,
+      "pass": 2,
+      "deliverable": 2,
+      "top_pick": 0,
+      "kept": 6,
+      "dropped": 0
+    },
+    "accepted_count": 2,
+    "rejected_count": 4,
+    "final_items": 2,
+    "rejected_by_gate": {
+      "evidence": 4
+    }
+  },
+  "resolved_duplicates": [],
+  "resolved_blocked": {},
+  "submit_stats": {
+    "candidates": 6,
+    "pass": 2,
+    "deliverable": 2,
+    "top_pick": 0,
+    "kept": 6,
+    "dropped": 0
+  },
+  "submit_summary": {
+    "block": 0,
+    "warn": 0,
+    "info": 9,
+    "codes": [
+      "INSUFFICIENT_CROSS_SOURCE",
+      "POLICY_PRIMARY_MISSING",
+      "QUASI_PRIMARY_USED",
+      "SOURCE_TIER_JUSTIFIED"
+    ],
+    "by_gate": {
+      "evidence": {
+        "block": 0,
+        "warn": 0,
+        "info": 9
+      }
+    }
+  },
+  "accepted_count": 2,
+  "rejected_count": 4,
+  "accepted_by_status": {
+    "PASS": 2
+  },
+  "accepted_by_section": {
+    "social": 1,
+    "universal_policy": 1
+  },
+  "final_items": 2,
+  "rejected_by_gate": {
+    "evidence": 4
+  },
+  "rendered": true
+}

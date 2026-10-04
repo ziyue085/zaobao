@@ -1,0 +1,466 @@
+{
+  "date": "2026-10-02",
+  "now": "2026-10-02T22:00:00+08:00",
+  "candidates": 6,
+  "accepted_count": 2,
+  "rejected_count": 4,
+  "final_items": 2,
+  "stats": {
+    "candidates": 6,
+    "pass": 2,
+    "deliverable": 2,
+    "top_pick": 0,
+    "kept": 6,
+    "dropped": 0
+  },
+  "blocked_by_gate": {},
+  "rejected_by_gate": {
+    "evidence": 4
+  },
+  "accepted_by_status": {
+    "PASS": 2
+  },
+  "accepted_by_section": {
+    "social": 1,
+    "universal_policy": 1
+  },
+  "accepted": [
+    {
+      "id": "c02",
+      "title": "青岛胶州湾第二隧道盾构掘进全部完成",
+      "section": "social",
+      "declared_status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": null,
+      "primary_url": "https://m.chinanews.com/wap/detail/chs/zw/10707223.shtml",
+      "decision": "PASS",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中铁十四局#完成#胶州湾第二隧道盾构掘进",
+        "published_at": "2026-10-02T18:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY",
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 2
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 2,
+        "verification_publishers": [
+          "中国新闻网",
+          "人民网"
+        ],
+        "has_cross_source_verification": true,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c03",
+      "title": "国家发展改革委推出系列举措支持服务业扩能提质",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://news.cctv.com/2026/10/02/ARTICDlZReViJ7AJcjUiBa6R261002.shtml",
+      "decision": "PASS",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "国家发展改革委#推出#支持服务业扩能提质政策举措",
+        "published_at": "2026-10-02T20:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "央视网"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "id": "c01",
+      "title": "国庆假期首日全社会跨区域人员流动量超3.29亿人次",
+      "section": "universal_policy",
+      "declared_status": "LOW_VALUE",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": "例行假日客流统计，同类数据每月每假都发，不构成政策或事件变化。",
+      "primary_url": "https://society.people.com.cn/n1/2026/1002/c1008-40808963.html",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "交通运输部#公布#国庆假期首日跨区域人员流动量",
+        "published_at": "2026-10-02T16:12:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY",
+          "UNKNOWN"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1,
+          "UNKNOWN": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "人民网"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": false,
+        "is_output_eligible": false
+      }
+    },
+    {
+      "id": "c04",
+      "title": "G217线独库公路10月8日20时起实施冬季封闭",
+      "section": "universal_policy",
+      "declared_status": "LOW_VALUE",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": "地方道路的季节性通行安排，属地方普通政策，无全国意义。",
+      "primary_url": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "新疆维吾尔自治区交通运输厅#宣布#独库公路冬季封闭",
+        "published_at": "2026-10-02T19:42:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "中国西藏新闻网（新华社稿）"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    },
+    {
+      "id": "c05",
+      "title": "全国秋粮收获过三成",
+      "section": "universal_policy",
+      "declared_status": "LOW_VALUE",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": "例行农情调度数据，逐旬发布，不构成事件。",
+      "primary_url": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "农业农村部#公布#全国秋粮收获进度",
+        "published_at": "2026-10-02T19:42:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "中国西藏新闻网（新华社稿）"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    },
+    {
+      "id": "c06",
+      "title": "国庆假期首日高速公路充电量创节假日单日历史新高",
+      "section": "universal_policy",
+      "declared_status": "LOW_VALUE",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": "假日单日充电量属例行监测数据，不构成政策或重大事件。",
+      "primary_url": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "国家能源局#公布#高速公路充电量",
+        "published_at": "2026-10-02T19:42:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "中国西藏新闻网（新华社稿）"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    }
+  ],
+  "issue_findings": [
+    {
+      "code": "INSUFFICIENT_CROSS_SOURCE",
+      "severity": "INFO",
+      "priority": 1,
+      "gate": "evidence",
+      "scope": "c01",
+      "message": "声明多源交叉印证，但可信来源不足 2 家",
+      "detail": "人民网"
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "INFO",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c04",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "INFO",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c05",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "INFO",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c06",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "QUASI_PRIMARY_USED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c01",
+      "message": "普适性政策使用准一手来源（中央文件通稿）",
+      "detail": "society.people.com.cn"
+    },
+    {
+      "code": "QUASI_PRIMARY_USED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c03",
+      "message": "普适性政策使用准一手来源（中央文件通稿）",
+      "detail": "news.cctv.com"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c04",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c05",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c06",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html"
+    }
+  ]
+}

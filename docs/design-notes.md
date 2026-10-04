@@ -159,8 +159,10 @@ SMIC 三季度业绩披露
 
 完整版在 `references/reliability-gaps.md`。最要紧的三条：
 
-1. **`has_material_event` 依赖自报。** 规则层无法验证"某只股票今天到底有没有真事件"。
-   它能拦住"自报 false 却标 PASS"，拦不住"明明没事件却自报 true"。
+1. **重要性判断仍然依赖模型，而且是当前最大的一处残留依赖。**
+   `has_material_event` 已被 `material_update` 事实块取代（见第十一节），
+   但"这件事值不值得占版面"没有可判定形式 —— 程序只能要求留下 `importance_reason`。
+   实测 23 条产出里 5 条误收，全部属于这一类。
 2. **词表是穷举式的。** 新出现的标题党词、新的"分析味"表述不会自动被拦。
    需要每周人工回看并补充。
 3. **域名清单不可能完备。** 清单外的域名要人工判级并写进 `tier_reason`。
@@ -173,7 +175,59 @@ SMIC 三季度业绩披露
 1. 改 `scripts/zaobao_check.py`（新增 code 时用新的、稳定的名字）
 2. 在 `tests/cases/` 加夹具：**一个规则对应一个夹具，且必须包含"触发"与"修正后不触发"两个 step**
 3. 在 `tests/mutate.py` 加一条对应的变异，证明新规则被测试真正覆盖
-4. 跑三段：`run_regression` → `run_cli_smoke` → `mutate`
+4. 跑四段：`run_regression` → `run_cli_smoke` → `mutate` → `check_output_readability`
 5. 更新本文与 `tests/test-cases.md` 的对照表
 
 **只改第 1 步就提交，等于把规则变成一句没人验证的话。**
+
+### 关于阈值冲突
+
+两处标题长度上限并存，是有意的，但需要知道：
+
+| 位置 | 值 | 用途 |
+|---|---|---|
+| `zaobao_check.py: TITLE_MAX_CHARS` | 45 | **硬闸门**。超过即 BLOCK，防的是"把一段话当标题" |
+| `check_output_readability.py: MAX_TITLE` | 30 | **可读性指标**。超过只报 FAIL，不阻断发布 |
+
+两者不合并，因为一个是"不能发"、一个是"发出去不好读"。
+当前 9 期实测有 3 期落在 30—36 字之间：闸门放行、可读性不通过。
+**收紧到 30 需要同时改渲染器与夹具，属 v0.1.2 待办，本轮没有为了让新写的检查变绿而调阈值。**
+
+## 十一、v0.1.1 的架构变更
+
+### 为什么改
+
+v0.1.0 把三件事都交给了模型：一是我查过了没有（`*_checked`），二是有没有实质事件（`has_material_event`），
+三是这个来源算不算一手（`sources[].tier`）。程序只能检查「声明与清单是否自洽」——
+**判定主体仍然是模型**。83 个零散 rule code 平铺在一起，也没人能从顶层读懂放行逻辑。
+
+### 改成了什么
+
+**一句话原则：能由程序根据原始字段计算的判断，不允许继续依赖模型自报。**
+
+- 候选保存**可审计事实**，不保存结论：
+  `published_at` / `material_update{claim,published_at,source_url}` / `new_progress_at` / `watchlist_subject`。
+- 由程序推出派生状态（`derive()`）：
+  `is_within_24h` / `has_primary_source` / `verification_source_count` / `has_cross_source_verification` /
+  `history_match` / `is_material_update` / `is_output_eligible`。
+- 规则收敛为**七个顶层 Gate**：`structure / freshness / evidence / duplication / importance / category / output`。
+  rule code 退化为 Gate 内部的诊断信息，顶层读代码从 `run_*_gate()` 开始。
+- 来源判定改为**正向证据优先**（`scripts/zaobao_classify.py`）：
+  先问"是不是原始发布者"，再问"是不是政府 / 监管 / 交易所"，再问"是不是官方公告 / 官方博客 / GitHub / 论文原文"，
+  最后才落到"有没有可靠独立来源交叉确认"。黑名单只用于排除搜索结果页与内容农场。
+- 清单外的域名仍有人工通道：`is_first_party + tier_reason` 可补证为一手，
+  `tier: trusted_secondary + tier_reason` 可补证为可信二手 —— 两条通道都要留下理由，且都会记 INFO。
+
+### 刻意保留的两处模型判断
+
+1. **重要性**：不可判定，所以保留模型判断，但要求留下 `importance_reason`，而不是一个 `important=true`。
+2. **栏目归类**：同上。程序只校验栏目是否在 watchlist 的 priority 里，不判断归得对不对。
+
+这就是为什么实战评估里仍然出现「事实没问题但不该占版面」的误收 ——
+那不是 Gate 失守，而是这两处本来就留给人的地方。详见 `docs/evaluation.md`。
+
+### 用实战评估代替覆盖率当 KPI
+
+模块覆盖率再高也回答不了「这份早报读起来行不行」。所以 v0.1.1 加了 `tests/evals/`：
+真实窗口、真实来源、正常走完整 Gate、逐条人工打标签，最后看误收 / 漏收 / 旧闻 / 重复 / 来源可靠性。
+**架构更漂亮但真实早报没有变好，不算 PASS。**

@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-03",
+  "window_start": "2026-10-02T12:00:00+08:00",
+  "window_end": "2026-10-03T12:00:00+08:00",
+  "note": "Round 5 · Day2：同一事件在窗口内被再次讨论，但没有实质新进展。历史里已有同一 fingerprint 的记录（Day1），应判 DUPLICATE，不得输出。",
+  "candidates": [
+    {
+      "id": "c01",
+      "title": "OpenAI 取消发布新一代模型引发行业安全讨论",
+      "section": "ai",
+      "entity": "OpenAI",
+      "action": "取消",
+      "object": "GPT-6.1 Astra的10月发布",
+      "event_date": "2026-10-03T10:00:00+08:00",
+      "published_at": "2026-10-03T10:00:00+08:00",
+      "status": "DUPLICATE",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "同一事件的再次讨论，未出现新的官方动作。",
+      "sources": [
+        {
+          "url": "https://www.163.com/dy/article/L8CU5E8G0514R9OJ.html",
+          "publisher": "环球网",
+          "tier": "trusted_secondary",
+          "tier_reason": "环球网科技报道的网易号转载稿，站点不在清单内",
+          "published_at": "2026-10-03T09:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.163.com/dy/article/L8CU5E8G0514R9OJ.html",
+      "body_facts": [
+        "媒体再度报道 OpenAI 取消发布新一代模型 GPT-6.1 Astra 一事，并讨论其安全治理含义。"
+      ],
+      "reject_reason": "Gate 阻断（DUPLICATE_HISTORY、LOW_VALUE_PRICE_ONLY、MATERIAL_UPDATE_MISSING），已丢弃"
+    }
+  ]
+}

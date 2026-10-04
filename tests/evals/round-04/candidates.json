@@ -1,0 +1,178 @@
+{
+  "date": "2026-10-02",
+  "window_start": "2026-10-01T22:00:00+08:00",
+  "window_end": "2026-10-02T22:00:00+08:00",
+  "note": "国庆假期首日夜间 → 次日夜间。政策与市场都在休假，只剩例行统计与假日运行数据。检验的是「不凑数」。",
+  "candidates": [
+    {
+      "id": "c01",
+      "title": "国庆假期首日全社会跨区域人员流动量超3.29亿人次",
+      "section": "universal_policy",
+      "entity": "交通运输部",
+      "action": "公布",
+      "object": "国庆假期首日跨区域人员流动量",
+      "published_at": "2026-10-02T16:12:00+08:00",
+      "status": "LOW_VALUE",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": "例行假日客流统计，同类数据每月每假都发，不构成政策或事件变化。",
+      "importance_reason": "交通运输部例行假日客流统计，属常规数据披露。",
+      "sources": [
+        {
+          "url": "https://society.people.com.cn/n1/2026/1002/c1008-40808963.html",
+          "publisher": "人民网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-02T16:12:00+08:00"
+        },
+        {
+          "url": "https://www.jingjiribao.cn/static/detail.jsp?id=687171",
+          "publisher": "经济日报",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T09:22:00+08:00"
+        }
+      ],
+      "primary_url": "https://society.people.com.cn/n1/2026/1002/c1008-40808963.html",
+      "body_facts": [
+        "交通运输部10月2日称，国庆假期首日全社会跨区域人员流动量32949.5万人次，同比下降1.9%。"
+      ]
+    },
+    {
+      "id": "c02",
+      "title": "青岛胶州湾第二隧道盾构掘进全部完成",
+      "section": "social",
+      "topic_type": "infrastructure",
+      "entity": "中铁十四局",
+      "action": "完成",
+      "object": "胶州湾第二隧道盾构掘进",
+      "published_at": "2026-10-02T18:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "importance_reason": "世界最长海底公路隧道盾构掘进全部完成，属重大工程节点。",
+      "sources": [
+        {
+          "url": "https://pic.people.com.cn/n1/2026/1003/c1016-40809115.html",
+          "publisher": "人民网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T00:00:00+08:00"
+        },
+        {
+          "url": "https://m.chinanews.com/wap/detail/chs/zw/10707223.shtml",
+          "publisher": "中国新闻网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-02T18:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://m.chinanews.com/wap/detail/chs/zw/10707223.shtml",
+      "body_facts": [
+        "10月2日，青岛胶州湾第二隧道服务隧道完成盾构掘进，海平面下最大埋深105米。",
+        "工程全长17.48公里，建成后为世界最长海底公路隧道。"
+      ]
+    },
+    {
+      "id": "c03",
+      "title": "国家发展改革委推出系列举措支持服务业扩能提质",
+      "section": "universal_policy",
+      "entity": "国家发展改革委",
+      "action": "推出",
+      "object": "支持服务业扩能提质政策举措",
+      "published_at": "2026-10-02T20:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "服务业对上半年经济增长贡献率66.1%，属结构性政策方向。",
+      "sources": [
+        {
+          "url": "https://news.cctv.com/2026/10/02/ARTICDlZReViJ7AJcjUiBa6R261002.shtml",
+          "publisher": "央视网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-02T20:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://news.cctv.com/2026/10/02/ARTICDlZReViJ7AJcjUiBa6R261002.shtml",
+      "body_facts": [
+        "国家发展改革委推出系列举措支持服务业扩能提质，全面推开养老服务消费补贴项目。",
+        "要素保障方面重点支持科技服务、物流运输以及文旅、体育等行业。"
+      ]
+    },
+    {
+      "id": "c04",
+      "title": "G217线独库公路10月8日20时起实施冬季封闭",
+      "section": "universal_policy",
+      "entity": "新疆维吾尔自治区交通运输厅",
+      "action": "宣布",
+      "object": "独库公路冬季封闭",
+      "published_at": "2026-10-02T19:42:00+08:00",
+      "status": "LOW_VALUE",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "地方道路的季节性通行安排，属地方普通政策，无全国意义。",
+      "importance_reason": "地方交通部门的常规季节性通行安排。",
+      "sources": [
+        {
+          "url": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html",
+          "publisher": "中国西藏新闻网（新华社稿）",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社通稿的地方党媒转载",
+          "published_at": "2026-10-02T19:42:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html",
+      "body_facts": [
+        "G217线独库公路2026年国庆期间正常通行，10月8日20时起实施冬季封闭。"
+      ]
+    },
+    {
+      "id": "c05",
+      "title": "全国秋粮收获过三成",
+      "section": "universal_policy",
+      "entity": "农业农村部",
+      "action": "公布",
+      "object": "全国秋粮收获进度",
+      "published_at": "2026-10-02T19:42:00+08:00",
+      "status": "LOW_VALUE",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "例行农情调度数据，逐旬发布，不构成事件。",
+      "importance_reason": "农业农村部例行农情调度。",
+      "sources": [
+        {
+          "url": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html",
+          "publisher": "中国西藏新闻网（新华社稿）",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社通稿的地方党媒转载",
+          "published_at": "2026-10-02T19:42:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html",
+      "body_facts": [
+        "截至10月1日，全国秋粮收获过三成，西南收获近七成。"
+      ]
+    },
+    {
+      "id": "c06",
+      "title": "国庆假期首日高速公路充电量创节假日单日历史新高",
+      "section": "universal_policy",
+      "entity": "国家能源局",
+      "action": "公布",
+      "object": "高速公路充电量",
+      "published_at": "2026-10-02T19:42:00+08:00",
+      "status": "LOW_VALUE",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "假日单日充电量属例行监测数据，不构成政策或重大事件。",
+      "importance_reason": "国家能源局充电设施监测平台的例行统计。",
+      "sources": [
+        {
+          "url": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html",
+          "publisher": "中国西藏新闻网（新华社稿）",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社通稿的地方党媒转载",
+          "published_at": "2026-10-02T19:42:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.xzxw.com/xw/2026-10/03/content_6962286.html",
+      "body_facts": [
+        "国庆假期首日全国高速公路充电量2804.69万千瓦时，同比增长60.4%。"
+      ]
+    }
+  ]
+}

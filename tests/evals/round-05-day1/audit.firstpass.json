@@ -1,0 +1,107 @@
+{
+  "date": "2026-09-29",
+  "now": "2026-09-29T09:00:00+08:00",
+  "candidates": 1,
+  "accepted_count": 1,
+  "rejected_count": 0,
+  "final_items": 1,
+  "stats": {
+    "candidates": 1,
+    "pass": 1,
+    "deliverable": 1,
+    "top_pick": 1,
+    "kept": 1,
+    "dropped": 0
+  },
+  "blocked_by_gate": {},
+  "rejected_by_gate": {},
+  "accepted_by_status": {
+    "PASS": 1
+  },
+  "accepted_by_section": {
+    "ai": 1
+  },
+  "accepted": [
+    {
+      "id": "c01",
+      "title": "OpenAI 取消 GPT-6.1 Astra 的10月发布",
+      "section": "ai",
+      "declared_status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": null,
+      "primary_url": "https://www.thecyberwire.com/newsletters/week-that-was/10/38",
+      "decision": "PASS",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "openai#取消#gpt61astra的10月发布",
+        "published_at": "2026-09-28T22:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": true,
+        "legacy_material_flag": false,
+        "material_update_substantiated": true,
+        "has_material_event": true,
+        "has_new_progress": true,
+        "source_classes": [
+          "TRUSTED_SECONDARY",
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 2
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 2,
+        "verification_publishers": [
+          "The CyberWire",
+          "金融界"
+        ],
+        "has_cross_source_verification": true,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    }
+  ],
+  "rejected": [],
+  "issue_findings": [
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c01",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.thecyberwire.com/newsletters/week-that-was/10/38"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c01",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.163.com/dy/article/L8DIMK980519QIKK.html"
+    }
+  ]
+}

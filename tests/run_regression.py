@@ -180,6 +180,15 @@ def run_step(case, step, index):
         _require(expect["kept_id"] in kept_ids,
                  "去重后应保留 %s，实际保留 %s" % (expect["kept_id"], kept_ids))
 
+    # 派生状态断言：验证「结论由程序算出来」，而不是模型自报。
+    if "derived" in expect:
+        for cid, want in expect["derived"].items():
+            _require(cid in by_id, "derived 断言引用了不存在的候选：%s" % cid)
+            got = zc.derive(by_id[cid], ctx)
+            for key, val in want.items():
+                _require(got.get(key) == val,
+                         "%s derived.%s 不符：期望 %s，实际 %s" % (cid, key, val, got.get(key)))
+
     if needs_render:
         if "render_block_count" in expect:
             got = len(_codes(rfind, zc.BLOCK))

@@ -1,0 +1,246 @@
+{
+  "date": "2026-10-04",
+  "window_start": "2026-10-03T09:00:00+08:00",
+  "window_end": "2026-10-04T09:00:00+08:00",
+  "note": "Round 2：同一窗口的第二次独立检索。查询角度与 Round 1 不同（改用『当日要闻汇总 / 公司公告 / 部委印发』三类入口），用来检验候选池的稳定性。",
+  "candidates": [
+    {
+      "id": "c01",
+      "title": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查",
+      "section": "universal_policy",
+      "entity": "商务部",
+      "action": "发起",
+      "object": "对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+      "event_date": "2026-10-03T12:00:00+08:00",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "top_pick": true,
+      "top_pick_line": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查。",
+      "importance_reason": "部委级贸易救济立案，与 Round 1 一致。",
+      "sources": [
+        {
+          "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html",
+          "publisher": "商务部",
+          "tier": "primary",
+          "is_first_party": true,
+          "published_at": "2026-10-03T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html",
+      "body_facts": [
+        "商务部公告2026年第44号称，自2026年10月3日起对原产于欧盟的进口对硝基甲苯进行反倾销立案调查。",
+        "本次倾销调查期为2025年7月1日至2026年6月30日，产业损害调查期为2022年1月1日至2026年6月30日。"
+      ],
+      "material_update": {
+        "claim": "商务部发布公告2026年第44号，对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+        "published_at": "2026-10-03T12:00:00+08:00",
+        "source_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html"
+      }
+    },
+    {
+      "id": "c02",
+      "title": "国铁集团优化老年旅客淡季购票优惠措施",
+      "section": "universal_policy",
+      "entity": "中国国家铁路集团",
+      "action": "优化",
+      "object": "老年旅客淡季购票优惠",
+      "event_date": "2026-10-03T12:00:00+08:00",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "importance_reason": "与 Round 1 一致。",
+      "sources": [
+        {
+          "url": "https://m.chinanews.com/wap/detail/cht/zw/10707395.shtml",
+          "publisher": "中国新闻网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T12:00:00+08:00"
+        },
+        {
+          "url": "https://m.gmw.cn/2026-10/04/content_1304571700.htm",
+          "publisher": "光明网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-04T08:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://m.chinanews.com/wap/detail/cht/zw/10707395.shtml",
+      "body_facts": [
+        "国铁集团10月3日称，年满60周岁老年人购买10月18日至12月30日标注「敬」字车次的火车票可享执行票价9折的「折上折」优惠。",
+        "本次优惠不再限定周中时段，相关优惠车票自10月4日起陆续发售。"
+      ]
+    },
+    {
+      "id": "c03",
+      "title": "国家医保局发布7类医用耗材分类与代码及医保通用名",
+      "section": "universal_policy",
+      "entity": "国家医保局",
+      "action": "发布",
+      "object": "7类医用耗材分类与代码及医保通用名",
+      "event_date": "2026-09-18T10:00:00+08:00",
+      "published_at": "2026-09-18T10:00:00+08:00",
+      "status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "国家医保局官网通知公告日期为2026年9月18日，超出24小时窗口；10月2—3日的报道属二次传播。",
+      "sources": [
+        {
+          "url": "https://k.sina.cn/article_5952915705_162d248f906703pt4w.html",
+          "publisher": "新浪看点",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-02T14:15:00+08:00"
+        }
+      ],
+      "primary_url": "https://k.sina.cn/article_5952915705_162d248f906703pt4w.html",
+      "body_facts": [
+        "国家医保局发布《神经介入与神经外科植入材料等7类医用耗材分类与代码及医保通用名》，形成136个医保通用名。"
+      ]
+    },
+    {
+      "id": "c04",
+      "title": "自然资源部公布1—8月新一轮找矿突破进展",
+      "section": "universal_policy",
+      "entity": "自然资源部",
+      "action": "公布",
+      "object": "1—8月新一轮找矿突破进展",
+      "event_date": "2026-10-03T19:00:00+08:00",
+      "published_at": "2026-10-03T19:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "战略性矿产新增储量数据，属全国性资源家底更新。",
+      "sources": [
+        {
+          "url": "https://tv.cctv.com/2026/10/03/VIDE1nZJej11WPlNPVhBxFDA261003.shtml",
+          "publisher": "央视网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T19:25:00+08:00"
+        }
+      ],
+      "primary_url": "https://tv.cctv.com/2026/10/03/VIDE1nZJej11WPlNPVhBxFDA261003.shtml",
+      "body_facts": [
+        "自然资源部数据显示，今年1—8月全国石油新增可采储量近7000万吨，天然气新增可采储量6100亿立方米。",
+        "安徽茶亭铜金矿、贵州猪拱塘铅锌矿新增资源量达超大型规模。"
+      ]
+    },
+    {
+      "id": "c05",
+      "title": "我国首个百兆瓦级压缩二氧化碳储能项目并网发电",
+      "section": "unexpected",
+      "unexpected_gate": "major_science_breakthrough",
+      "entity": "中国华电",
+      "action": "并网",
+      "object": "新疆木垒百兆瓦级压缩二氧化碳储能项目",
+      "event_date": "2026-10-02T12:00:00+08:00",
+      "published_at": "2026-10-02T12:00:00+08:00",
+      "status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "项目于10月2日并网，10月3日《新闻联播》报道；事件本体超出24小时窗口。",
+      "sources": [
+        {
+          "url": "https://tv.cctv.com/2026/10/03/VIDE1nZJej11WPlNPVhBxFDA261003.shtml",
+          "publisher": "央视网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T19:25:00+08:00"
+        }
+      ],
+      "primary_url": "https://tv.cctv.com/2026/10/03/VIDE1nZJej11WPlNPVhBxFDA261003.shtml",
+      "body_facts": [
+        "我国首个百兆瓦级压缩二氧化碳储能项目在新疆木垒成功并网发电，年发电量约2亿度。"
+      ]
+    },
+    {
+      "id": "c06",
+      "title": "中国联通：结构调整基金拟减持不超过1.2%股份",
+      "section": "investment",
+      "entity": "中国联通",
+      "action": "减持",
+      "object": "1.2%股份",
+      "watchlist_subject": "大型央企",
+      "event_date": "2026-10-03T20:00:00+08:00",
+      "published_at": "2026-10-03T20:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "重要国企股东减持计划，属关注清单内的股权变化事件。",
+      "sources": [
+        {
+          "url": "https://www.toutiao.com/w/1878026174215232",
+          "publisher": "今日头条",
+          "tier": "discovery_only",
+          "published_at": "2026-10-03T20:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.toutiao.com/w/1878026174215232",
+      "body_facts": [
+        "中国联通公告，结构调整基金拟通过集中竞价与大宗交易合计减持不超过总股本1.2%的股份。"
+      ],
+      "material_update": {
+        "claim": "中国联通披露结构调整基金减持计划，上限为总股本1.2%",
+        "published_at": "2026-10-03T20:00:00+08:00",
+        "source_url": "https://www.toutiao.com/w/1878026174215232"
+      }
+    },
+    {
+      "id": "c07",
+      "title": "峰岹科技拟1.18亿美元收购Sciosense全部股份",
+      "section": "investment",
+      "entity": "峰岹科技",
+      "action": "收购",
+      "object": "Sciosense B.V. 100%股份",
+      "event_date": "2026-10-03T16:06:00+08:00",
+      "published_at": "2026-10-03T16:06:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "上市公司境外并购，属关注清单内的并购重组事件类型。",
+      "sources": [
+        {
+          "url": "https://www.163.com/dy/article/L8B15FMB053469RG.html",
+          "publisher": "证券时报",
+          "tier": "trusted_secondary",
+          "tier_reason": "网易号转载证券时报报道，站点本身不在可信清单内",
+          "published_at": "2026-10-03T16:06:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.163.com/dy/article/L8B15FMB053469RG.html",
+      "body_facts": [
+        "峰岹科技公告，拟通过全资子公司以现金1.18亿美元收购Sciosense B.V. 100%股份。",
+        "交易尚需完成境外投资备案及荷兰、德国、意大利三国外国直接投资审查。"
+      ],
+      "material_update": {
+        "claim": "峰岹科技披露以1.18亿美元收购Sciosense全部股份",
+        "published_at": "2026-10-03T16:06:00+08:00",
+        "source_url": "https://www.163.com/dy/article/L8B15FMB053469RG.html"
+      }
+    },
+    {
+      "id": "c08",
+      "title": "教育部部署开展2027届高校毕业生校园招聘月活动",
+      "section": "universal_policy",
+      "entity": "教育部",
+      "action": "部署",
+      "object": "2027届高校毕业生校园招聘月活动",
+      "event_date": "2026-10-03T19:04:00+08:00",
+      "published_at": "2026-10-03T19:04:00+08:00",
+      "status": "LOW_VALUE",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "importance_reason": "工作部署类通稿，活动本身自9月即已开展，无新增具体政策，不值得占用版面。",
+      "reject_reason": "部署类工作通报，不进入输出。",
+      "sources": [
+        {
+          "url": "https://www.news.cn/politics/20261003/4239d94c255943c6bb142d3a1cd6dbc0/c.html",
+          "publisher": "新华网",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社受权发布教育部信息，属准一手通稿",
+          "published_at": "2026-10-03T19:04:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.news.cn/politics/20261003/4239d94c255943c6bb142d3a1cd6dbc0/c.html",
+      "body_facts": [
+        "教育部部署开展2027届高校毕业生校园招聘月活动，“金秋启航”系列活动于2026年9月至11月集中开展。"
+      ]
+    }
+  ]
+}

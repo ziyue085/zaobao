@@ -29,7 +29,9 @@
               }
             ],
             "primary_url": "https://www.news.cn/fortune/20261004a.htm",
-            "body_facts": ["中国石化今日发布2026年三季度报告。"],
+            "body_facts": [
+              "中国石化今日发布2026年三季度报告。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -38,7 +40,8 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "中国石油化工股份有限公司"
           },
           {
             "id": "c02",
@@ -59,7 +62,9 @@
               }
             ],
             "primary_url": "https://www.cls.cn/detail/1234567",
-            "body_facts": ["中石化今日披露2026年三季度报告。"],
+            "body_facts": [
+              "中石化今日披露2026年三季度报告。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -68,7 +73,8 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "中石化"
           },
           {
             "id": "c03",
@@ -89,7 +95,9 @@
               }
             ],
             "primary_url": "https://www.sinopec.com/listco/announcement/2026q3.html",
-            "body_facts": ["中国石化今日在上交所披露2026年三季度报告。"],
+            "body_facts": [
+              "中国石化今日在上交所披露2026年三季度报告。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -98,14 +106,30 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "Sinopec"
           }
         ]
       },
       "expect": {
         "block_count": 2,
-        "block_codes": ["DUPLICATE_IN_ISSUE"],
-        "fingerprint_same": [["c01", "c02"], ["c01", "c03"], ["c02", "c03"]],
+        "block_codes": [
+          "DUPLICATE_IN_ISSUE"
+        ],
+        "fingerprint_same": [
+          [
+            "c01",
+            "c02"
+          ],
+          [
+            "c01",
+            "c03"
+          ],
+          [
+            "c02",
+            "c03"
+          ]
+        ],
         "kept_id": "c03"
       }
     },
@@ -133,8 +157,11 @@
                 "tier": "trusted_secondary"
               }
             ],
-            "body_facts": ["中国石化今日发布2026年三季度报告。"],
-            "has_material_event": true
+            "body_facts": [
+              "中国石化今日发布2026年三季度报告。"
+            ],
+            "has_material_event": true,
+            "watchlist_subject": "中国石油化工股份有限公司"
           },
           {
             "id": "c02",
@@ -155,8 +182,11 @@
                 "tier": "trusted_secondary"
               }
             ],
-            "body_facts": ["中石化今日披露2026年三季度报告。"],
-            "has_material_event": true
+            "body_facts": [
+              "中石化今日披露2026年三季度报告。"
+            ],
+            "has_material_event": true,
+            "watchlist_subject": "中石化"
           },
           {
             "id": "c03",
@@ -177,7 +207,9 @@
               }
             ],
             "primary_url": "https://www.sinopec.com/listco/announcement/2026q3.html",
-            "body_facts": ["中国石化今日在上交所披露2026年三季度报告。"],
+            "body_facts": [
+              "中国石化今日在上交所披露2026年三季度报告。"
+            ],
             "has_material_event": true,
             "top_pick": true,
             "top_pick_line": "中国石化披露2026年三季报。",
@@ -188,19 +220,28 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "Sinopec"
           }
         ]
       },
       "expect": {
         "block_count": 0,
-        "stats": { "candidates": 3, "pass": 1, "kept": 1, "dropped": 2 },
+        "stats": {
+          "candidates": 3,
+          "pass": 1,
+          "kept": 1,
+          "dropped": 2
+        },
         "kept_id": "c03",
         "render_block_count": 0,
         "render_contains": [
           "https://www.sinopec.com/listco/announcement/2026q3.html"
         ],
-        "render_excludes": ["新华社：中国石化发布2026年三季度报告", "中石化三季报出炉"]
+        "render_excludes": [
+          "新华社：中国石化发布2026年三季度报告",
+          "中石化三季报出炉"
+        ]
       }
     }
   ]

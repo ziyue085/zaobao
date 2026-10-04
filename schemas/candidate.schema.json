@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/ziyue085/zaobao/blob/main/schemas/candidate.schema.json",
   "title": "早间情报候选条目",
-  "description": "一条候选新闻在内部流转时的完整状态。只有 status=PASS 且 gates 全为 true 的候选才允许进入最终输出。",
+  "description": "一条候选新闻在内部流转时的完整状态。v0.1.1 起：优先保存可审计的事实字段，由规则层自行计算派生结论；只有 status 属于 PASS/UPDATED 且各 Gate 无 BLOCK 的候选才允许进入最终输出。",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -16,7 +16,6 @@
     "status",
     "evidence_status",
     "sources",
-    "gates",
     "body_facts"
   ],
   "properties": {
@@ -64,7 +63,19 @@
     },
     "event_date": {
       "type": "string",
-      "description": "原始事件发生时间，ISO 8601。"
+      "description": "事件发生时间（同时也是事实上的发布时间基准），ISO 8601 或 YYYY-MM-DD。"
+    },
+    "published_at": {
+      "type": ["string", "null"],
+      "description": "v0.1.1：来源实际发布时间。填写时优先于 event_date 用于时效计算 —— 由程序算，不由模型声明。"
+    },
+    "event_time": {
+      "type": ["string", "null"],
+      "description": "v0.1.1：event_date 的别名，便于与外部数据源对齐。"
+    },
+    "discovered_at": {
+      "type": ["string", "null"],
+      "description": "v0.1.1：发现该线索的时间。仅作记录，不参与放行判断。"
     },
     "first_confirmed_at": {
       "type": ["string", "null"],
@@ -90,9 +101,34 @@
         null
       ]
     },
+    "material_update": {
+      "type": ["object", "null"],
+      "description": "v0.1.1 取代 has_material_event 的事实块。不是「我相信有事件」，而是「凭什么说有事件」。三个字段齐全且时间落在窗口内，程序才认它构成实质事件。",
+      "additionalProperties": false,
+      "required": ["claim", "published_at", "source_url"],
+      "properties": {
+        "claim": {
+          "type": "string",
+          "minLength": 1,
+          "description": "一句话说明这是什么实质进展。"
+        },
+        "published_at": {
+          "type": "string",
+          "description": "该进展的发布时间，必须落在时间窗内。"
+        },
+        "source_url": {
+          "type": "string",
+          "description": "支撑该进展的来源 URL。搜索引擎结果页不算。"
+        }
+      }
+    },
+    "previous_event_id": {
+      "type": ["string", "null"],
+      "description": "v0.1.1：UPDATED 条目指向被更新对象的历史 event_id，便于回溯。"
+    },
     "status": {
       "type": "string",
-      "description": "候选状态机。只有 PASS 可以进入最终输出。",
+      "description": "候选状态机。PASS = 本期新事件；UPDATED = 对历史事件的实质新进展。两者都是可输出终态。其余一律不输出。",
       "enum": [
         "NEW",
         "UPDATED",
@@ -130,6 +166,7 @@
           "publisher": { "type": "string" },
           "tier": {
             "type": "string",
+            "description": "模型声明的层级。v0.1.1 起仅作提示：实际层级由 zaobao_classify.py 按域名与发布者计算，声明与计算不一致时以计算为准。",
             "enum": ["primary", "trusted_secondary", "discovery_only"]
           },
           "is_first_party": {
@@ -169,7 +206,8 @@
     },
     "has_material_event": {
       "type": "boolean",
-      "description": "是否存在实质事件。仅有正常价格波动时必须为 false，否则判 LOW_VALUE。"
+      "description": "【DEPRECATED，v0.1.1 起不再作为放行依据】模型自报「是否存在实质事件」。请改用 material_update 事实块。保留读取是为了兼容 v0.1.0 数据。",
+      "deprecated": true
     },
     "topic_type": {
       "type": ["string", "null"],
@@ -186,6 +224,10 @@
         "celebrity",
         null
       ]
+    },
+    "watchlist_subject": {
+      "type": ["string", "null"],
+      "description": "v0.1.1：投资条目必须声明它对应 config/watchlist.yaml 里的哪一项（institutions / assets / 别名）。声明的是「引用」，由程序校验该引用是否真的在清单里 —— 名单是可枚举的事实，不该交给模型判断。"
     },
     "subject_confirmed": {
       "type": ["boolean", "null"],
@@ -216,18 +258,14 @@
         "new_technical_detail": { "type": "boolean" }
       }
     },
+    "importance_reason": {
+      "type": ["string", "null"],
+      "description": "v0.1.1：模型判断「值得占版面」的理由。重要性不可判定，所以保留模型判断，但要求留下理由而不是 important=true。"
+    },
     "gates": {
       "type": "object",
-      "description": "三态检查闸门。铁律：未检查 ≠ 已通过 —— 字段缺席即 BLOCK，不得默认 false。",
-      "additionalProperties": false,
-      "required": [
-        "time_window_checked",
-        "history_dedup_checked",
-        "issue_dedup_checked",
-        "primary_source_checked",
-        "url_checked",
-        "no_analysis_checked"
-      ],
+      "description": "【DEPRECATED，v0.1.1 起不再作为放行依据】v0.1.0 的六个模型自报闸门。保留读取是为了兼容旧数据；时效与证据现在由程序按事实字段自行计算。字段缺席不再判为失败。",
+      "deprecated": true,
       "properties": {
         "time_window_checked": { "type": "boolean" },
         "history_dedup_checked": { "type": "boolean" },
@@ -239,7 +277,34 @@
     },
     "reject_reason": {
       "type": ["string", "null"],
-      "description": "status 非 PASS 时说明原因，便于复盘为什么没发。"
+      "description": "status 非 PASS/UPDATED 时说明原因，便于复盘为什么没发。"
+    },
+    "decision": {
+      "type": ["string", "null"],
+      "description": "【程序产出，不要手填】规则层给出的裁决：PASS / UPDATED / DROP / DROPPED_IN_ISSUE / BLOCKED。",
+      "enum": ["PASS", "UPDATED", "DROP", "DROPPED_IN_ISSUE", "BLOCKED", null]
+    },
+    "decision_reasons": {
+      "type": ["array", "null"],
+      "description": "【程序产出】裁决依据的 rule code 列表。",
+      "items": { "type": "string" }
+    },
+    "gate_results": {
+      "type": ["object", "null"],
+      "description": "【程序产出】七个顶层 Gate 的结论：PASS / WARN / BLOCK。",
+      "properties": {
+        "structure": { "type": "string" },
+        "freshness": { "type": "string" },
+        "evidence": { "type": "string" },
+        "duplication": { "type": "string" },
+        "importance": { "type": "string" },
+        "category": { "type": "string" },
+        "output": { "type": "string" }
+      }
+    },
+    "derived": {
+      "type": ["object", "null"],
+      "description": "【程序产出】由事实字段算出的派生状态，模型不应直接填写。"
     }
   }
 }

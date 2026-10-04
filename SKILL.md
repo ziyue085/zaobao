@@ -1,6 +1,6 @@
 ---
 name: morning-intelligence
-version: 0.1.0
+version: 0.1.1
 description: 中文个人早间情报。生成一份适合在微信里快速读完、只包含已核实新事实的 24 小时情报。当用户说"早报""早间情报""今天有什么新闻""过去24小时发生了什么""生成今日情报""morning intelligence"时使用。只写已核实的新事实，不写投资建议、不写股价预测、不写影响分析、不写政策推演、不写行动建议；信息少时就少写。绝不把"搜索不到"写成"没有新闻"，绝不把传闻写成事实，绝不把旧闻重新包装成新闻。
 agent_created: true
 ---
@@ -36,7 +36,9 @@ agent_created: true
 2. **读配置**：读 `config/watchlist.yaml`（关注什么）与 `config/sources.yaml`（来源分级）。
 3. **发现候选**：按 priority 逐栏发现；优先用专项工具，再用联网搜索。搜索只负责发现线索。
 4. **定位原文**：每条候选必须找到能引用的 URL。
-5. **建候选**：按 `schemas/candidate.schema.json` 建结构，填 entity / action / object —— 这三项决定去重。
+5. **建候选**：按 `schemas/candidate.schema.json` 建结构 —— entity / action / object 决定去重；
+   还要填齐**事实字段**（`published_at`、`sources[]`、`material_update`、投资条目的 `watchlist_subject`）。
+   见第六节：写事实，不写"我查过了"。
 6. **时间判断**：事件超出 24 小时即 OLD。只有出现实质新进展（官方确认／新公告／正式文件／新数据／处罚判决／调查结果／产品正式上线／传闻被证实或证伪）才可升级为 UPDATED。
 7. **本期去重**：同一 fingerprint 只保留来源最好的一条（一手 > 二手 > 社交）。
 8. **历史去重**：对照 `data/history.jsonl` 最近 7 天以上记录；同 fingerprint 且无新进展即 DUPLICATE。
@@ -72,7 +74,31 @@ agent_created: true
 - 社交平台只用于发现线索，除非发帖者本身就是当事人／官方账号／公司或项目负责人／论文作者。
 - 新华社／央视／人民日报对中央文件的通稿可作**准一手**，但不得静默升级为 primary。
 
-## 六、候选状态机
+## 六、候选里写什么：事实字段，不是结论
+
+**这一节是 v0.1.1 的核心规则，其他规则都要服从它。**
+
+> 能由程序根据原始字段计算的判断，不允许继续依赖模型自报。
+
+所以候选里**不写** `time_checked: true` 这类"我查过了"，而是写**可审计的事实**：
+
+```text
+published_at / event_time / discovered_at   事件与发布的真实时刻
+material_update{claim, published_at, source_url}
+                                            实质事件的三要素，缺一不可
+new_progress_at + new_progress_type         UPDATED 的依据，两者必须成对
+sources[].url / tier / publisher / is_first_party / tier_reason
+watchlist_subject                           投资条目对应关注清单里的哪一项
+importance_reason                           为什么这件事值得占版面
+```
+
+能不能放行，由程序据此计算：时效、一手来源、交叉验证、跨日去重、主体是否在清单内。
+
+- `gates` / `has_material_event` 是 v0.1.0 的旧字段，**已废弃**。写了不影响判定的字段也不加分。
+- 字段缺席不等于通过。`published_at` 不填，程序就算不出时效，这条就发不出去。
+- **投资条目必须写 `watchlist_subject`**，且必须是 `config/watchlist.yaml` 里真实存在的一项。
+
+## 七、候选状态机
 
 `NEW / UPDATED / OLD / DUPLICATE / UNVERIFIED / LOW_VALUE / PASS`
 
@@ -83,7 +109,13 @@ agent_created: true
 
 「搜到了 N 条候选」≠「发送 N 条新闻」。发现与发送之间必须走完整条流程。
 
-## 七、输出格式
+整套判定收敛为**七个顶层 Gate**，按此顺序执行：
+
+`structure` → `freshness` → `evidence` → `duplication` → `importance` → `category` → `output`
+
+前六关都在筛候选，`output` 关决定最终发哪几条。被拦下时会告诉你卡在哪一关。
+
+## 八、输出格式
 
 顺序固定：Top → 各栏目。**无内容的栏目不出现。**
 
@@ -109,11 +141,13 @@ agent_created: true
 - 需要披露的条目在来源行后加「（尚未见一手确认）」或「（待核实）」。
 - 正常 5—12 条。**这不是硬要求**，不得为了数量降低门槛。
 - 不使用 Markdown 表格。
+- 标题**直接陈述事实**，尽量控制在 30 字以内（硬上限 45 字）。不要写成问句、悬念句或评价句。
 
-## 八、输出前自检（逐条过）
+## 九、输出前自检（逐条过）
 
 - 是过去 24 小时的新信息或新进展吗？
-- 真的重要吗？
+- 真的重要吗？**它是改了规则、改了资源分配、或给出了硬数据，还是只是"表了个态"？**
+  发布会介绍安排、领导署名文章、纲领性指导意见，都不够格占版面。
 - 证据够吗？一手来源找到了吗？
 - 是旧闻吗？
 - 与最近 7 天内容重复吗？与本期其他条目重复吗？
@@ -123,7 +157,7 @@ agent_created: true
 
 任一关键项不通过：**删除该条**，不要改一改凑合发。
 
-## 九、闸门优先
+## 十、闸门优先
 
 渲染前必须让规则层通过：
 
@@ -135,7 +169,15 @@ python scripts/zaobao_check.py check-issue <candidates.json> --repo .
 
 `scripts/zaobao_render.py` 自带前后双重自检，有 BLOCK 会直接拒绝输出。
 
-## 十、按需加载
+渲染后可以再跑一次排版检查：
+
+```bash
+python tests/check_output_readability.py
+```
+
+它按微信阅读标准检查标题长度、句数、段落长度、表格与链接可点性。
+
+## 十一、按需加载
 
 | 需要时 | 读 |
 |---|---|
@@ -145,3 +187,4 @@ python scripts/zaobao_check.py check-issue <candidates.json> --repo .
 | 去重与 fingerprint 设计 | `references/dedup.md` |
 | 常见误判与已知断点 | `references/reliability-gaps.md` |
 | 关注范围与来源分级怎么改 | `config/watchlist.yaml`、`config/sources.yaml` |
+| 实战效果与评估方法 | `docs/evaluation.md` |

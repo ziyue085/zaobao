@@ -5,7 +5,7 @@
 
 产出是一份能在微信里几分钟读完的短文，只包含已经核实的新事实。
 
-- 版本：**v0.1.0**
+- 版本：**v0.1.1**
 - 许可：MIT
 - 依赖：**零**（Python 3.8+ 标准库即可运行；装了 PyYAML 会用，不装也能跑）
 
@@ -41,6 +41,14 @@ python scripts/zaobao_check.py check-issue issue.json --repo .
 
 **新、真、重要、简洁。**
 
+v0.1.1 之上还有一条更根本的原则，其他规则都要服从它：
+
+> **能由程序根据原始字段计算的判断，不允许继续依赖模型自报。**
+
+所以候选里保存的是「可审计的事实」（发布时间、来源 URL、实质新进展的事实块、主体引用了关注清单的哪一项），
+能不能放行由程序算：时效、一手来源、交叉验证、跨日去重、主体是否在清单内。
+模型只负责两件程序做不了的事 —— **判断重要性**（要留下理由）与**归类**。
+
 禁止：投资建议、股价预测、影响分析、政策推演、行动建议、为凑数加入低价值信息、
 把"没搜索到"写成"没有新闻"、把传闻写成事实、把旧闻重新包装成新闻。
 
@@ -73,17 +81,24 @@ morning-intelligence/
 │   ├── dedup.md                 去重与 fingerprint
 │   └── reliability-gaps.md      已知断点与薄弱点
 ├── scripts/
-│   ├── zaobao_check.py          确定性规则层（零依赖）
+│   ├── zaobao_check.py          确定性规则层 + 七个 Gate（零依赖）
+│   ├── zaobao_classify.py       来源分类器（正向证据优先，9 个类别）
 │   └── zaobao_render.py         渲染器（带自检闸门）
 ├── tests/
-│   ├── cases/*.json             14 个用例 / 67 个断言步骤
+│   ├── cases/*.json             15 个用例 / 85 个断言步骤
 │   ├── run_regression.py        回归运行器
-│   ├── run_cli_smoke.py         命令行端到端冒烟（19 项）
-│   ├── mutate.py                变异测试（16 处破坏）
+│   ├── run_cli_smoke.py         命令行端到端冒烟（29 项）
+│   ├── mutate.py                变异测试（25 处破坏）
+│   ├── check_output_readability.py  输出可读性检查（标题长度 / 句数 / 表格 / 链接 / 时长）
+│   ├── run_eval_round.py        实战评估：把一轮真实候选走完整条流程并落盘
+│   ├── run_eval_summary.py      把逐条人工标签汇总成记分卡
+│   ├── compare_rounds.py        比对同窗口两轮检索的差异
+│   ├── evals/                   实战评估材料（候选 / 审计 / 输出 / 人工标签）
 │   ├── test-cases.md            用例说明与覆盖矩阵
 │   └── regression-checklist.md  三段式回归清单
 ├── examples/                    合成示例（含反面样例）
 ├── docs/design-notes.md         取舍、阈值依据、已知限制
+├── docs/evaluation.md           实战评估方法、指标、各轮结果与已知限制
 └── data/                        运行时数据目录（.gitkeep 占位）
 ```
 
@@ -167,6 +182,7 @@ python scripts/zaobao_check.py fingerprint --entity 中芯国际 --action 发布
 python tests/run_regression.py    # 期望 REGRESSION_STATUS=PASS
 python tests/run_cli_smoke.py     # 期望 CLI_SMOKE_STATUS=PASS
 python tests/mutate.py            # 期望 MUTATION_STATUS=PASS
+python tests/check_output_readability.py   # 期望 TERMINAL_STATUS=PASS
 ```
 
 > 注意：`record` 与渲染器写的路径是相对的，建议固定在同一台机器上运行，
@@ -378,21 +394,34 @@ OpenAI 今日在其官网发布支持视频输入的多模态模型。官方文�
 
 ### 最要紧的三条
 
-1. **`has_material_event` 依赖自报。** 能拦住"自报 false 却标 PASS"，
-   拦不住"明明没事件却自报 true"。测试用例 `case-09` 覆盖了前者，后者无法自动检测。
+1. **重要性与栏目归类仍完全依赖模型。** v0.1.1 已经把时效、证据、去重、主体范围
+   全部改成程序计算（见 `docs/evaluation.md`），但"这件事值不值得占版面""该放哪个栏目"
+   仍然只能由模型判断 —— 系统能做的是要求它留下 `importance_reason`，并在审计里把主体与原栏目标出来
+   供人工复核。实测里这一类误收的典型是：`应急管理部视频调度`（假期例行调度）、
+   `科技部介绍十五五安排`（发布会表态）、`八部门指导意见`（纲领性文件，无量化口径）——
+   共同点是**叙了事、讲的话也对，但没有改变规则或资源分配**。
 2. **词表是穷举式的。** 新出现的标题党词、新的"分析味"表述不会自动被拦。
    需要每周人工回看并补充 `scripts/zaobao_check.py` 顶部的词表并重跑测试。
-3. **域名清单不可能完备。** 清单外的域名要人工判级。规则层只能保证
-   "说不清理由的一手声明会被拦下"，不能保证"判对了"。
+3. **规则层校验不了"标题是否被这条 URL 支持"。** 它能校验 URL 是否可引用、
+   是否落在可信清单里，但校验不了一条标题是不是超出了来源能支持的范围。
+   round-05 就出现过标题写成"公布调查问卷"、来源页其实是"答记者问"的情形。
+
+### 一处尚未修掉的排版瑕疵
+
+`tests/check_output_readability.py` 按"标题 ≤ 30 字"检查输出，当前 9 期里有 3 期超标
+（最长 36 字，如 `Aleph Alpha 开源发布 780 亿参数模型 Kolibri-1`）。原因是渲染器对标题长度
+只做下限与上限的宽口径校验（`TITLE_MAX_CHARS = 45`），没有针对微信阅读收紧。
+这是 **v0.1.2 的第一顺位待办**，本轮未就地修，因为没有为了让自己新写的检查变绿而放宽阈值。
 
 ### 测试覆盖面
 
-- 回归测试：14 用例 / 67 步骤，全绿；变异测试 16/16 捕获；CLI 冒烟 19/19。
-- 规则层共 83 个 code，夹具中被**正面断言**的有 **54 个**。其余 29 个中，
-  一部分由 CLI 冒烟覆盖（`HISTORY_*` / `CONFIG_*`），一部分属于需要构造非法输入的畸形分支，**当前未覆盖**。
-  详见 `tests/test-cases.md` 第五节的覆盖矩阵。
-- 夹具是**合成数据**，证明的是规则逻辑，不是"真实网络环境下能否跑通"。
-- **没有端到端测试"真的联网抓一条新闻"这一步** —— 那部分不可判定，只能人工回归。
+- 回归测试：15 用例 / 85 步骤，全绿；变异测试 25/25 捕获；CLI 冒烟 29/29；可读性检查 9 期 6 通过。
+- 规则层共 80+ 个 code，夹具中被**正面断言**的有 60 余个。其余由 CLI 冒烟覆盖（`HISTORY_*` / `CONFIG_*`）
+  或属于需要构造非法输入的畸形分支。详见 `tests/test-cases.md` 第五节的覆盖矩阵。
+- 夹具是**合成数据**，证明的是规则逻辑。**「真实网络环境下到底行不行」由实战评估层回答** ——
+  见 `docs/evaluation.md`：6 轮真实窗口 + 1 组三段跨日链路，23 条产出，GOOD_RATE 0.78。
+- 实战评估里的「漏收重要事件」目前只能人工发现，`tests/evals/*/labels.json` 的
+  `missed_important` 字段就是留给它的位置。
 
 ### 规则层对原始规范做了一处实质性放宽
 
@@ -415,6 +444,7 @@ OpenAI 今日在其官网发布支持视频输入的多模态模型。官方文�
 | 模型运行时怎么执行 | `SKILL.md` |
 | 为什么这么设计、阈值依据 | `docs/design-notes.md` |
 | 怎么加规则、怎么加测试 | `docs/design-notes.md` 第十节 |
+| 实战效果到底怎么样、怎么复现 | `docs/evaluation.md` |
 | 已知断点的完整清单 | `references/reliability-gaps.md` |
 | 改完要怎么验证 | `tests/regression-checklist.md` |
 

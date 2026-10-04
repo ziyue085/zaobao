@@ -1,0 +1,442 @@
+[
+  {
+    "id": "c01",
+    "title": "中国人民银行调整完善若干货币政策工具",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "VERIFIED_CROSS_SOURCE",
+    "reject_reason": null,
+    "primary_url": "https://www.cnr.cn/jingji/gundong/20261001/t20261001_527831130.shtml",
+    "decision": "PASS",
+    "decision_reasons": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "blocked_by": [],
+    "warned_by": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "WARN",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "中国人民银行#调整#若干货币政策工具",
+      "published_at": "2026-09-29T18:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": true,
+      "legacy_material_flag": false,
+      "material_update_substantiated": true,
+      "has_material_event": true,
+      "has_new_progress": true,
+      "source_classes": [
+        "TRUSTED_SECONDARY",
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 2
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 2,
+      "verification_publishers": [
+        "央广网",
+        "新华财经"
+      ],
+      "has_cross_source_verification": true,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c02",
+    "title": "三部门发布居民购房贷款贴息政策",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "VERIFIED_CROSS_SOURCE",
+    "reject_reason": null,
+    "primary_url": "https://news.southcn.com/node_64549305f1/0d672f1304.shtml",
+    "decision": "PASS",
+    "decision_reasons": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "blocked_by": [],
+    "warned_by": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "WARN",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "财政部#发布#居民购房贷款贴息政策",
+      "published_at": "2026-09-29T17:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": true,
+      "legacy_material_flag": false,
+      "material_update_substantiated": true,
+      "has_material_event": true,
+      "has_new_progress": true,
+      "source_classes": [
+        "TRUSTED_SECONDARY",
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 2
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 2,
+      "verification_publishers": [
+        "南方网",
+        "腾讯自选股"
+      ],
+      "has_cross_source_verification": true,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c03",
+    "title": "八部门印发金融支持服务业扩能提质指导意见",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": null,
+    "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+    "decision": "PASS",
+    "decision_reasons": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "blocked_by": [],
+    "warned_by": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "WARN",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "中国人民银行#印发#关于金融支持服务业扩能提质的指导意见",
+      "published_at": "2026-09-29T17:30:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "新华财经"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c04",
+    "title": "科技部介绍「十五五」推进科技强国建设安排",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "VERIFIED_CROSS_SOURCE",
+    "reject_reason": null,
+    "primary_url": "https://www.cinic.org.cn/hy/yw/1655843.html",
+    "decision": "PASS",
+    "decision_reasons": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "blocked_by": [],
+    "warned_by": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "WARN",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "科技部#介绍#十五五推进科技强国建设安排",
+      "published_at": "2026-09-29T15:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": true,
+      "legacy_material_flag": false,
+      "material_update_substantiated": true,
+      "has_material_event": true,
+      "has_new_progress": true,
+      "source_classes": [
+        "TRUSTED_SECONDARY",
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 2
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 2,
+      "verification_publishers": [
+        "中国产业经济信息网",
+        "中宏网"
+      ],
+      "has_cross_source_verification": true,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c05",
+    "title": "国务院国资委提出十五五做好新央企组建和战略性重组",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": null,
+    "primary_url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150",
+    "decision": "PASS",
+    "decision_reasons": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "blocked_by": [],
+    "warned_by": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "WARN",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "国务院国资委#提出#十五五新央企组建和战略性重组",
+      "published_at": "2026-09-29T16:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "腾讯自选股"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c06",
+    "title": "9月制造业PMI回升至50.1%重返扩张区间",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": null,
+    "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+    "decision": "PASS",
+    "decision_reasons": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "blocked_by": [],
+    "warned_by": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "WARN",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "国家统计局#公布#9月制造业pmi",
+      "published_at": "2026-09-30T09:30:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "新华财经"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c11",
+    "title": "农业农村部印发全国畜牧兽医行业发展十五五规划",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": null,
+    "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+    "decision": "PASS",
+    "decision_reasons": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "blocked_by": [],
+    "warned_by": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "WARN",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "农业农村部#印发#全国畜牧兽医行业发展十五五规划",
+      "published_at": "2026-09-29T16:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "新华财经"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  }
+]

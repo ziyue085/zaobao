@@ -1,0 +1,1048 @@
+{
+  "date": "2026-09-30",
+  "now": "2026-09-30T09:45:00+08:00",
+  "candidates": 12,
+  "accepted_count": 7,
+  "rejected_count": 5,
+  "final_items": 7,
+  "stats": {
+    "candidates": 12,
+    "pass": 7,
+    "deliverable": 7,
+    "top_pick": 2,
+    "kept": 11,
+    "dropped": 1
+  },
+  "blocked_by_gate": {},
+  "rejected_by_gate": {
+    "freshness": 2,
+    "evidence": 2,
+    "duplication": 1
+  },
+  "accepted_by_status": {
+    "PASS": 7
+  },
+  "accepted_by_section": {
+    "universal_policy": 7
+  },
+  "accepted": [
+    {
+      "id": "c01",
+      "title": "中国人民银行调整完善若干货币政策工具",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": null,
+      "primary_url": "https://www.cnr.cn/jingji/gundong/20261001/t20261001_527831130.shtml",
+      "decision": "PASS",
+      "decision_reasons": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中国人民银行#调整#若干货币政策工具",
+        "published_at": "2026-09-29T18:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": true,
+        "legacy_material_flag": false,
+        "material_update_substantiated": true,
+        "has_material_event": true,
+        "has_new_progress": true,
+        "source_classes": [
+          "TRUSTED_SECONDARY",
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 2
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 2,
+        "verification_publishers": [
+          "央广网",
+          "新华财经"
+        ],
+        "has_cross_source_verification": true,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c02",
+      "title": "三部门发布居民购房贷款贴息政策",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": null,
+      "primary_url": "https://news.southcn.com/node_64549305f1/0d672f1304.shtml",
+      "decision": "PASS",
+      "decision_reasons": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "财政部#发布#居民购房贷款贴息政策",
+        "published_at": "2026-09-29T17:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": true,
+        "legacy_material_flag": false,
+        "material_update_substantiated": true,
+        "has_material_event": true,
+        "has_new_progress": true,
+        "source_classes": [
+          "TRUSTED_SECONDARY",
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 2
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 2,
+        "verification_publishers": [
+          "南方网",
+          "腾讯自选股"
+        ],
+        "has_cross_source_verification": true,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c03",
+      "title": "八部门印发金融支持服务业扩能提质指导意见",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+      "decision": "PASS",
+      "decision_reasons": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中国人民银行#印发#关于金融支持服务业扩能提质的指导意见",
+        "published_at": "2026-09-29T17:30:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "新华财经"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c04",
+      "title": "科技部介绍「十五五」推进科技强国建设安排",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": null,
+      "primary_url": "https://www.cinic.org.cn/hy/yw/1655843.html",
+      "decision": "PASS",
+      "decision_reasons": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "科技部#介绍#十五五推进科技强国建设安排",
+        "published_at": "2026-09-29T15:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": true,
+        "legacy_material_flag": false,
+        "material_update_substantiated": true,
+        "has_material_event": true,
+        "has_new_progress": true,
+        "source_classes": [
+          "TRUSTED_SECONDARY",
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 2
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 2,
+        "verification_publishers": [
+          "中国产业经济信息网",
+          "中宏网"
+        ],
+        "has_cross_source_verification": true,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c05",
+      "title": "国务院国资委提出十五五做好新央企组建和战略性重组",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150",
+      "decision": "PASS",
+      "decision_reasons": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "国务院国资委#提出#十五五新央企组建和战略性重组",
+        "published_at": "2026-09-29T16:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "腾讯自选股"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c06",
+      "title": "9月制造业PMI回升至50.1%重返扩张区间",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+      "decision": "PASS",
+      "decision_reasons": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "国家统计局#公布#9月制造业pmi",
+        "published_at": "2026-09-30T09:30:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "新华财经"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c11",
+      "title": "农业农村部印发全国畜牧兽医行业发展十五五规划",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+      "decision": "PASS",
+      "decision_reasons": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "农业农村部#印发#全国畜牧兽医行业发展十五五规划",
+        "published_at": "2026-09-29T16:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "新华财经"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "id": "c07",
+      "title": "中国人民银行开展905亿元7天期逆回购操作",
+      "section": "investment",
+      "declared_status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": "公开市场操作公告时间为9月29日09:20，超出24小时窗口；且属例行操作。",
+      "primary_url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中国人民银行#开展#905亿元7天期逆回购操作",
+        "published_at": "2026-09-29T09:20:00+08:00",
+        "is_future": false,
+        "is_within_24h": false,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "腾讯自选股"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": false,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    },
+    {
+      "id": "c08",
+      "title": "国务院9月重要政策汇总发布",
+      "section": "universal_policy",
+      "declared_status": "LOW_VALUE",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": "汇总稿，无新增事实，不进入输出。",
+      "primary_url": "https://news.qq.com/rain/a/20261002A042AS00",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "国务院#发布#9月重要政策汇总",
+        "published_at": "2026-09-30T09:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "腾讯新闻"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    },
+    {
+      "id": "c09",
+      "title": "国务院常务会研究宏观政策发力提效",
+      "section": "universal_policy",
+      "declared_status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": "会议为9月28日，超出24小时窗口；9月29—30日的报道属二次传播。",
+      "primary_url": "https://news.qq.com/rain/a/20261002A042AS00",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "国务院#研究#宏观政策发力提效与促进有效投资",
+        "published_at": "2026-09-28T19:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": false,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "腾讯新闻"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": false,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    },
+    {
+      "id": "c10",
+      "title": "央行调整多项货币政策工具，PSL利率降至1.5%",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://news.qq.com/rain/a/20261001A050H200",
+      "decision": "DROPPED_IN_ISSUE",
+      "decision_reasons": [
+        "DUPLICATE_IN_ISSUE",
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中国人民银行#调整#若干货币政策工具",
+        "published_at": "2026-09-29T20:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "腾讯新闻"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c12",
+      "title": "外汇局公布8月国际收支货物和服务贸易顺差数据",
+      "section": "universal_policy",
+      "declared_status": "LOW_VALUE",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": "例行数据发布，不进入输出。",
+      "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "国家外汇管理局#公布#8月国际收支货物和服务贸易数据",
+        "published_at": "2026-09-29T16:30:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "新华财经"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    }
+  ],
+  "issue_findings": [
+    {
+      "code": "DUPLICATE_IN_ISSUE",
+      "severity": "BLOCK",
+      "priority": 1,
+      "gate": null,
+      "scope": "c10",
+      "message": "同一事件在本期出现多次且都被标为可输出；只应保留来源最好的一条",
+      "detail": "中国人民银行#调整#若干货币政策工具"
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c01",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c02",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c03",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c04",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c05",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c06",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c10",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c11",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "INVESTMENT_SUBJECT_UNBOUND",
+      "severity": "INFO",
+      "priority": 2,
+      "gate": "category",
+      "scope": "c07",
+      "message": "投资条目必须声明 watchlist_subject，指明它对应关注清单里的哪个机构／标的／类别",
+      "detail": "entity=中国人民银行"
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "INFO",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c08",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "INFO",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c09",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "INFO",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c12",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "MATERIAL_UPDATE_MISSING",
+      "severity": "INFO",
+      "priority": 3,
+      "gate": "importance",
+      "scope": "c07",
+      "message": "投资／AI 条目必须给出 material_update 事实块，缺失即无法证明存在实质事件",
+      "detail": "应有字段：claim、published_at、source_url"
+    },
+    {
+      "code": "SOURCE_URL_REUSED",
+      "severity": "WARN",
+      "priority": 4,
+      "gate": null,
+      "scope": "issue",
+      "message": "同一个来源 URL 被 3 条以上内容引用，通常说明没有找到各自的一手来源",
+      "detail": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html ← c01、c03、c06、c11"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c01",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c02",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://news.southcn.com/node_64549305f1/0d672f1304.shtml"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c02",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c03",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c04",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.cinic.org.cn/hy/yw/1655843.html"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c04",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://zhonghongwang.com/show-258-473996-1.html"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c05",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c06",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c07",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c08",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://news.qq.com/rain/a/20261002A042AS00"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c09",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://news.qq.com/rain/a/20261002A042AS00"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c10",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://news.qq.com/rain/a/20261001A050H200"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c11",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c12",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html"
+    },
+    {
+      "code": "TIME_OUT_OF_WINDOW",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "freshness",
+      "scope": "c07",
+      "message": "事件超出 24 小时窗口，已正确判为 OLD",
+      "detail": ""
+    },
+    {
+      "code": "TIME_OUT_OF_WINDOW",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "freshness",
+      "scope": "c09",
+      "message": "事件超出 24 小时窗口，已正确判为 OLD",
+      "detail": ""
+    }
+  ]
+}

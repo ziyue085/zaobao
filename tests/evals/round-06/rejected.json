@@ -1,0 +1,174 @@
+[
+  {
+    "id": "c03",
+    "title": "我国首个深水油田二次开发项目累产原油突破200万吨",
+    "section": "investment",
+    "declared_status": "UNVERIFIED",
+    "evidence_status": "REJECTED",
+    "reject_reason": "Gate 阻断（LOW_VALUE_PRICE_ONLY、MATERIAL_UPDATE_UNSUBSTANTIATED、SEARCH_URL_AS_SOURCE），已丢弃",
+    "primary_url": "https://www.baidu.com/s?wd=%E6%B5%81%E8%8A%B1%E6%B2%B9%E7%94%B0+200%E4%B8%87%E5%90%A8",
+    "decision": "BLOCKED",
+    "decision_reasons": [
+      "SEARCH_URL_AS_SOURCE"
+    ],
+    "blocked_by": [
+      "SEARCH_URL_AS_SOURCE"
+    ],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "BLOCK",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "中国海油#宣布#流花油田二次开发累产原油突破200万吨",
+      "published_at": "2026-10-03T12:09:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": true,
+      "legacy_material_flag": false,
+      "material_update_substantiated": false,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "REJECTED"
+      ],
+      "source_class_counts": {
+        "REJECTED": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 0,
+      "verification_publishers": [],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": "大型央企",
+      "watchlist_subject_bound": true,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": false,
+      "is_output_eligible": false
+    }
+  },
+  {
+    "id": "c04",
+    "title": "国家医保局统一7类医用耗材医保通用名",
+    "section": "universal_policy",
+    "declared_status": "UNVERIFIED",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": "Gate 阻断（SECONDARY_SOURCE_MISSING），已丢弃",
+    "primary_url": "https://www.sohu.com/a/1083596932_439193",
+    "decision": "DROP",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "国家医保局#发布#7类医用耗材分类与代码及医保通用名",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "UNKNOWN"
+      ],
+      "source_class_counts": {
+        "UNKNOWN": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 0,
+      "verification_publishers": [],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": false
+    }
+  },
+  {
+    "id": "c05",
+    "title": "国庆档电影总票房突破3亿元",
+    "section": "social",
+    "declared_status": "UNVERIFIED",
+    "evidence_status": "REJECTED",
+    "reject_reason": "Gate 阻断（DISCOVERY_ONLY_AS_SOLE_EVIDENCE、SECONDARY_SOURCE_MISSING），已丢弃",
+    "primary_url": "https://www.toutiao.com/article/7692034473646375470/",
+    "decision": "DROP",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "国庆档#突破#国庆档电影总票房3亿元",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "DISCOVERY_ONLY"
+      ],
+      "source_class_counts": {
+        "DISCOVERY_ONLY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 0,
+      "verification_publishers": [],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": true,
+      "only_discovery_source": true,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": false,
+      "is_output_eligible": false
+    }
+  }
+]

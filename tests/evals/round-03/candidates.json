@@ -1,0 +1,373 @@
+{
+  "date": "2026-09-30",
+  "window_start": "2026-09-29T10:00:00+08:00",
+  "window_end": "2026-09-30T10:00:00+08:00",
+  "note": "Round 3：历史新闻密集日。2026-09-29 至 09-30 是典型的多部委同日发声日（央行 + 财政部 + 科技部 + 国资委 + 八部门意见 + PMI）。检验是否失控、是否超过 12 条、能否真的做重要性筛选。判断只用当天可获得的信息。",
+  "candidates": [
+    {
+      "id": "c01",
+      "title": "中国人民银行调整完善若干货币政策工具",
+      "section": "universal_policy",
+      "entity": "中国人民银行",
+      "action": "调整",
+      "object": "若干货币政策工具",
+      "event_date": "2026-09-29T18:00:00+08:00",
+      "published_at": "2026-09-29T18:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "top_pick": true,
+      "top_pick_line": "中国人民银行调整完善若干货币政策工具，PSL 利率下调0.25个百分点。",
+      "importance_reason": "四项结构性货币政策工具同时降价、扩围、增量，属全国性货币政策的实质变更。",
+      "sources": [
+        {
+          "url": "https://www.cnr.cn/jingji/gundong/20261001/t20261001_527831130.shtml",
+          "publisher": "央广网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-01T12:00:00+08:00"
+        },
+        {
+          "url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+          "publisher": "新华财经",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社旗下金融信息平台，站点不在清单内",
+          "published_at": "2026-10-04T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.cnr.cn/jingji/gundong/20261001/t20261001_527831130.shtml",
+      "body_facts": [
+        "中国人民银行9月29日宣布，一年期抵押补充贷款利率从1.75%下调至1.5%，并将水网、新型电网、算力网等「六张网」建设纳入支持领域。",
+        "科技创新和技术改造再贷款额度增加2000亿元、支持比例由60%提高至100%；支农支小再贷款额度增加5000亿元。"
+      ],
+      "material_update": {
+        "claim": "央行调整完善四项结构性货币政策工具：PSL 降息扩容、两项再贷款增量提比例",
+        "published_at": "2026-09-29T18:00:00+08:00",
+        "source_url": "https://www.cnr.cn/jingji/gundong/20261001/t20261001_527831130.shtml"
+      }
+    },
+    {
+      "id": "c02",
+      "title": "三部门发布居民购房贷款贴息政策",
+      "section": "universal_policy",
+      "entity": "财政部",
+      "action": "发布",
+      "object": "居民购房贷款贴息政策",
+      "event_date": "2026-09-29T17:00:00+08:00",
+      "published_at": "2026-09-29T17:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "top_pick": true,
+      "top_pick_line": "财政部、央行、金融监管总局发布居民购房贷款贴息政策，10月1日起实施。",
+      "importance_reason": "中央财政首次对商业性个人住房贷款贴息，属全国性住房与财政政策。",
+      "sources": [
+        {
+          "url": "https://news.southcn.com/node_64549305f1/0d672f1304.shtml",
+          "publisher": "南方网",
+          "tier": "trusted_secondary",
+          "tier_reason": "南方报业旗下新闻网站，站点不在清单内",
+          "published_at": "2026-09-29T17:00:00+08:00"
+        },
+        {
+          "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150",
+          "publisher": "腾讯自选股",
+          "tier": "trusted_secondary",
+          "tier_reason": "腾讯财经资讯页，转载三部门通知全文，站点不在清单内",
+          "published_at": "2026-09-29T20:28:00+08:00"
+        }
+      ],
+      "primary_url": "https://news.southcn.com/node_64549305f1/0d672f1304.shtml",
+      "body_facts": [
+        "财政部、中国人民银行、金融监管总局9月29日联合印发通知，自2026年10月1日起实施居民购房贷款贴息政策，期限暂定1年。",
+        "符合条件的首套住房商业贷款可按本金享受年化1个百分点、最长5年的财政贴息，单户贴息贷款规模上限100万元。"
+      ],
+      "material_update": {
+        "claim": "三部门印发《关于实施居民购房贷款贴息政策的通知》，10月1日起实施",
+        "published_at": "2026-09-29T17:00:00+08:00",
+        "source_url": "https://news.southcn.com/node_64549305f1/0d672f1304.shtml"
+      }
+    },
+    {
+      "id": "c03",
+      "title": "八部门印发金融支持服务业扩能提质指导意见",
+      "section": "universal_policy",
+      "entity": "中国人民银行",
+      "action": "印发",
+      "object": "关于金融支持服务业扩能提质的指导意见",
+      "event_date": "2026-09-29T17:30:00+08:00",
+      "published_at": "2026-09-29T17:30:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "八部门联合发文，针对服务业轻资产融资难问题给出全国性金融支持框架。",
+      "sources": [
+        {
+          "url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+          "publisher": "新华财经",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社旗下金融信息平台，站点不在清单内",
+          "published_at": "2026-10-04T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+      "body_facts": [
+        "中国人民银行等八部门印发《关于金融支持服务业扩能提质的指导意见》，要求推动金融机构转变重资产重抵押的融资支持理念。"
+      ]
+    },
+    {
+      "id": "c04",
+      "title": "科技部介绍「十五五」推进科技强国建设安排",
+      "section": "universal_policy",
+      "entity": "科技部",
+      "action": "介绍",
+      "object": "十五五推进科技强国建设安排",
+      "event_date": "2026-09-29T15:00:00+08:00",
+      "published_at": "2026-09-29T15:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "importance_reason": "「十五五」科技攻关方向首次由主管部门在国新办发布会上系统说明。",
+      "sources": [
+        {
+          "url": "https://www.cinic.org.cn/hy/yw/1655843.html",
+          "publisher": "中国产业经济信息网",
+          "tier": "trusted_secondary",
+          "tier_reason": "行业媒体，站点不在清单内",
+          "published_at": "2026-09-29T20:00:00+08:00"
+        },
+        {
+          "url": "https://zhonghongwang.com/show-258-473996-1.html",
+          "publisher": "中宏网",
+          "tier": "trusted_secondary",
+          "tier_reason": "宏观政策类媒体，站点不在清单内",
+          "published_at": "2026-10-02T11:18:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.cinic.org.cn/hy/yw/1655843.html",
+      "body_facts": [
+        "科技部部长阴和俊9月29日在国新办发布会上表示，「十五五」将全链条推动集成电路、工业母机等重点领域关键核心技术攻关。",
+        "前沿方向聚焦人工智能、量子科技、生物制造等领域，并体系化布局一批国家重大科技任务。"
+      ],
+      "material_update": {
+        "claim": "国新办举行「开局起步十五五」科技部专场发布会，说明未来五年攻关方向",
+        "published_at": "2026-09-29T15:00:00+08:00",
+        "source_url": "https://www.cinic.org.cn/hy/yw/1655843.html"
+      }
+    },
+    {
+      "id": "c05",
+      "title": "国务院国资委提出十五五做好新央企组建和战略性重组",
+      "section": "universal_policy",
+      "entity": "国务院国资委",
+      "action": "提出",
+      "object": "十五五新央企组建和战略性重组",
+      "event_date": "2026-09-29T16:00:00+08:00",
+      "published_at": "2026-09-29T16:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "国资委主要负责人署名文章明确国有资本布局方向，属关注清单内的机构表态。",
+      "sources": [
+        {
+          "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150",
+          "publisher": "腾讯自选股",
+          "tier": "trusted_secondary",
+          "tier_reason": "腾讯财经资讯页，站点不在清单内",
+          "published_at": "2026-09-29T20:28:00+08:00"
+        }
+      ],
+      "primary_url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150",
+      "body_facts": [
+        "国务院国资委主任程福波发文表示，「十五五」将继续做好新央企组建和战略性重组，推动国有资本向重要行业和关键领域集中。"
+      ]
+    },
+    {
+      "id": "c06",
+      "title": "9月制造业PMI回升至50.1%重返扩张区间",
+      "section": "universal_policy",
+      "entity": "国家统计局",
+      "action": "公布",
+      "object": "9月制造业PMI",
+      "event_date": "2026-09-30T09:30:00+08:00",
+      "published_at": "2026-09-30T09:30:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "三大 PMI 同步回到扩张区间，属月末关键景气数据。",
+      "sources": [
+        {
+          "url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+          "publisher": "新华财经",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社旗下金融信息平台，站点不在清单内",
+          "published_at": "2026-10-04T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+      "body_facts": [
+        "国家统计局数据显示，9月制造业PMI、非制造业商务活动指数和综合PMI产出指数分别为50.1%、50.2%和50.7%，重返扩张区间。"
+      ]
+    },
+    {
+      "id": "c07",
+      "title": "中国人民银行开展905亿元7天期逆回购操作",
+      "section": "investment",
+      "entity": "中国人民银行",
+      "action": "开展",
+      "object": "905亿元7天期逆回购操作",
+      "event_date": "2026-09-29T09:20:00+08:00",
+      "published_at": "2026-09-29T09:20:00+08:00",
+      "status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "公开市场操作公告时间为9月29日09:20，超出24小时窗口；且属例行操作。",
+      "sources": [
+        {
+          "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150",
+          "publisher": "腾讯自选股",
+          "tier": "trusted_secondary",
+          "tier_reason": "腾讯财经资讯页，站点不在清单内",
+          "published_at": "2026-09-29T20:28:00+08:00"
+        }
+      ],
+      "primary_url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150",
+      "body_facts": [
+        "中国人民银行9月29日开展905亿元7天期逆回购操作，操作利率1.40%。"
+      ]
+    },
+    {
+      "id": "c08",
+      "title": "国务院9月重要政策汇总发布",
+      "section": "universal_policy",
+      "entity": "国务院",
+      "action": "发布",
+      "object": "9月重要政策汇总",
+      "event_date": "2026-09-30T09:00:00+08:00",
+      "published_at": "2026-09-30T09:00:00+08:00",
+      "status": "LOW_VALUE",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "月度汇总稿，内容均为此前已发布政策，没有新事实。",
+      "reject_reason": "汇总稿，无新增事实，不进入输出。",
+      "sources": [
+        {
+          "url": "https://news.qq.com/rain/a/20261002A042AS00",
+          "publisher": "腾讯新闻",
+          "tier": "trusted_secondary",
+          "tier_reason": "腾讯新闻转载政务汇总，站点不在清单内",
+          "published_at": "2026-10-02T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://news.qq.com/rain/a/20261002A042AS00",
+      "body_facts": [
+        "9月多项重要政策出台，包括国务院常务会研究宏观政策发力提效、调整货币政策工具、居民房贷贴息等。"
+      ]
+    },
+    {
+      "id": "c09",
+      "title": "国务院常务会研究宏观政策发力提效",
+      "section": "universal_policy",
+      "entity": "国务院",
+      "action": "研究",
+      "object": "宏观政策发力提效与促进有效投资",
+      "event_date": "2026-09-28T19:00:00+08:00",
+      "published_at": "2026-09-28T19:00:00+08:00",
+      "status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "reject_reason": "会议为9月28日，超出24小时窗口；9月29—30日的报道属二次传播。",
+      "sources": [
+        {
+          "url": "https://news.qq.com/rain/a/20261002A042AS00",
+          "publisher": "腾讯新闻",
+          "tier": "trusted_secondary",
+          "tier_reason": "腾讯新闻转载政务汇总，站点不在清单内",
+          "published_at": "2026-10-02T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://news.qq.com/rain/a/20261002A042AS00",
+      "body_facts": [
+        "9月28日国务院常务会议研究宏观政策发力提效、促进有效投资有关工作，要求推出一批务实管用的增量政策。"
+      ]
+    },
+    {
+      "id": "c10",
+      "title": "央行调整多项货币政策工具，PSL利率降至1.5%",
+      "section": "universal_policy",
+      "entity": "中国人民银行",
+      "action": "调整",
+      "object": "若干货币政策工具",
+      "event_date": "2026-09-29T20:00:00+08:00",
+      "published_at": "2026-09-29T20:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "与 c01 为同一事件的转载版本，用于验证本期内部去重。",
+      "sources": [
+        {
+          "url": "https://news.qq.com/rain/a/20261001A050H200",
+          "publisher": "腾讯新闻",
+          "tier": "trusted_secondary",
+          "tier_reason": "腾讯新闻转载中国证券报文章，站点不在清单内",
+          "published_at": "2026-10-01T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://news.qq.com/rain/a/20261001A050H200",
+      "body_facts": [
+        "央行9月29日决定下调抵押补充贷款利率0.25个百分点，一年期利率由1.75%降至1.5%。"
+      ]
+    },
+    {
+      "id": "c11",
+      "title": "农业农村部印发全国畜牧兽医行业发展十五五规划",
+      "section": "universal_policy",
+      "entity": "农业农村部",
+      "action": "印发",
+      "object": "全国畜牧兽医行业发展十五五规划",
+      "event_date": "2026-09-29T16:00:00+08:00",
+      "published_at": "2026-09-29T16:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "部委层面五年行业规划，含肉类、禽蛋、奶类等定量目标。",
+      "sources": [
+        {
+          "url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+          "publisher": "新华财经",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社旗下金融信息平台，站点不在清单内",
+          "published_at": "2026-10-04T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+      "body_facts": [
+        "农业农村部印发《全国畜牧兽医行业发展「十五五」规划》，提出15项定量目标，2030年饲草总产量将达1.3亿吨。"
+      ]
+    },
+    {
+      "id": "c12",
+      "title": "外汇局公布8月国际收支货物和服务贸易顺差数据",
+      "section": "universal_policy",
+      "entity": "国家外汇管理局",
+      "action": "公布",
+      "object": "8月国际收支货物和服务贸易数据",
+      "event_date": "2026-09-29T16:30:00+08:00",
+      "published_at": "2026-09-29T16:30:00+08:00",
+      "status": "LOW_VALUE",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "例行月度国际收支数据，未出现方向性变化。",
+      "reject_reason": "例行数据发布，不进入输出。",
+      "sources": [
+        {
+          "url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+          "publisher": "新华财经",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社旗下金融信息平台，站点不在清单内",
+          "published_at": "2026-10-04T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+      "body_facts": [
+        "国家外汇管理局数据显示，8月我国国际收支货物和服务贸易出口4243亿美元。"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "date": "2026-10-04",
+  "now": "2026-10-04T09:00:00+08:00",
+  "candidates": 1,
+  "accepted_count": 1,
+  "rejected_count": 0,
+  "final_items": 1,
+  "stats": {
+    "candidates": 1,
+    "pass": 1,
+    "deliverable": 1,
+    "top_pick": 0,
+    "kept": 1,
+    "dropped": 0
+  },
+  "blocked_by_gate": {},
+  "rejected_by_gate": {},
+  "accepted_by_status": {
+    "UPDATED": 1
+  },
+  "accepted_by_section": {
+    "ai": 1
+  },
+  "accepted": [
+    {
+      "id": "c01",
+      "title": "OpenAI 确认已暂停最先进模型训练",
+      "section": "ai",
+      "declared_status": "UPDATED",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://www.hkcd.com.hk/hkcdweb/content/2026/10/03/content_8778392.html",
+      "decision": "UPDATED",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "openai#取消#gpt61astra的10月发布",
+        "published_at": "2026-09-28T22:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": false,
+        "new_progress_fields_ok": true,
+        "material_update_present": true,
+        "legacy_material_flag": false,
+        "material_update_substantiated": true,
+        "has_material_event": true,
+        "has_new_progress": true,
+        "source_classes": [
+          "TRUSTED_SECONDARY",
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 2
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 2,
+        "verification_publishers": [
+          "科创板日报",
+          "香港商报"
+        ],
+        "has_cross_source_verification": true,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": true,
+        "history_match_count": 1,
+        "is_material_update": true,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    }
+  ],
+  "rejected": [],
+  "issue_findings": [
+    {
+      "code": "HISTORY_MATCH_UPDATED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "duplication",
+      "scope": "c01",
+      "message": "与历史事件同一 fingerprint，但存在实质新进展，按 UPDATED 输出",
+      "detail": "openai#取消#gpt61astra的10月发布 (5 天前)"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c01",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.hkcd.com.hk/hkcdweb/content/2026/10/03/content_8778392.html"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c01",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://news.qq.com/rain/a/20261004A02KWU00"
+    }
+  ]
+}

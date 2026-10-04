@@ -35,23 +35,25 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 
 CHECK = "scripts/zaobao_check.py"
+CLASSIFY = "scripts/zaobao_classify.py"
+RENDER = "scripts/zaobao_render.py"
 
 MUTATIONS = [
     {
-        "name": "M01 gates 字典缺键不再报错",
+        "name": "M01 material_update 缺失不再阻断",
         "file": CHECK,
-        "old": "        if key not in gates:\n",
-        "new": "        if False:\n",
-        "why": "「未检查 ≠ 已通过」在闸门字典这一层失效",
-        "expect": {"case-09 step5"},
+        "old": '        elif d.get("legacy_material_flag"):\n',
+        "new": "        elif True:\n",
+        "why": "投资／AI 条目可以不给任何实质事件证据就放行",
+        "expect": {"case-09 step3"},
     },
     {
-        "name": "M01b has_material_event 缺席不再报错",
+        "name": "M01b material_update 不再能支撑 UPDATED",
         "file": CHECK,
-        "old": '        if "has_material_event" not in cand:\n',
-        "new": "        if False:\n",
-        "why": "「未检查 ≠ 已通过」在栏目字段这一层失效",
-        "expect": {"case-09 step3"},
+        "old": '    d["has_new_progress"] = bool(np_ok or d.get("material_update_substantiated"))\n',
+        "new": '    d["has_new_progress"] = bool(np_ok)\n',
+        "why": "旧事件的实质新进展只剩 new_progress_* 一条通道",
+        "expect": {"case-15 step5"},
     },
     {
         "name": "M02 时间窗外不再阻断（BLOCK 降为 INFO）",
@@ -59,7 +61,7 @@ MUTATIONS = [
         "old": 'findings.append(fnd("TIME_OUT_OF_WINDOW", BLOCK, 0, cand.get("id"),',
         "new": 'findings.append(fnd("TIME_OUT_OF_WINDOW", INFO, 0, cand.get("id"),',
         "why": "旧闻可以照常发出",
-        "expect": {"case-03 step1", "case-03 step3", "case-04 step3"},
+        "expect": {"case-03 step1", "case-03 step3", "case-04 step3", "case-15 step1"},
     },
     {
         "name": "M03 跨日去重失效",
@@ -67,7 +69,8 @@ MUTATIONS = [
         "old": '        if rec.get("fingerprint") != fp:\n            continue\n',
         "new": "        if True:\n            continue\n",
         "why": "同一事件可以连发三天",
-        "expect": {"case-08 step1", "case-08 step2", "case-08 step3", "case-08 step4"},
+        "expect": {"case-08 step1", "case-08 step2", "case-08 step3", "case-08 step4",
+                   "case-15 step5"},
     },
     {
         "name": "M04 本期内部去重失效",
@@ -75,7 +78,7 @@ MUTATIONS = [
         "old": "        if len(items) == 1:\n",
         "new": "        if True:\n",
         "why": "同一事件换标题后重复出现",
-        "expect": {"case-02 step1", "case-02 step2"},
+        "expect": {"case-02 step1", "case-02 step2", "case-15 step4"},
     },
     {
         "name": "M05 候选层标题党检查关闭",
@@ -128,8 +131,8 @@ MUTATIONS = [
     {
         "name": "M07 二手来源披露要求取消",
         "file": CHECK,
-        "old": '    if tier == "SECONDARY_ONLY" and cand.get("disclosure") != DISCLOSURE_SECONDARY:\n',
-        "new": "    if False:\n",
+        "old": '        if cand.get("disclosure") != DISCLOSURE_SECONDARY:\n',
+        "new": "        if False:\n",
         "why": "二手报道被当成一手发出",
         "expect": {"case-05 step1"},
     },
@@ -175,7 +178,82 @@ MUTATIONS = [
         "old": '        hit = is_never_source(url, ctx.get("never_a_source"))\n',
         "new": "        hit = None\n",
         "why": "搜索引擎结果页可以当证据",
-        "expect": {"case-12 step3"},
+        "expect": {"case-12 step3", "case-15 step2", "case-15 step7"},
+    },
+    {
+        "name": "M15 来源分类器一手判定失效",
+        "file": CLASSIFY,
+        "old": '    out["is_primary"] = cls in PRIMARY_CLASSES\n',
+        "new": '    out["is_primary"] = False\n',
+        "why": "一手来源全部降级，声明 VERIFIED_PRIMARY 却查不到一手来源",
+        "expect_include": {"case-11 step1", "case-15 step3", "case-09 step4"},
+    },
+    {
+        "name": "M16 自报字段缺席重新变成失败",
+        "file": CHECK,
+        "old": '    if gates is None:\n        return\n',
+        "new": '    if gates is None:\n        gates = {}\n',
+        "why": "把「不填自报字段」重新判成问题，等于把自报又拉回放行依据",
+        "expect": {"case-09 step5", "case-11 step1", "case-12 step6",
+                   "case-15 step3", "case-15 step16"},
+    },
+    {
+        "name": "M17 material_update 未自证不再报错",
+        "file": CHECK,
+        "old": '            if not d.get("material_update_substantiated"):\n',
+        "new": "            if False:\n",
+        "why": "material_update 缺少关键字段也能算作实质事件",
+        "expect": {"case-15 step6"},
+    },
+    {
+        "name": "M18 渲染来源优先级失效（改用列表首个来源）",
+        "file": RENDER,
+        "old": ('    for s in srcs:\n'
+                '        if str(s.get("url") or "") == primary_url:\n'),
+        "new": ('    for s in srcs:\n'
+                '        if True:\n'),
+        "why": "官方原文被排在后面的媒体转载顶掉",
+        "expect": {"case-15 step8"},
+    },
+    {
+        "name": "M19 结构门时间字段缺失不再报错",
+        "file": CHECK,
+        "old": '    if parse_dt(cand.get("published_at") or cand.get("event_date")) is None:\n',
+        "new": "    if False:\n",
+        "why": "连时间都没有的候选也能走进后续 Gate",
+        "expect": {"case-13 step5"},
+    },
+    {
+        "name": "M20 独立发布者退回按主机名去重",
+        "file": CHECK,
+        "old": ('    publishers = {zcl.publisher_key(s) for s in trusted if zcl.publisher_key(s)}\n'),
+        "new": ('    publishers = {zcl.host_of(str(s.get("url") or "")) for s in trusted if s.get("url")}\n'),
+        "why": "同一家媒体的两个子域被误算成两家独立来源，交叉验证门槛被悄悄放低",
+        "expect_include": {"case-15 step12"},
+    },
+    {
+        "name": "M21 清单外域名不再能凭理由计入可信二手",
+        "file": CLASSIFY,
+        "old": ('        elif (host and declared == "trusted_secondary"\n'),
+        "new": ('        elif (False and host and declared == "trusted_secondary"\n'),
+        "why": "域名清单外的真实媒体永远拿不到可信二手资格，只能靠一手通道",
+        "expect_include": {"case-15 step10"},
+    },
+    {
+        "name": "M22 「仅有可信二手」不再校验可信来源",
+        "file": CHECK,
+        "old": '        if d.get("verification_source_count", 0) < 1:\n',
+        "new": "        if False:\n",
+        "why": "随便挂一条清单外来源、写上「尚未见一手确认」，就能当成可信二手放行",
+        "expect_include": {"case-15 step14"},
+    },
+    {
+        "name": "M23 同一个来源 URL 被多条内容反复引用不再提示",
+        "file": CHECK,
+        "old": '        if len(ids) >= 3:\n',
+        "new": "        if False:\n",
+        "why": "一个周报/汇总页可以给十条内容当来源，读者无从核对",
+        "expect_include": {"case-15 step15"},
     },
 ]
 

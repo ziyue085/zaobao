@@ -1,0 +1,292 @@
+[
+  {
+    "id": "c07",
+    "title": "中国人民银行开展905亿元7天期逆回购操作",
+    "section": "investment",
+    "declared_status": "OLD",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": "公开市场操作公告时间为9月29日09:20，超出24小时窗口；且属例行操作。",
+    "primary_url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260929202820a6b41150",
+    "decision": "DROP",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "中国人民银行#开展#905亿元7天期逆回购操作",
+      "published_at": "2026-09-29T09:20:00+08:00",
+      "is_future": false,
+      "is_within_24h": false,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "腾讯自选股"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": false,
+      "evidence_ok": true,
+      "is_output_eligible": false
+    }
+  },
+  {
+    "id": "c08",
+    "title": "国务院9月重要政策汇总发布",
+    "section": "universal_policy",
+    "declared_status": "LOW_VALUE",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": "汇总稿，无新增事实，不进入输出。",
+    "primary_url": "https://news.qq.com/rain/a/20261002A042AS00",
+    "decision": "DROP",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "国务院#发布#9月重要政策汇总",
+      "published_at": "2026-09-30T09:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "腾讯新闻"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": false
+    }
+  },
+  {
+    "id": "c09",
+    "title": "国务院常务会研究宏观政策发力提效",
+    "section": "universal_policy",
+    "declared_status": "OLD",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": "会议为9月28日，超出24小时窗口；9月29—30日的报道属二次传播。",
+    "primary_url": "https://news.qq.com/rain/a/20261002A042AS00",
+    "decision": "DROP",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "国务院#研究#宏观政策发力提效与促进有效投资",
+      "published_at": "2026-09-28T19:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": false,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "腾讯新闻"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": false,
+      "evidence_ok": true,
+      "is_output_eligible": false
+    }
+  },
+  {
+    "id": "c10",
+    "title": "央行调整多项货币政策工具，PSL利率降至1.5%",
+    "section": "universal_policy",
+    "declared_status": "DUPLICATE",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": "本期内部重复，保留 c01",
+    "primary_url": "https://news.qq.com/rain/a/20261001A050H200",
+    "decision": "DROP",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "中国人民银行#调整#若干货币政策工具",
+      "published_at": "2026-09-29T20:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "腾讯新闻"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": false
+    }
+  },
+  {
+    "id": "c12",
+    "title": "外汇局公布8月国际收支货物和服务贸易顺差数据",
+    "section": "universal_policy",
+    "declared_status": "LOW_VALUE",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": "例行数据发布，不进入输出。",
+    "primary_url": "https://www.cnfin.com/hs-lb/detail/20261004/4477368_1.html",
+    "decision": "DROP",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "国家外汇管理局#公布#8月国际收支货物和服务贸易数据",
+      "published_at": "2026-09-29T16:30:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "新华财经"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": false
+    }
+  }
+]

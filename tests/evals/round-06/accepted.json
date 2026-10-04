@@ -1,0 +1,124 @@
+[
+  {
+    "id": "c01",
+    "title": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "VERIFIED_PRIMARY",
+    "reject_reason": null,
+    "primary_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html",
+    "decision": "PASS",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "商务部#发起#对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "PRIMARY_OFFICIAL"
+      ],
+      "source_class_counts": {
+        "PRIMARY_OFFICIAL": 1
+      },
+      "has_primary_source": true,
+      "primary_source_count": 1,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "商务部"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c02",
+    "title": "国铁集团优化老年旅客淡季购票优惠措施",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "VERIFIED_CROSS_SOURCE",
+    "reject_reason": null,
+    "primary_url": "https://m.chinanews.com/wap/detail/chs/zw/10707395.shtml",
+    "decision": "PASS",
+    "decision_reasons": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "blocked_by": [],
+    "warned_by": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "WARN",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "中国国家铁路#优化#老年旅客淡季购票优惠",
+      "published_at": "2026-10-03T17:15:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY",
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 2
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 2,
+      "verification_publishers": [
+        "中国新闻网",
+        "中国网（新华社稿）"
+      ],
+      "has_cross_source_verification": true,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  }
+]

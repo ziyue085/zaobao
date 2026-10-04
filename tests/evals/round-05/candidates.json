@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-04",
+  "window_start": "2026-10-03T09:00:00+08:00",
+  "window_end": "2026-10-04T09:00:00+08:00",
+  "note": "Day 3。history.jsonl 里有 Day 1 的两条记录。同 fingerprint 无新进展 → DUPLICATE 不输出；同 fingerprint 但有窗口内实质新进展 → UPDATED 可输出。",
+  "candidates": [
+    {
+      "id": "c01",
+      "title": "青岛胶州湾第二隧道盾构掘进全部完成",
+      "section": "social",
+      "topic_type": "infrastructure",
+      "entity": "中铁十四局",
+      "action": "完成",
+      "object": "胶州湾第二隧道盾构掘进",
+      "published_at": "2026-10-04T08:00:00+08:00",
+      "status": "DUPLICATE",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": "与最近 7 天内已输出事件同一 fingerprint，且无实质新进展。",
+      "importance_reason": "同一事件被另一家媒体换标题再发一次。",
+      "sources": [
+        {
+          "url": "https://pic.people.com.cn/n1/2026/1003/c1016-40809115.html",
+          "publisher": "人民网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-04T08:00:00+08:00"
+        },
+        {
+          "url": "https://m.chinanews.com/wap/detail/chs/zw/10707223.shtml",
+          "publisher": "中国新闻网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-04T08:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://m.chinanews.com/wap/detail/chs/zw/10707223.shtml",
+      "body_facts": [
+        "青岛胶州湾第二隧道盾构掘进全部完成。"
+      ]
+    },
+    {
+      "id": "c02",
+      "title": "商务部对原产于欧盟的进口对硝基甲苯反倾销立案调查：公布调查问卷",
+      "section": "universal_policy",
+      "entity": "商务部",
+      "action": "发起",
+      "object": "对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+      "published_at": "2026-10-04T08:30:00+08:00",
+      "status": "UPDATED",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "importance_reason": "立案后的程序性新节点：调查问卷公布、开放利害关系方登记。",
+      "sources": [
+        {
+          "url": "https://www.mofcom.gov.cn/syxwfb/art/2026/art_c1e2b099e84d4b6d8e10e7cef5928511.html",
+          "publisher": "商务部",
+          "tier": "primary",
+          "is_first_party": true,
+          "published_at": "2026-10-04T08:30:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.mofcom.gov.cn/syxwfb/art/2026/art_c1e2b099e84d4b6d8e10e7cef5928511.html",
+      "body_facts": [
+        "商务部贸易救济调查局10月4日公布本案调查问卷，并明确登记参加调查的时限。"
+      ],
+      "material_update": {
+        "claim": "商务部公布本案调查问卷并开放利害关系方登记",
+        "published_at": "2026-10-04T08:30:00+08:00",
+        "source_url": "https://www.mofcom.gov.cn/syxwfb/art/2026/art_c1e2b099e84d4b6d8e10e7cef5928511.html"
+      }
+    },
+    {
+      "id": "c03",
+      "title": "教育部部署开展2027届高校毕业生校园招聘月活动",
+      "section": "universal_policy",
+      "entity": "教育部",
+      "action": "部署",
+      "object": "2027届高校毕业生校园招聘月活动",
+      "published_at": "2026-10-03T17:22:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "面向 2027 届全体高校毕业生的全国性就业安排，属公共政策。",
+      "sources": [
+        {
+          "url": "https://www.cqrb.cn/shishi/2026-10-03/2789259_pc.html",
+          "publisher": "新华社（重庆日报网转载）",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社通稿，省级党报网站全文转载",
+          "published_at": "2026-10-03T17:22:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.cqrb.cn/shishi/2026-10-03/2789259_pc.html",
+      "body_facts": [
+        "「金秋启航」校园招聘月系列活动于2026年9月至11月集中开展。",
+        "对脱贫家庭、低保家庭、零就业家庭及残疾人等重点群体毕业生建立帮扶台账。"
+      ]
+    }
+  ]
+}

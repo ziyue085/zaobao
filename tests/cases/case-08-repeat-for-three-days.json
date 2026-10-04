@@ -60,7 +60,9 @@
               }
             ],
             "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
-            "body_facts": ["媒体继续讨论该公司三季报内容。"],
+            "body_facts": [
+              "媒体继续讨论该公司三季报内容。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -69,13 +71,18 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "中芯国际"
           }
         ]
       },
       "expect": {
-        "block_codes": ["DUPLICATE_HISTORY"],
-        "severity": { "DUPLICATE_HISTORY": "BLOCK" }
+        "block_codes": [
+          "DUPLICATE_HISTORY"
+        ],
+        "severity": {
+          "DUPLICATE_HISTORY": "BLOCK"
+        }
       }
     },
     {
@@ -103,18 +110,29 @@
                 "tier_reason": "公司投资者关系页面的正式公告"
               }
             ],
-            "body_facts": ["媒体继续讨论该公司三季报内容。"],
-            "has_material_event": true
+            "body_facts": [
+              "媒体继续讨论该公司三季报内容。"
+            ],
+            "has_material_event": true,
+            "watchlist_subject": "中芯国际"
           }
         ]
       },
       "expect": {
         "block_count": 0,
-        "any_codes": ["DUPLICATE_HISTORY"],
-        "severity": { "DUPLICATE_HISTORY": "INFO" },
-        "stats": { "pass": 0 },
+        "any_codes": [
+          "DUPLICATE_HISTORY"
+        ],
+        "severity": {
+          "DUPLICATE_HISTORY": "INFO"
+        },
+        "stats": {
+          "pass": 0
+        },
         "render_block_count": 0,
-        "render_excludes": ["中芯国际三季报持续引发讨论"]
+        "render_excludes": [
+          "中芯国际三季报持续引发讨论"
+        ]
       }
     },
     {
@@ -155,15 +173,22 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "中芯国际"
           }
         ]
       },
       "expect": {
         "block_count": 0,
-        "any_codes": ["HISTORY_MATCH_UPDATED"],
-        "severity": { "HISTORY_MATCH_UPDATED": "INFO" },
-        "stats": { "pass": 1 },
+        "any_codes": [
+          "HISTORY_MATCH_UPDATED"
+        ],
+        "severity": {
+          "HISTORY_MATCH_UPDATED": "INFO"
+        },
+        "stats": {
+          "pass": 1
+        },
         "render_block_count": 0
       }
     },
@@ -192,7 +217,9 @@
               }
             ],
             "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
-            "body_facts": ["有媒体转载该公司三季度业绩说明会纪要。"],
+            "body_facts": [
+              "有媒体转载该公司三季度业绩说明会纪要。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -201,13 +228,18 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "SMIC"
           }
         ]
       },
       "expect": {
-        "block_codes": ["DUPLICATE_HISTORY"],
-        "fingerprint_equals": { "c01": "中芯国际#发布#2026年三季度报告" }
+        "block_codes": [
+          "DUPLICATE_HISTORY"
+        ],
+        "fingerprint_equals": {
+          "c01": "中芯国际#发布#2026年三季度报告"
+        }
       }
     }
   ]

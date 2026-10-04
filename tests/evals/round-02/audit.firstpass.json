@@ -1,0 +1,630 @@
+{
+  "date": "2026-10-04",
+  "now": "2026-10-04T09:00:00+08:00",
+  "candidates": 8,
+  "accepted_count": 3,
+  "rejected_count": 5,
+  "final_items": 3,
+  "stats": {
+    "candidates": 8,
+    "pass": 5,
+    "deliverable": 3,
+    "top_pick": 1,
+    "kept": 8,
+    "dropped": 0
+  },
+  "blocked_by_gate": {
+    "evidence": 2,
+    "category": 1
+  },
+  "rejected_by_gate": {
+    "freshness": 2,
+    "evidence": 2,
+    "category": 1
+  },
+  "accepted_by_status": {
+    "PASS": 3
+  },
+  "accepted_by_section": {
+    "universal_policy": 3
+  },
+  "accepted": [
+    {
+      "id": "c01",
+      "title": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "reject_reason": null,
+      "primary_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html",
+      "decision": "PASS",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "商务部#发起#对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+        "published_at": "2026-10-03T12:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": true,
+        "legacy_material_flag": false,
+        "material_update_substantiated": true,
+        "has_material_event": true,
+        "has_new_progress": true,
+        "source_classes": [
+          "PRIMARY_OFFICIAL"
+        ],
+        "source_class_counts": {
+          "PRIMARY_OFFICIAL": 1
+        },
+        "has_primary_source": true,
+        "primary_source_count": 1,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "商务部"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c02",
+      "title": "国铁集团优化老年旅客淡季购票优惠措施",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": null,
+      "primary_url": "https://m.chinanews.com/wap/detail/cht/zw/10707395.shtml",
+      "decision": "PASS",
+      "decision_reasons": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中国国家铁路#优化#老年旅客淡季购票优惠",
+        "published_at": "2026-10-03T12:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY",
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 2
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 2,
+        "verification_publishers": [
+          "中国新闻网",
+          "光明网"
+        ],
+        "has_cross_source_verification": true,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c04",
+      "title": "自然资源部公布1—8月新一轮找矿突破进展",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://tv.cctv.com/2026/10/03/VIDE1nZJej11WPlNPVhBxFDA261003.shtml",
+      "decision": "PASS",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "自然资源部#公布#18月新一轮找矿突破进展",
+        "published_at": "2026-10-03T19:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "央视网"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "id": "c03",
+      "title": "国家医保局发布7类医用耗材分类与代码及医保通用名",
+      "section": "universal_policy",
+      "declared_status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": "国家医保局官网通知公告日期为2026年9月18日，超出24小时窗口；10月2—3日的报道属二次传播。",
+      "primary_url": "https://k.sina.cn/article_5952915705_162d248f906703pt4w.html",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "国家医保局#发布#7类医用耗材分类与代码及医保通用名",
+        "published_at": "2026-09-18T10:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": false,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "UNKNOWN"
+        ],
+        "source_class_counts": {
+          "UNKNOWN": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 0,
+        "verification_publishers": [],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": false,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    },
+    {
+      "id": "c05",
+      "title": "我国首个百兆瓦级压缩二氧化碳储能项目并网发电",
+      "section": "unexpected",
+      "declared_status": "OLD",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": "项目于10月2日并网，10月3日《新闻联播》报道；事件本体超出24小时窗口。",
+      "primary_url": "https://tv.cctv.com/2026/10/03/VIDE1nZJej11WPlNPVhBxFDA261003.shtml",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中国华电#并网#新疆木垒百兆瓦级压缩二氧化碳储能项目",
+        "published_at": "2026-10-02T12:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": false,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "央视网"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": false,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    },
+    {
+      "id": "c06",
+      "title": "中国联通：结构调整基金拟减持不超过1.2%股份",
+      "section": "investment",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://www.toutiao.com/w/1878026174215232",
+      "decision": "BLOCKED",
+      "decision_reasons": [
+        "DISCOVERY_ONLY_AS_SOLE_EVIDENCE",
+        "SECONDARY_SOURCE_MISSING"
+      ],
+      "blocked_by": [
+        "DISCOVERY_ONLY_AS_SOLE_EVIDENCE",
+        "SECONDARY_SOURCE_MISSING"
+      ],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "BLOCK",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中国联通#减持#12股份",
+        "published_at": "2026-10-03T20:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": true,
+        "legacy_material_flag": false,
+        "material_update_substantiated": true,
+        "has_material_event": true,
+        "has_new_progress": true,
+        "source_classes": [
+          "DISCOVERY_ONLY"
+        ],
+        "source_class_counts": {
+          "DISCOVERY_ONLY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 0,
+        "verification_publishers": [],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": true,
+        "only_discovery_source": true,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": "大型央企",
+        "watchlist_subject_bound": true,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c07",
+      "title": "峰岹科技拟1.18亿美元收购Sciosense全部股份",
+      "section": "investment",
+      "declared_status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": null,
+      "primary_url": "https://www.163.com/dy/article/L8B15FMB053469RG.html",
+      "decision": "BLOCKED",
+      "decision_reasons": [
+        "INVESTMENT_SUBJECT_UNBOUND"
+      ],
+      "blocked_by": [
+        "INVESTMENT_SUBJECT_UNBOUND"
+      ],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "BLOCK",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "峰岹科技#收购#sciosensebv100股份",
+        "published_at": "2026-10-03T16:06:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": true,
+        "legacy_material_flag": false,
+        "material_update_substantiated": true,
+        "has_material_event": true,
+        "has_new_progress": true,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "证券时报"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c08",
+      "title": "教育部部署开展2027届高校毕业生校园招聘月活动",
+      "section": "universal_policy",
+      "declared_status": "LOW_VALUE",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "reject_reason": "部署类工作通报，不进入输出。",
+      "primary_url": "https://www.news.cn/politics/20261003/4239d94c255943c6bb142d3a1cd6dbc0/c.html",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "教育部#部署#2027届高校毕业生校园招聘月活动",
+        "published_at": "2026-10-03T19:04:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "新华网"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": false,
+        "is_output_eligible": false
+      }
+    }
+  ],
+  "issue_findings": [
+    {
+      "code": "DISCOVERY_ONLY_AS_SOLE_EVIDENCE",
+      "severity": "BLOCK",
+      "priority": 1,
+      "gate": "evidence",
+      "scope": "c06",
+      "message": "只有社交平台作为来源，不能单独作为重要事实的证据",
+      "detail": ""
+    },
+    {
+      "code": "SECONDARY_SOURCE_MISSING",
+      "severity": "BLOCK",
+      "priority": 1,
+      "gate": "evidence",
+      "scope": "c06",
+      "message": "声明「仅有可信二手」，但程序按来源分类器算不出一条可信来源",
+      "detail": "计算类别：{\"DISCOVERY_ONLY\": 1}"
+    },
+    {
+      "code": "PRIMARY_SOURCE_MISSING",
+      "severity": "INFO",
+      "priority": 1,
+      "gate": "evidence",
+      "scope": "c08",
+      "message": "声明 VERIFIED_PRIMARY 但没有任何一手来源",
+      "detail": ""
+    },
+    {
+      "code": "SECONDARY_SOURCE_MISSING",
+      "severity": "INFO",
+      "priority": 1,
+      "gate": "evidence",
+      "scope": "c03",
+      "message": "声明「仅有可信二手」，但程序按来源分类器算不出一条可信来源",
+      "detail": "计算类别：{\"UNKNOWN\": 1}"
+    },
+    {
+      "code": "INVESTMENT_SUBJECT_UNBOUND",
+      "severity": "BLOCK",
+      "priority": 2,
+      "gate": "category",
+      "scope": "c07",
+      "message": "投资条目必须声明 watchlist_subject，指明它对应关注清单里的哪个机构／标的／类别",
+      "detail": "entity=峰岹科技"
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c02",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "INFO",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c03",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "QUASI_PRIMARY_USED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c04",
+      "message": "普适性政策使用准一手来源（中央文件通稿）",
+      "detail": "tv.cctv.com"
+    },
+    {
+      "code": "QUASI_PRIMARY_USED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c08",
+      "message": "普适性政策使用准一手来源（中央文件通稿）",
+      "detail": "www.news.cn"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c07",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.163.com/dy/article/L8B15FMB053469RG.html"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c08",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://www.news.cn/politics/20261003/4239d94c255943c6bb142d3a1cd6dbc0/c.html"
+    },
+    {
+      "code": "TIME_OUT_OF_WINDOW",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "freshness",
+      "scope": "c03",
+      "message": "事件超出 24 小时窗口，已正确判为 OLD",
+      "detail": ""
+    },
+    {
+      "code": "TIME_OUT_OF_WINDOW",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "freshness",
+      "scope": "c05",
+      "message": "事件超出 24 小时窗口，已正确判为 OLD",
+      "detail": ""
+    }
+  ]
+}

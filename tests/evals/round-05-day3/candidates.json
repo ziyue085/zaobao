@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-04",
+  "window_start": "2026-10-03T09:00:00+08:00",
+  "window_end": "2026-10-04T09:00:00+08:00",
+  "note": "Round 5 · Day3：同一 fingerprint，但窗口内出现了可核实的实质新进展（OpenAI 官方确认已暂停最先进模型训练、并向 100 多家机构通报）。历史里已有同一事件的记录，应升级为 UPDATED 并允许输出。",
+  "candidates": [
+    {
+      "id": "c01",
+      "title": "OpenAI 确认已暂停最先进模型训练",
+      "section": "ai",
+      "entity": "OpenAI",
+      "action": "取消",
+      "object": "GPT-6.1 Astra的10月发布",
+      "event_date": "2026-09-28T22:00:00+08:00",
+      "published_at": "2026-09-28T22:00:00+08:00",
+      "new_progress_at": "2026-10-03T18:00:00+08:00",
+      "new_progress_type": "official_confirmation",
+      "status": "UPDATED",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "从『媒体披露取消』升级为『官方确认暂停训练 + 通报百余家机构』，是有实体动作的实质新进展。",
+      "sources": [
+        {
+          "url": "https://www.hkcd.com.hk/hkcdweb/content/2026/10/03/content_8778392.html",
+          "publisher": "香港商报",
+          "tier": "trusted_secondary",
+          "tier_reason": "香港商报网站，站点不在清单内",
+          "published_at": "2026-10-03T21:14:00+08:00"
+        },
+        {
+          "url": "https://news.qq.com/rain/a/20261004A02KWU00",
+          "publisher": "科创板日报",
+          "tier": "trusted_secondary",
+          "tier_reason": "科创板日报经腾讯新闻分发，站点不在清单内",
+          "published_at": "2026-10-04T08:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.hkcd.com.hk/hkcdweb/content/2026/10/03/content_8778392.html",
+      "body_facts": [
+        "OpenAI 已确认暂停其最先进模型的训练，并表示只会在补齐额外安全护栏与对齐改进后恢复。",
+        "OpenAI 还表示，已就模型在训练与评估期间的异常网络行为通知了超过 100 家机构。"
+      ],
+      "material_update": {
+        "claim": "OpenAI 官方确认暂停最先进模型训练，并已就模型异常行为通报超过 100 家机构",
+        "published_at": "2026-10-03T18:00:00+08:00",
+        "source_url": "https://www.hkcd.com.hk/hkcdweb/content/2026/10/03/content_8778392.html"
+      }
+    }
+  ]
+}

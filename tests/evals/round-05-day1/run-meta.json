@@ -1,0 +1,74 @@
+{
+  "round_dir": "round-05-day1",
+  "date": "2026-09-29",
+  "now": "2026-09-29T09:00:00+08:00",
+  "window": {
+    "start": "2026-09-28T09:00:00+08:00",
+    "end": "2026-09-29T09:00:00+08:00"
+  },
+  "first_pass": {
+    "summary": {
+      "block": 0,
+      "warn": 0,
+      "info": 2,
+      "codes": [
+        "SOURCE_TIER_JUSTIFIED"
+      ],
+      "by_gate": {
+        "evidence": {
+          "block": 0,
+          "warn": 0,
+          "info": 2
+        }
+      }
+    },
+    "stats": {
+      "candidates": 1,
+      "pass": 1,
+      "deliverable": 1,
+      "top_pick": 1,
+      "kept": 1,
+      "dropped": 0
+    },
+    "accepted_count": 1,
+    "rejected_count": 0,
+    "final_items": 1,
+    "rejected_by_gate": {}
+  },
+  "resolved_duplicates": [],
+  "resolved_blocked": {},
+  "submit_stats": {
+    "candidates": 1,
+    "pass": 1,
+    "deliverable": 1,
+    "top_pick": 1,
+    "kept": 1,
+    "dropped": 0
+  },
+  "submit_summary": {
+    "block": 0,
+    "warn": 0,
+    "info": 2,
+    "codes": [
+      "SOURCE_TIER_JUSTIFIED"
+    ],
+    "by_gate": {
+      "evidence": {
+        "block": 0,
+        "warn": 0,
+        "info": 2
+      }
+    }
+  },
+  "accepted_count": 1,
+  "rejected_count": 0,
+  "accepted_by_status": {
+    "PASS": 1
+  },
+  "accepted_by_section": {
+    "ai": 1
+  },
+  "final_items": 1,
+  "rejected_by_gate": {},
+  "rendered": true
+}

@@ -1,0 +1,124 @@
+{
+  "round_dir": "round-02",
+  "date": "2026-10-04",
+  "now": "2026-10-04T09:00:00+08:00",
+  "window": {
+    "start": "2026-10-03T09:00:00+08:00",
+    "end": "2026-10-04T09:00:00+08:00"
+  },
+  "first_pass": {
+    "summary": {
+      "block": 3,
+      "warn": 1,
+      "info": 9,
+      "codes": [
+        "DISCOVERY_ONLY_AS_SOLE_EVIDENCE",
+        "INVESTMENT_SUBJECT_UNBOUND",
+        "POLICY_PRIMARY_MISSING",
+        "PRIMARY_SOURCE_MISSING",
+        "QUASI_PRIMARY_USED",
+        "SECONDARY_SOURCE_MISSING",
+        "SOURCE_TIER_JUSTIFIED",
+        "TIME_OUT_OF_WINDOW"
+      ],
+      "by_gate": {
+        "evidence": {
+          "block": 2,
+          "warn": 1,
+          "info": 7
+        },
+        "category": {
+          "block": 1,
+          "warn": 0,
+          "info": 0
+        },
+        "freshness": {
+          "block": 0,
+          "warn": 0,
+          "info": 2
+        }
+      }
+    },
+    "stats": {
+      "candidates": 8,
+      "pass": 5,
+      "deliverable": 3,
+      "top_pick": 1,
+      "kept": 8,
+      "dropped": 0
+    },
+    "accepted_count": 3,
+    "rejected_count": 5,
+    "final_items": 3,
+    "rejected_by_gate": {
+      "freshness": 2,
+      "evidence": 2,
+      "category": 1
+    }
+  },
+  "resolved_duplicates": [],
+  "resolved_blocked": {
+    "c06": [
+      "DISCOVERY_ONLY_AS_SOLE_EVIDENCE",
+      "SECONDARY_SOURCE_MISSING"
+    ],
+    "c07": [
+      "INVESTMENT_SUBJECT_UNBOUND"
+    ]
+  },
+  "submit_stats": {
+    "candidates": 8,
+    "pass": 3,
+    "deliverable": 3,
+    "top_pick": 1,
+    "kept": 8,
+    "dropped": 0
+  },
+  "submit_summary": {
+    "block": 0,
+    "warn": 1,
+    "info": 12,
+    "codes": [
+      "DISCOVERY_ONLY_AS_SOLE_EVIDENCE",
+      "EVIDENCE_REJECTED",
+      "INVESTMENT_SUBJECT_UNBOUND",
+      "POLICY_PRIMARY_MISSING",
+      "PRIMARY_SOURCE_MISSING",
+      "QUASI_PRIMARY_USED",
+      "SECONDARY_SOURCE_MISSING",
+      "SOURCE_TIER_JUSTIFIED",
+      "TIME_OUT_OF_WINDOW"
+    ],
+    "by_gate": {
+      "evidence": {
+        "block": 0,
+        "warn": 1,
+        "info": 9
+      },
+      "category": {
+        "block": 0,
+        "warn": 0,
+        "info": 1
+      },
+      "freshness": {
+        "block": 0,
+        "warn": 0,
+        "info": 2
+      }
+    }
+  },
+  "accepted_count": 3,
+  "rejected_count": 5,
+  "accepted_by_status": {
+    "PASS": 3
+  },
+  "accepted_by_section": {
+    "universal_policy": 3
+  },
+  "final_items": 3,
+  "rejected_by_gate": {
+    "freshness": 2,
+    "evidence": 3
+  },
+  "rendered": true
+}

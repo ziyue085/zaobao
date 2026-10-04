@@ -1,0 +1,17 @@
+{
+  "round": "round-05-day1",
+  "date": "2026-09-29",
+  "window": "2026-09-28T09:00+08:00 → 2026-09-29T09:00+08:00",
+  "issue_note": "Round 5 链路第一步：事件首次出现。系统判 PASS 并输出，0 BLOCK 0 WARN。已知限制：事后复盘拿不到 9 月 28 日的原文 URL，只能引用 10 月 3—4 日的回溯稿，这一点记在 candidates.json 的 note 里。",
+  "items": [
+    {
+      "id": "c01",
+      "title": "OpenAI 取消新一代模型 GPT-6.1 Astra 的10月发布",
+      "label": "GOOD",
+      "note": "两条独立可信来源互证，material_update 齐备，事件确在窗口内。"
+    }
+  ],
+  "rejected_review": [],
+  "missed_important": [],
+  "comment": "Day1 的作用是给后面两天留下历史记录 —— 这一条会被写进 history。"
+}

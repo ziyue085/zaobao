@@ -1,0 +1,122 @@
+[
+  {
+    "id": "c02",
+    "title": "商务部对原产于欧盟的进口对硝基甲苯反倾销立案调查：公布调查问卷",
+    "section": "universal_policy",
+    "declared_status": "UPDATED",
+    "evidence_status": "VERIFIED_PRIMARY",
+    "reject_reason": null,
+    "primary_url": "https://www.mofcom.gov.cn/syxwfb/art/2026/art_c1e2b099e84d4b6d8e10e7cef5928511.html",
+    "decision": "UPDATED",
+    "decision_reasons": [],
+    "blocked_by": [],
+    "warned_by": [],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "PASS",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "商务部#发起#对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+      "published_at": "2026-10-04T08:30:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": true,
+      "legacy_material_flag": false,
+      "material_update_substantiated": true,
+      "has_material_event": true,
+      "has_new_progress": true,
+      "source_classes": [
+        "PRIMARY_OFFICIAL"
+      ],
+      "source_class_counts": {
+        "PRIMARY_OFFICIAL": 1
+      },
+      "has_primary_source": true,
+      "primary_source_count": 1,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "商务部"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": true,
+      "history_match_count": 1,
+      "is_material_update": true,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  },
+  {
+    "id": "c03",
+    "title": "教育部部署开展2027届高校毕业生校园招聘月活动",
+    "section": "universal_policy",
+    "declared_status": "PASS",
+    "evidence_status": "SECONDARY_ONLY",
+    "reject_reason": null,
+    "primary_url": "https://www.cqrb.cn/shishi/2026-10-03/2789259_pc.html",
+    "decision": "PASS",
+    "decision_reasons": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "blocked_by": [],
+    "warned_by": [
+      "POLICY_PRIMARY_MISSING"
+    ],
+    "gate_results": {
+      "structure": "PASS",
+      "freshness": "PASS",
+      "evidence": "WARN",
+      "duplication": "PASS",
+      "importance": "PASS",
+      "category": "PASS",
+      "output": "PASS"
+    },
+    "derived": {
+      "fingerprint": "教育部#部署#2027届高校毕业生校园招聘月活动",
+      "published_at": "2026-10-03T17:22:00+08:00",
+      "is_future": false,
+      "is_within_24h": true,
+      "new_progress_fields_ok": false,
+      "material_update_present": false,
+      "legacy_material_flag": false,
+      "material_update_substantiated": null,
+      "has_material_event": false,
+      "has_new_progress": false,
+      "source_classes": [
+        "TRUSTED_SECONDARY"
+      ],
+      "source_class_counts": {
+        "TRUSTED_SECONDARY": 1
+      },
+      "has_primary_source": false,
+      "primary_source_count": 0,
+      "verification_source_count": 1,
+      "verification_publishers": [
+        "新华社（重庆日报网转载）"
+      ],
+      "has_cross_source_verification": false,
+      "has_discovery_only_source": false,
+      "only_discovery_source": false,
+      "tier_mismatch_count": 0,
+      "watchlist_subject": null,
+      "watchlist_subject_bound": false,
+      "history_match": false,
+      "history_match_count": 0,
+      "is_material_update": false,
+      "freshness_ok": true,
+      "evidence_ok": true,
+      "is_output_eligible": true
+    }
+  }
+]

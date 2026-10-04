@@ -1,0 +1,409 @@
+{
+  "date": "2026-10-04",
+  "now": "2026-10-04T09:00:00+08:00",
+  "candidates": 5,
+  "accepted_count": 2,
+  "rejected_count": 3,
+  "final_items": 2,
+  "stats": {
+    "candidates": 5,
+    "pass": 2,
+    "deliverable": 2,
+    "top_pick": 0,
+    "kept": 5,
+    "dropped": 0
+  },
+  "blocked_by_gate": {
+    "evidence": 1
+  },
+  "rejected_by_gate": {
+    "evidence": 3
+  },
+  "accepted_by_status": {
+    "PASS": 2
+  },
+  "accepted_by_section": {
+    "universal_policy": 2
+  },
+  "accepted": [
+    {
+      "id": "c01",
+      "title": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "reject_reason": null,
+      "primary_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html",
+      "decision": "PASS",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "商务部#发起#对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+        "published_at": "2026-10-03T12:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "PRIMARY_OFFICIAL"
+        ],
+        "source_class_counts": {
+          "PRIMARY_OFFICIAL": 1
+        },
+        "has_primary_source": true,
+        "primary_source_count": 1,
+        "verification_source_count": 1,
+        "verification_publishers": [
+          "商务部"
+        ],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    },
+    {
+      "id": "c02",
+      "title": "国铁集团优化老年旅客淡季购票优惠措施",
+      "section": "universal_policy",
+      "declared_status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "reject_reason": null,
+      "primary_url": "https://m.chinanews.com/wap/detail/chs/zw/10707395.shtml",
+      "decision": "PASS",
+      "decision_reasons": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "blocked_by": [],
+      "warned_by": [
+        "POLICY_PRIMARY_MISSING"
+      ],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "WARN",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中国国家铁路#优化#老年旅客淡季购票优惠",
+        "published_at": "2026-10-03T17:15:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "TRUSTED_SECONDARY",
+          "TRUSTED_SECONDARY"
+        ],
+        "source_class_counts": {
+          "TRUSTED_SECONDARY": 2
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 2,
+        "verification_publishers": [
+          "中国新闻网",
+          "中国网（新华社稿）"
+        ],
+        "has_cross_source_verification": true,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": true
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "id": "c03",
+      "title": "我国首个深水油田二次开发项目累产原油突破200万吨",
+      "section": "investment",
+      "declared_status": "UNVERIFIED",
+      "evidence_status": "REJECTED",
+      "reject_reason": "Gate 阻断（LOW_VALUE_PRICE_ONLY、MATERIAL_UPDATE_UNSUBSTANTIATED、SEARCH_URL_AS_SOURCE），已丢弃",
+      "primary_url": "https://www.baidu.com/s?wd=%E6%B5%81%E8%8A%B1%E6%B2%B9%E7%94%B0+200%E4%B8%87%E5%90%A8",
+      "decision": "BLOCKED",
+      "decision_reasons": [
+        "SEARCH_URL_AS_SOURCE"
+      ],
+      "blocked_by": [
+        "SEARCH_URL_AS_SOURCE"
+      ],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "BLOCK",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "中国海油#宣布#流花油田二次开发累产原油突破200万吨",
+        "published_at": "2026-10-03T12:09:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": true,
+        "legacy_material_flag": false,
+        "material_update_substantiated": false,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "REJECTED"
+        ],
+        "source_class_counts": {
+          "REJECTED": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 0,
+        "verification_publishers": [],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": "大型央企",
+        "watchlist_subject_bound": true,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": false,
+        "is_output_eligible": false
+      }
+    },
+    {
+      "id": "c04",
+      "title": "国家医保局统一7类医用耗材医保通用名",
+      "section": "universal_policy",
+      "declared_status": "UNVERIFIED",
+      "evidence_status": "SECONDARY_ONLY",
+      "reject_reason": "Gate 阻断（SECONDARY_SOURCE_MISSING），已丢弃",
+      "primary_url": "https://www.sohu.com/a/1083596932_439193",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "国家医保局#发布#7类医用耗材分类与代码及医保通用名",
+        "published_at": "2026-10-03T12:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "UNKNOWN"
+        ],
+        "source_class_counts": {
+          "UNKNOWN": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 0,
+        "verification_publishers": [],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": false,
+        "only_discovery_source": false,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": true,
+        "is_output_eligible": false
+      }
+    },
+    {
+      "id": "c05",
+      "title": "国庆档电影总票房突破3亿元",
+      "section": "social",
+      "declared_status": "UNVERIFIED",
+      "evidence_status": "REJECTED",
+      "reject_reason": "Gate 阻断（DISCOVERY_ONLY_AS_SOLE_EVIDENCE、SECONDARY_SOURCE_MISSING），已丢弃",
+      "primary_url": "https://www.toutiao.com/article/7692034473646375470/",
+      "decision": "DROP",
+      "decision_reasons": [],
+      "blocked_by": [],
+      "warned_by": [],
+      "gate_results": {
+        "structure": "PASS",
+        "freshness": "PASS",
+        "evidence": "PASS",
+        "duplication": "PASS",
+        "importance": "PASS",
+        "category": "PASS",
+        "output": "PASS"
+      },
+      "derived": {
+        "fingerprint": "国庆档#突破#国庆档电影总票房3亿元",
+        "published_at": "2026-10-03T12:00:00+08:00",
+        "is_future": false,
+        "is_within_24h": true,
+        "new_progress_fields_ok": false,
+        "material_update_present": false,
+        "legacy_material_flag": false,
+        "material_update_substantiated": null,
+        "has_material_event": false,
+        "has_new_progress": false,
+        "source_classes": [
+          "DISCOVERY_ONLY"
+        ],
+        "source_class_counts": {
+          "DISCOVERY_ONLY": 1
+        },
+        "has_primary_source": false,
+        "primary_source_count": 0,
+        "verification_source_count": 0,
+        "verification_publishers": [],
+        "has_cross_source_verification": false,
+        "has_discovery_only_source": true,
+        "only_discovery_source": true,
+        "tier_mismatch_count": 0,
+        "watchlist_subject": null,
+        "watchlist_subject_bound": false,
+        "history_match": false,
+        "history_match_count": 0,
+        "is_material_update": false,
+        "freshness_ok": true,
+        "evidence_ok": false,
+        "is_output_eligible": false
+      }
+    }
+  ],
+  "issue_findings": [
+    {
+      "code": "SEARCH_URL_AS_SOURCE",
+      "severity": "BLOCK",
+      "priority": 1,
+      "gate": "evidence",
+      "scope": "c03",
+      "message": "搜索引擎或内容农场页面不能作为来源",
+      "detail": "https://www.baidu.com/s?wd=%E6%B5%81%E8%8A%B1%E6%B2%B9%E7%94%B0+200%E4%B8%87%E5%90%A8 (baidu.com/s)"
+    },
+    {
+      "code": "DISCOVERY_ONLY_AS_SOLE_EVIDENCE",
+      "severity": "INFO",
+      "priority": 1,
+      "gate": "evidence",
+      "scope": "c05",
+      "message": "只有社交平台作为来源，不能单独作为重要事实的证据",
+      "detail": ""
+    },
+    {
+      "code": "SECONDARY_SOURCE_MISSING",
+      "severity": "INFO",
+      "priority": 1,
+      "gate": "evidence",
+      "scope": "c04",
+      "message": "声明「仅有可信二手」，但程序按来源分类器算不出一条可信来源",
+      "detail": "计算类别：{\"UNKNOWN\": 1}"
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "WARN",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c02",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "POLICY_PRIMARY_MISSING",
+      "severity": "INFO",
+      "priority": 2,
+      "gate": "evidence",
+      "scope": "c04",
+      "message": "普适性政策缺少一手或准一手来源",
+      "detail": ""
+    },
+    {
+      "code": "MATERIAL_UPDATE_UNSUBSTANTIATED",
+      "severity": "INFO",
+      "priority": 3,
+      "gate": "importance",
+      "scope": "c03",
+      "message": "material_update 未能自证：需要非空 claim、窗口内的 published_at、可用的 source_url",
+      "detail": "字段齐全但时间不在窗口内或来源不可用"
+    },
+    {
+      "code": "EVIDENCE_REJECTED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c03",
+      "message": "证据已判定不可用，正确做法是整条丢弃",
+      "detail": "Gate 阻断（LOW_VALUE_PRICE_ONLY、MATERIAL_UPDATE_UNSUBSTANTIATED、SEARCH_URL_AS_SOURCE），已丢弃"
+    },
+    {
+      "code": "EVIDENCE_REJECTED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c05",
+      "message": "证据已判定不可用，正确做法是整条丢弃",
+      "detail": "Gate 阻断（DISCOVERY_ONLY_AS_SOLE_EVIDENCE、SECONDARY_SOURCE_MISSING），已丢弃"
+    },
+    {
+      "code": "SOURCE_TIER_JUSTIFIED",
+      "severity": "INFO",
+      "priority": 5,
+      "gate": "evidence",
+      "scope": "c02",
+      "message": "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+      "detail": "https://big5.china.com.cn/gate/big5/news.china.com.cn/2026-10/03/content_118721553.shtml"
+    }
+  ]
+}

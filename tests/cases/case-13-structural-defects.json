@@ -21,10 +21,16 @@
             "status": "PASS",
             "evidence_status": "VERIFIED_PRIMARY",
             "sources": [
-              { "url": "www.pbc.gov.cn/a.html", "publisher": "中国人民银行", "tier": "primary" }
+              {
+                "url": "www.pbc.gov.cn/a.html",
+                "publisher": "中国人民银行",
+                "tier": "primary"
+              }
             ],
             "primary_url": "www.pbc.gov.cn/a.html",
-            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "body_facts": [
+              "中国人民银行今日公告开展5000亿元逆回购操作。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -36,7 +42,14 @@
           }
         ]
       },
-      "expect": { "block_codes": ["URL_INVALID"], "severity": { "URL_INVALID": "BLOCK" } }
+      "expect": {
+        "block_codes": [
+          "URL_INVALID"
+        ],
+        "severity": {
+          "URL_INVALID": "BLOCK"
+        }
+      }
     },
     {
       "desc": "声称一手来源，但域名不在清单里，也没写清理由",
@@ -55,10 +68,16 @@
             "evidence_status": "VERIFIED_PRIMARY",
             "has_material_event": true,
             "sources": [
-              { "url": "https://www.example-corp.com/ir/2026q3.html", "publisher": "某公司", "tier": "primary" }
+              {
+                "url": "https://www.example-corp.com/ir/2026q3.html",
+                "publisher": "某公司",
+                "tier": "primary"
+              }
             ],
             "primary_url": "https://www.example-corp.com/ir/2026q3.html",
-            "body_facts": ["该公司今日发布2026年三季度报告。"],
+            "body_facts": [
+              "该公司今日发布2026年三季度报告。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -66,13 +85,18 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "恒顺醋业"
           }
         ]
       },
       "expect": {
-        "block_codes": ["PRIMARY_TIER_NOT_JUSTIFIED"],
-        "severity": { "PRIMARY_TIER_NOT_JUSTIFIED": "BLOCK" }
+        "block_codes": [
+          "PRIMARY_TIER_NOT_JUSTIFIED"
+        ],
+        "severity": {
+          "PRIMARY_TIER_NOT_JUSTIFIED": "BLOCK"
+        }
       }
     },
     {
@@ -92,7 +116,9 @@
             "evidence_status": "VERIFIED_PRIMARY",
             "sources": [],
             "primary_url": "https://www.pbc.gov.cn/a.html",
-            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "body_facts": [
+              "中国人民银行今日公告开展5000亿元逆回购操作。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -104,7 +130,14 @@
           }
         ]
       },
-      "expect": { "block_codes": ["SOURCE_MISSING"], "severity": { "SOURCE_MISSING": "BLOCK" } }
+      "expect": {
+        "block_codes": [
+          "SOURCE_MISSING"
+        ],
+        "severity": {
+          "SOURCE_MISSING": "BLOCK"
+        }
+      }
     },
     {
       "desc": "entity 为空 —— fingerprint 无法构造，去重会失效",
@@ -130,7 +163,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/a.html",
-            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "body_facts": [
+              "中国人民银行今日公告开展5000亿元逆回购操作。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -143,8 +178,12 @@
         ]
       },
       "expect": {
-        "block_codes": ["FINGERPRINT_INCOMPLETE"],
-        "severity": { "FINGERPRINT_INCOMPLETE": "BLOCK" }
+        "block_codes": [
+          "FINGERPRINT_INCOMPLETE"
+        ],
+        "severity": {
+          "FINGERPRINT_INCOMPLETE": "BLOCK"
+        }
       }
     },
     {
@@ -171,7 +210,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/a.html",
-            "body_facts": ["中国人民银行公告开展5000亿元逆回购操作。"],
+            "body_facts": [
+              "中国人民银行公告开展5000亿元逆回购操作。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -184,8 +225,12 @@
         ]
       },
       "expect": {
-        "block_codes": ["TIME_FIELD_MISSING"],
-        "severity": { "TIME_FIELD_MISSING": "BLOCK" }
+        "block_codes": [
+          "TIME_FIELD_MISSING"
+        ],
+        "severity": {
+          "TIME_FIELD_MISSING": "BLOCK"
+        }
       }
     },
     {
@@ -212,7 +257,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/a.html",
-            "body_facts": ["中国人民银行公告开展5000亿元逆回购操作。"],
+            "body_facts": [
+              "中国人民银行公告开展5000亿元逆回购操作。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -224,7 +271,14 @@
           }
         ]
       },
-      "expect": { "block_codes": ["TIME_IN_FUTURE"], "severity": { "TIME_IN_FUTURE": "BLOCK" } }
+      "expect": {
+        "block_codes": [
+          "TIME_IN_FUTURE"
+        ],
+        "severity": {
+          "TIME_IN_FUTURE": "BLOCK"
+        }
+      }
     },
     {
       "desc": "status 取值非法",
@@ -249,11 +303,20 @@
                 "is_first_party": true
               }
             ],
-            "body_facts": ["中国人民银行公告开展5000亿元逆回购操作。"]
+            "body_facts": [
+              "中国人民银行公告开展5000亿元逆回购操作。"
+            ]
           }
         ]
       },
-      "expect": { "block_codes": ["STATUS_INVALID"], "severity": { "STATUS_INVALID": "BLOCK" } }
+      "expect": {
+        "block_codes": [
+          "STATUS_INVALID"
+        ],
+        "severity": {
+          "STATUS_INVALID": "BLOCK"
+        }
+      }
     },
     {
       "desc": "事实句数量越界",
@@ -292,8 +355,12 @@
         ]
       },
       "expect": {
-        "block_codes": ["BODY_FACT_COUNT_INVALID"],
-        "severity": { "BODY_FACT_COUNT_INVALID": "BLOCK" }
+        "block_codes": [
+          "BODY_FACT_COUNT_INVALID"
+        ],
+        "severity": {
+          "BODY_FACT_COUNT_INVALID": "BLOCK"
+        }
       }
     },
     {
@@ -321,7 +388,9 @@
               }
             ],
             "primary_url": "https://www.example-assoc.org/data/202608.html",
-            "body_facts": ["该协会今日发布2026年8月行业运行数据。"],
+            "body_facts": [
+              "该协会今日发布2026年8月行业运行数据。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -334,8 +403,12 @@
         ]
       },
       "expect": {
-        "block_codes": ["SECTION_NOT_IN_WATCHLIST"],
-        "severity": { "SECTION_NOT_IN_WATCHLIST": "BLOCK" }
+        "block_codes": [
+          "SECTION_NOT_IN_WATCHLIST"
+        ],
+        "severity": {
+          "SECTION_NOT_IN_WATCHLIST": "BLOCK"
+        }
       }
     },
     {
@@ -362,7 +435,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/a.html",
-            "body_facts": ["中国人民银行今日公告开展逆回购操作。"],
+            "body_facts": [
+              "中国人民银行今日公告开展逆回购操作。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -375,15 +450,24 @@
           }
         }
       ],
-      "input": { "date": "2026-10-04", "candidates": [] },
+      "input": {
+        "date": "2026-10-04",
+        "candidates": []
+      },
       "expect": {
-        "warn_codes": ["TOO_MANY_ITEMS"],
-        "severity": { "TOO_MANY_ITEMS": "WARN" },
-        "stats": { "pass": 13 }
+        "warn_codes": [
+          "TOO_MANY_ITEMS"
+        ],
+        "severity": {
+          "TOO_MANY_ITEMS": "WARN"
+        },
+        "stats": {
+          "pass": 13
+        }
       }
     },
     {
-      "desc": "闸门字段显式为 false，却标 PASS",
+      "desc": "模型自报 history_dedup_checked=false 却标 PASS —— v0.1.1 起不再阻断，只留 WARN 记录流程完整性",
       "input": {
         "date": "2026-10-04",
         "candidates": [
@@ -406,7 +490,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/a.html",
-            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "body_facts": [
+              "中国人民银行今日公告开展5000亿元逆回购操作。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": false,
@@ -419,8 +505,13 @@
         ]
       },
       "expect": {
-        "block_codes": ["GATE_NOT_PASSED"],
-        "severity": { "GATE_NOT_PASSED": "BLOCK" }
+        "block_count": 0,
+        "warn_codes": [
+          "LEGACY_GATE_REPORTED_FALSE"
+        ],
+        "severity": {
+          "LEGACY_GATE_REPORTED_FALSE": "WARN"
+        }
       }
     },
     {
@@ -447,7 +538,9 @@
               }
             ],
             "primary_url": "https://www.cls.cn/detail/999999",
-            "body_facts": ["据财联社报道，该组织发布了全球贸易展望报告。"],
+            "body_facts": [
+              "据财联社报道，该组织发布了全球贸易展望报告。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -461,8 +554,12 @@
         ]
       },
       "expect": {
-        "block_codes": ["INSUFFICIENT_CROSS_SOURCE"],
-        "severity": { "INSUFFICIENT_CROSS_SOURCE": "BLOCK" }
+        "block_codes": [
+          "INSUFFICIENT_CROSS_SOURCE"
+        ],
+        "severity": {
+          "INSUFFICIENT_CROSS_SOURCE": "BLOCK"
+        }
       }
     },
     {
@@ -488,7 +585,9 @@
                 "is_first_party": true
               }
             ],
-            "body_facts": ["中国人民银行今日公告开展5000亿元逆回购操作。"],
+            "body_facts": [
+              "中国人民银行今日公告开展5000亿元逆回购操作。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -501,8 +600,12 @@
         ]
       },
       "expect": {
-        "block_codes": ["PRIMARY_URL_MISSING"],
-        "severity": { "PRIMARY_URL_MISSING": "BLOCK" }
+        "block_codes": [
+          "PRIMARY_URL_MISSING"
+        ],
+        "severity": {
+          "PRIMARY_URL_MISSING": "BLOCK"
+        }
       }
     },
     {
@@ -532,7 +635,9 @@
               }
             ],
             "primary_url": "https://www.news.cn/ent/20261004.htm",
-            "body_facts": ["社交平台上出现该演员已办理离婚手续的说法。"],
+            "body_facts": [
+              "社交平台上出现该演员已办理离婚手续的说法。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -546,8 +651,12 @@
         ]
       },
       "expect": {
-        "block_codes": ["REJECTED_IN_OUTPUT"],
-        "severity": { "REJECTED_IN_OUTPUT": "BLOCK" }
+        "block_codes": [
+          "REJECTED_IN_OUTPUT"
+        ],
+        "severity": {
+          "REJECTED_IN_OUTPUT": "BLOCK"
+        }
       }
     },
     {
@@ -574,7 +683,9 @@
               }
             ],
             "primary_url": "https://www.mot.gov.cn/xw/20261004.html",
-            "body_facts": ["某地公安交管部门今日通报一起道路交通事故处置情况。"],
+            "body_facts": [
+              "某地公安交管部门今日通报一起道路交通事故处置情况。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -588,8 +699,12 @@
         ]
       },
       "expect": {
-        "block_codes": ["SOCIAL_TOPIC_TYPE_MISSING"],
-        "severity": { "SOCIAL_TOPIC_TYPE_MISSING": "BLOCK" }
+        "block_codes": [
+          "SOCIAL_TOPIC_TYPE_MISSING"
+        ],
+        "severity": {
+          "SOCIAL_TOPIC_TYPE_MISSING": "BLOCK"
+        }
       }
     },
     {
@@ -617,7 +732,9 @@
               }
             ],
             "primary_url": "https://www.example-firm.com/news/speech",
-            "body_facts": ["该企业家在某公开活动中发表演讲，勉励年轻人坚持长期主义。"],
+            "body_facts": [
+              "该企业家在某公开活动中发表演讲，勉励年轻人坚持长期主义。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -631,8 +748,12 @@
         ]
       },
       "expect": {
-        "block_codes": ["IDEA_SIGNAL_MISSING"],
-        "severity": { "IDEA_SIGNAL_MISSING": "BLOCK" }
+        "block_codes": [
+          "IDEA_SIGNAL_MISSING"
+        ],
+        "severity": {
+          "IDEA_SIGNAL_MISSING": "BLOCK"
+        }
       }
     },
     {
@@ -659,7 +780,9 @@
               }
             ],
             "primary_url": "https://www.cls.cn/detail/888888",
-            "body_facts": ["据财联社报道，国务院常务会议部署了下一阶段重点工作。"],
+            "body_facts": [
+              "据财联社报道，国务院常务会议部署了下一阶段重点工作。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -674,8 +797,12 @@
       },
       "expect": {
         "block_count": 0,
-        "warn_codes": ["POLICY_PRIMARY_MISSING"],
-        "severity": { "POLICY_PRIMARY_MISSING": "WARN" }
+        "warn_codes": [
+          "POLICY_PRIMARY_MISSING"
+        ],
+        "severity": {
+          "POLICY_PRIMARY_MISSING": "WARN"
+        }
       }
     },
     {
@@ -702,7 +829,9 @@
               }
             ],
             "primary_url": "https://www.news.cn/politics/20261004.htm",
-            "body_facts": ["新华社通稿称，国务院印发了关于促进服务消费高质量发展的意见。"],
+            "body_facts": [
+              "新华社通稿称，国务院印发了关于促进服务消费高质量发展的意见。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -717,8 +846,12 @@
       },
       "expect": {
         "block_count": 0,
-        "any_codes": ["QUASI_PRIMARY_USED"],
-        "severity": { "QUASI_PRIMARY_USED": "INFO" }
+        "any_codes": [
+          "QUASI_PRIMARY_USED"
+        ],
+        "severity": {
+          "QUASI_PRIMARY_USED": "INFO"
+        }
       }
     }
   ]

@@ -7,14 +7,40 @@
 本脚本只做「可判定」的检查：
 
     ✅ 字段是否缺失 / 是否三态缺席
-    ✅ 时间是否落在 24 小时窗口内
+    ✅ 时间是否落在 24 小时窗口内（由程序按时间字段计算，不采信模型自报）
     ✅ fingerprint 是否与最近 N 天历史重复、本期内部是否重复
-    ✅ evidence_status 与来源层级是否自洽
+    ✅ 来源类别与 evidence_status 是否自洽（由程序分类，不采信模型声明）
     ✅ 枚举是否合法、计数是否越界
     ✅ 字面违规（标题党、投资建议、影响分析、表格、把「没搜到」写成「没新闻」）
 
 它**不做**研究、不生成内容、不判断「这条新闻重不重要」。
 判断重要性是模型在 SKILL.md 流程里的工作，本脚本只负责在模型出错时拦住它。
+
+v0.1.1 架构：七个顶层 Gate
+--------------------------
+规则不再是一盘散沙的 80 多个 code，而是归到七个稳定的顶层 Gate：
+
+    structure    结构完好性：schema、必填字段、URL、时间格式、枚举
+    freshness    时效性：24 小时窗口、旧闻、实质新进展、UPDATED 是否成立
+    evidence     证据：一手来源、交叉印证、evidence_status 是否合理、披露标记
+    duplication  去重：本期内部、跨日历史、fingerprint、UPDATED
+    importance   注意力价值：是否值得占版面（允许模型判断，但必须留理由）
+    category     栏目：归类是否合理、门槛是否满足、同一事件只进一个栏目
+    output       最终裁决：PASS / UPDATED 是否真的可以进入输出
+
+`run_*_gate()` 是**看懂这份代码的入口**。rule code 退化为 Gate 内部的诊断信息，
+继续保留（测试按 code 断言），但不再是架构本身。
+
+程序计算 vs 模型自报
+--------------------
+v0.1.1 起，以下判断由程序根据**事实字段**自行计算，不再采信模型自报：
+
+    is_within_24h / has_primary_source / verification_source_count
+    has_cross_source_verification / history_match / is_material_update
+    is_output_eligible
+
+v0.1.0 的 `gates.*_checked` 与 `has_material_event` 保留可读，
+但已标记 deprecated，**不再作为放行依据**。
 
 分级
 ----
@@ -22,7 +48,7 @@
     WARN   必须显式处理（可在报告中说明后放行）。
     INFO   记录用，不影响发布。
 
-发现项结构固定为 code / severity / priority / scope / message / detail。
+发现项结构固定为 code / severity / priority / gate / scope / message / detail。
 code 稳定不变，因为测试按 code 断言。
 
 用法
@@ -31,6 +57,8 @@ code 稳定不变，因为测试按 code 断言。
     zaobao_check.py check-candidate <candidate.json> [--repo .] [--now ISO] [--json]
     zaobao_check.py check-render  <output.md>   --issue <issue.json> [--repo .] [--json]
     zaobao_check.py check-config  [--repo .] [--json]
+    zaobao_check.py audit         <issue.json>  [--repo .] [--now ISO] [--out-md P] [--json]
+    zaobao_check.py derive        <issue.json>  [--repo .] [--now ISO] [--json]
     zaobao_check.py fingerprint   --entity E --action A --object O [--repo .]
     zaobao_check.py record        --issue <issue.json> --history <history.jsonl> [--write]
     zaobao_check.py prune         --history <history.jsonl> [--days 30] [--write]
@@ -49,6 +77,10 @@ import os
 import re
 import sys
 from datetime import datetime, date, timedelta, timezone
+
+# 统一来源分类器（同目录，零依赖叶子模块）
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import zaobao_classify as zcl  # noqa: E402
 
 # ────────────────────────────────────────────────────────────────
 # 常量（全部具名，便于单点调整）
@@ -98,10 +130,22 @@ NEW_PROGRESS_TYPES = [
     "product_launch", "rumor_confirmed", "rumor_refuted",
 ]
 
-REQUIRED_GATES = [
+# ── 顶层 Gate（v0.1.1）────────────────────────────────────────────
+# 顺序即执行顺序。结构没过就没必要谈时效与证据。
+GATES = [
+    "structure", "freshness", "evidence",
+    "duplication", "importance", "category", "output",
+]
+
+# v0.1.0 的六个模型自报闸门字段。保留只为兼容读取，
+# **不再作为放行依据** —— 程序改为自行计算时效与证据。
+LEGACY_CHECKED_FIELDS = [
     "time_window_checked", "history_dedup_checked", "issue_dedup_checked",
     "primary_source_checked", "url_checked", "no_analysis_checked",
 ]
+
+# material_update 事实块的三个必需字段。缺一个就不算证明。
+MATERIAL_UPDATE_FIELDS = ["claim", "published_at", "source_url"]
 
 DISCLOSURE_SECONDARY = "尚未见一手确认"
 DISCLOSURE_UNVERIFIED = "待核实"
@@ -151,15 +195,28 @@ MD_LINK_RE = re.compile(r"\[[^\]]+\]\((https?://[^)]+)\)")
 # ────────────────────────────────────────────────────────────────
 
 
-def fnd(code, severity, priority, scope, message, detail=""):
+def fnd(code, severity, priority, scope, message, detail="", gate=None):
     return {
         "code": code,
         "severity": severity,
         "priority": priority,
+        "gate": gate,
         "scope": scope,
         "message": message,
         "detail": detail,
     }
+
+
+def tag_gate(findings, gate):
+    """把一组发现项归到某个 Gate 名下。
+
+    rule code 是 Gate 内部的诊断信息；Gate 才是架构。
+    归口在这里做，避免给 80 多处 fnd() 调用逐一手写 gate 参数。
+    """
+    for item in findings:
+        if not item.get("gate"):
+            item["gate"] = gate
+    return findings
 
 
 def has_block(findings):
@@ -192,12 +249,37 @@ def front_stage(findings, max_items=3, min_severity=WARN):
 
 
 def summarize(findings):
+    by_gate = {}
+    for x in findings:
+        g = x.get("gate") or "ungated"
+        slot = by_gate.setdefault(g, {"block": 0, "warn": 0, "info": 0})
+        slot[x["severity"].lower()] += 1
     return {
         "block": sum(1 for x in findings if x["severity"] == BLOCK),
         "warn": sum(1 for x in findings if x["severity"] == WARN),
         "info": sum(1 for x in findings if x["severity"] == INFO),
         "codes": sorted({x["code"] for x in findings}),
+        "by_gate": by_gate,
     }
+
+
+def gate_results(findings):
+    """把发现项按 Gate 归口，给出每个 Gate 的结论。
+
+    PASS   该 Gate 无阻断项
+    WARN   只有警告，需要显式处理
+    BLOCK  存在阻断项
+    """
+    out = {g: "PASS" for g in GATES}
+    for x in findings:
+        g = x.get("gate")
+        if g not in out:
+            continue
+        if x["severity"] == BLOCK:
+            out[g] = "BLOCK"
+        elif x["severity"] == WARN and out[g] == "PASS":
+            out[g] = "WARN"
+    return out
 
 # ────────────────────────────────────────────────────────────────
 # 时间
@@ -290,52 +372,164 @@ def candidate_fingerprint(cand, aliases=None):
     )
 
 # ────────────────────────────────────────────────────────────────
-# URL
+# URL（统一走 zaobao_classify，避免两处实现漂移）
 # ────────────────────────────────────────────────────────────────
 
 
 def host_of(url):
-    if not isinstance(url, str):
-        return ""
-    m = re.match(r"^https?://([^/?#]+)", url.strip(), re.I)
-    if not m:
-        return ""
-    return m.group(1).lower().split("@")[-1].split(":")[0]
+    return zcl.host_of(url)
 
 
 def domain_hit(host, domains):
-    for d in domains or []:
-        d = str(d).strip().lower()
-        if not d:
-            continue
-        if host == d or host.endswith("." + d):
-            return d
-    return None
+    return zcl.domain_hit(host, domains)
 
 
 def is_never_source(url, never_list):
     """搜索引擎结果页、内容农场 —— 永远不能作为来源。"""
-    if not isinstance(url, str):
-        return None
-    host = host_of(url)
-    if not host:
-        return None
-    path = url.strip()
-    for entry in never_list or []:
-        entry = str(entry).strip().lower()
-        if not entry:
-            continue
-        if "/" in entry:
-            dom, _, pathpart = entry.partition("/")
-            if domain_hit(host, [dom]) and ("/" + pathpart) in path:
-                return entry
-        elif domain_hit(host, [entry]):
-            return entry
-    return None
+    return zcl.is_never_source(url, never_list)
 
 
 def is_valid_url(url):
     return bool(re.match(r"^https?://[^\s/]+", str(url or "").strip(), re.I))
+
+# ────────────────────────────────────────────────────────────────
+# 派生层：由程序根据事实字段计算结论（v0.1.1 核心）
+# ────────────────────────────────────────────────────────────────
+
+
+def derive(cand, ctx):
+    """根据候选里的事实字段，由程序自行计算派生状态。
+
+    这一层的存在就是为了回答一个问题：**能不能不让模型自报？**
+
+        is_within_24h             ← published_at / event_date 与当前时间
+        has_primary_source        ← 来源分类器算出的类别
+        verification_source_count ← 独立发布者计数
+        has_cross_source_verification ← 上一项 >= 2
+        history_match             ← fingerprint 与历史记录比对
+        is_material_update        ← 历史命中 + 有实质新进展
+        is_output_eligible        ← 时效与证据都成立，且状态是可输出终态
+
+    模型如果声明 `time_checked=true` 但发布时间是 30 小时前，
+    这里算出来的 `is_within_24h` 仍然是 false —— 自报不再是放行依据。
+    """
+    now = ctx["now"]
+    window = timedelta(hours=ctx.get("window_hours", WINDOW_HOURS))
+    d = {"fingerprint": candidate_fingerprint(cand, ctx.get("aliases"))}
+
+    # ── 时效 ────────────────────────────────────────────────
+    pub = parse_dt(cand.get("published_at") or cand.get("event_date")
+                   or cand.get("event_time"))
+    d["published_at"] = pub.isoformat() if pub else None
+    d["is_future"] = bool(pub and pub > now)
+    d["is_within_24h"] = bool(pub and timedelta(0) <= (now - pub) <= window)
+
+    # ── 实质新进展：new_progress_* 或 material_update 任一成立即可 ──
+    np_at = parse_dt(cand.get("new_progress_at"))
+    np_type = cand.get("new_progress_type")
+    np_ok = bool(
+        np_type in NEW_PROGRESS_TYPES
+        and np_at is not None
+        and timedelta(0) <= (now - np_at) <= window
+    )
+    d["new_progress_fields_ok"] = np_ok
+
+    mu = cand.get("material_update")
+    legacy_present = "has_material_event" in cand
+    d["material_update_present"] = mu is not None
+    d["legacy_material_flag"] = bool(legacy_present and not isinstance(mu, dict))
+    d["material_update_substantiated"] = None
+
+    if isinstance(mu, dict):
+        mu_at = parse_dt(mu.get("published_at"))
+        mu_url = str(mu.get("source_url") or "")
+        mu_claim = str(mu.get("claim") or "").strip()
+        mu_ok = bool(
+            mu_claim
+            and mu_at is not None
+            and timedelta(0) <= (now - mu_at) <= window
+            and is_valid_url(mu_url)
+            and not is_never_source(mu_url, ctx.get("never_a_source"))
+        )
+        d["material_update_substantiated"] = mu_ok
+        d["has_material_event"] = mu_ok
+    elif mu is not None:
+        # 存在但不是对象 —— 结构性缺陷，结构 Gate 会报
+        d["material_update_substantiated"] = False
+        d["has_material_event"] = False
+    elif legacy_present:
+        # v0.1.0 自报字段：可读、可用，但会被标记 deprecated
+        d["has_material_event"] = cand.get("has_material_event") is True
+    else:
+        d["has_material_event"] = False
+
+    d["has_new_progress"] = bool(np_ok or d.get("material_update_substantiated"))
+
+    # ── 来源（由分类器计算，不采信 sources[].tier 声明）──
+    classes = zcl.classify_sources(cand, ctx)
+    d["source_classes"] = [c["class"] for c in classes]
+    d["source_class_counts"] = zcl.summarize_classes(classes)
+    d["has_primary_source"] = any(c["is_primary"] for c in classes)
+    d["primary_source_count"] = sum(1 for c in classes if c["is_primary"])
+    # 独立发布者计数：按「来源 dict」取 publisher，而不是按分类结论 dict。
+    # 分类结论里没有 publisher 字段，误传进去会导致永远退回主机名 ——
+    # 那样同一家媒体的两个子域（news.sina.com.cn / finance.sina.com.cn）
+    # 会被误算成两家独立来源。
+    src_dicts = [s for s in (cand.get("sources") or []) if isinstance(s, dict)]
+    trusted = [s for s, c in zip(src_dicts, classes)
+               if c["is_primary"] or c["class"] == zcl.TRUSTED_SECONDARY]
+    publishers = {zcl.publisher_key(s) for s in trusted if zcl.publisher_key(s)}
+    d["verification_source_count"] = len(publishers)
+    d["verification_publishers"] = sorted(publishers)
+    d["has_cross_source_verification"] = len(publishers) >= 2
+    d["has_discovery_only_source"] = any(
+        c["class"] == zcl.DISCOVERY_ONLY for c in classes)
+    d["only_discovery_source"] = bool(classes) and all(
+        c["class"] == zcl.DISCOVERY_ONLY for c in classes)
+    d["tier_mismatch_count"] = sum(1 for c in classes if c["mismatch"])
+
+    # ── 投资主体是否落在关注清单（能对 config 直接校验的事实）──
+    inv_ref = str(cand.get("watchlist_subject") or "").strip()
+    d["watchlist_subject"] = inv_ref or None
+    d["watchlist_subject_bound"] = bool(
+        cand.get("section") == "investment"
+        and inv_ref and inv_ref in (ctx.get("investment_subjects") or set()))
+
+    # ── 去重 ────────────────────────────────────────────────
+    days = ctx.get("history_dedup_days", HISTORY_DEDUP_DAYS)
+    matches = []
+    for rec in ctx.get("history_records") or []:
+        if not isinstance(rec, dict) or rec.get("fingerprint") != d["fingerprint"]:
+            continue
+        rec_date = parse_date(rec.get("date"))
+        if rec_date is None:
+            continue
+        if (now.date() - rec_date).days <= days:
+            matches.append(rec)
+    d["history_match"] = bool(matches)
+    d["history_match_count"] = len(matches)
+    d["is_material_update"] = bool(d["history_match"] and d["has_new_progress"])
+
+    # ── 最终可输出性（程序意见，供审计与 Gate 参考）──
+    declared_evidence = cand.get("evidence_status")
+    d["freshness_ok"] = bool(d["is_within_24h"] or d["has_new_progress"])
+    d["evidence_ok"] = bool(
+        d["has_primary_source"]
+        or d["has_cross_source_verification"]
+        or declared_evidence in ("SECONDARY_ONLY", "UNVERIFIED")
+    )
+    d["is_output_eligible"] = bool(
+        cand.get("status") in OUTPUT_STATUSES
+        and d["freshness_ok"]
+        and d["evidence_ok"]
+    )
+    return d
+
+
+def derive_issue(issue, ctx):
+    """对整期候选逐条计算派生状态。"""
+    return [derive(c, ctx) for c in iter_candidates(issue)]
+
 
 # ────────────────────────────────────────────────────────────────
 # 配置：YAML 读取（PyYAML 优先，缺失时用内置子集解析器）
@@ -524,6 +718,34 @@ def load_yaml_file(path):
     return yaml.safe_load(text), "pyyaml"
 
 
+def _investment_subjects(watch):
+    """关注清单里「投资」栏目认可的主体集合。
+
+    为什么放在这里：主体名单是**可枚举的事实**，程序可以直接对着 config 校验。
+    v0.1.0 只校验事件类型（"并购重组"就放行），从不校验主体，
+    等于把「该不该关注这家公司」整个交给了模型 —— 这正是 Round 2 实战评估里
+    一条清单外个股的并购被误收的原因。
+
+    命中范围：institutions + assets + 全部别名的 canonical 与变体。
+    """
+    inv = ((watch.get("sections") or {}).get("investment") or {})
+    names = set()
+    for key in ("institutions", "assets"):
+        for x in (inv.get(key) or []):
+            t = str(x).strip()
+            if t:
+                names.add(t)
+    for canonical, variants in (watch.get("aliases") or {}).items():
+        c = str(canonical).strip()
+        if c:
+            names.add(c)
+        for v in (variants or []):
+            t = str(v).strip()
+            if t:
+                names.add(t)
+    return names
+
+
 def load_config(repo_root, now=None):
     watch_path = os.path.join(repo_root, "config", "watchlist.yaml")
     src_path = os.path.join(repo_root, "config", "sources.yaml")
@@ -553,6 +775,7 @@ def load_config(repo_root, now=None):
             "quasi_primary_domains": secondary_block.get("quasi_primary") or [],
             "discovery_domains": discovery_block.get("domains") or [],
             "never_a_source": sources.get("never_a_source") or [],
+            "investment_subjects": _investment_subjects(watch),
             "history_records": [],
             "history_dedup_days": HISTORY_DEDUP_DAYS,
             "history_retention_days": HISTORY_RETENTION_DAYS,
@@ -652,6 +875,12 @@ def check_config(repo_root, now=None):
         findings.append(fnd("CONFIG_ALIASES_EMPTY", INFO, 5, "watchlist.aliases",
                             "未配置主体别名，跨来源换称呼的事件可能被当成两条"))
 
+    inv = sections.get("investment") or {}
+    if not ((inv.get("institutions") or []) or (inv.get("assets") or [])):
+        findings.append(fnd("CONFIG_INVESTMENT_SUBJECTS_EMPTY", WARN, 3,
+                            "watchlist.sections.investment",
+                            "投资栏目没有可枚举的主体清单，主体准入校验会失效"))
+
     for engine_name, engine in (cfg.get("engines") or {}).items():
         if engine == "mini_yaml":
             findings.append(fnd("CONFIG_USING_MINI_YAML", INFO, 5, engine_name,
@@ -718,32 +947,37 @@ def _check_language(cand, findings):
                             str(body)))
 
 
-def _check_time(cand, ctx, findings):
+def _check_time(cand, ctx, d, findings):
+    """时效判定。窗口与"是否有新进展"都取自派生层，不采信模型自报。
+
+    v0.1.1 起，模型写 `time_window_checked: true` 不再有任何作用 ——
+    时间是否落在窗口内由 published_at / event_date 与当前时间算出来。
+    """
     now = ctx["now"]
-    window = timedelta(hours=ctx.get("window_hours", WINDOW_HOURS))
     status = cand.get("status")
 
-    event_dt = parse_dt(cand.get("event_date"))
+    event_dt = parse_dt(cand.get("published_at") or cand.get("event_date"))
     if event_dt is None:
-        findings.append(fnd("TIME_FIELD_MISSING", BLOCK, 0, cand.get("id"),
-                            "event_date 缺失或无法解析",
-                            str(cand.get("event_date"))))
+        # 缺时间字段已由结构 Gate 报出（TIME_FIELD_MISSING），这里只做短路。
         return
 
-    np_at = parse_dt(cand.get("new_progress_at"))
-    np_type = cand.get("new_progress_type")
-    has_new_progress = (
-        np_type in NEW_PROGRESS_TYPES
-        and np_at is not None
-        and timedelta(0) <= (now - np_at) <= window
-    )
+    # 窗口与"是否有新进展"都取自派生层 —— 模型写 checked=true 不改变这两项。
+    has_new_progress = bool(d.get("has_new_progress"))
+    within_window = bool(d.get("is_within_24h"))
+
+    # 声明 UPDATED 就必须拿得出可核实的实质新进展。
+    if status == "UPDATED" and not has_new_progress:
+        findings.append(fnd(
+            "UPDATED_NOT_SUBSTANTIATED", _sev_for_status(cand), 0, cand.get("id"),
+            "标为 UPDATED 但找不到可核实的实质新进展",
+            "需要 new_progress_at+new_progress_type，或字段完整的 material_update"))
 
     if event_dt > now:
         findings.append(fnd("TIME_IN_FUTURE", BLOCK, 0, cand.get("id"),
-                            "事件时间晚于当前时间", str(cand.get("event_date"))))
+                            "事件时间晚于当前时间", str(event_dt)))
         return
 
-    if (now - event_dt) <= window:
+    if within_window:
         if has_new_progress and status == "OLD":
             findings.append(fnd("STATUS_SHOULD_BE_UPDATED", BLOCK, 0, cand.get("id"),
                                 "事件在窗内且有新进展，却被标为 OLD"))
@@ -754,7 +988,7 @@ def _check_time(cand, ctx, findings):
         if status != "UPDATED":
             findings.append(fnd("STATUS_SHOULD_BE_UPDATED", BLOCK, 0, cand.get("id"),
                                 "旧事件出现实质新进展，状态应为 UPDATED",
-                                "当前 %s，new_progress_type=%s" % (status, np_type)))
+                                "当前 %s" % status))
         return
 
     if status == "OLD":
@@ -784,7 +1018,8 @@ def _sev_for_status(cand, when_output=BLOCK, otherwise=INFO):
     return otherwise
 
 
-def _check_sources(cand, ctx, findings):
+def _check_sources(cand, ctx, d, findings):
+    """证据判定。一手与否由分类器计算，不采信 sources[].tier 声明。"""
     cid = cand.get("id")
     tier = cand.get("evidence_status")
     if tier not in EVIDENCE_STATUSES:
@@ -805,7 +1040,7 @@ def _check_sources(cand, ctx, findings):
         findings.append(fnd("SOURCE_MISSING", BLOCK, 1, cid, "sources 为空"))
         return
 
-    valid_srcs = []
+    valid_srcs, valid_classes = [], []
     for s in srcs:
         if not isinstance(s, dict):
             continue
@@ -825,52 +1060,63 @@ def _check_sources(cand, ctx, findings):
             findings.append(fnd("SOURCE_TIER_INVALID", BLOCK, 1, cid,
                                 "来源层级非法", "%s → %s" % (url, s_tier)))
             continue
+        cls = zcl.classify_source(s, ctx)
         declared = domain_hit(host, ctx.get("%s_domains" % s_tier) or [])
-        if s_tier == "primary" and not declared:
-            if not s.get("is_first_party") or not str(s.get("tier_reason") or "").strip():
-                findings.append(fnd(
-                    "PRIMARY_TIER_NOT_JUSTIFIED", BLOCK, 1, cid,
-                    "域名不在 primary 清单中，且未声明 is_first_party + tier_reason",
-                    url))
-                continue
-            if domain_hit(host, ctx.get("discovery_domains") or []):
-                findings.append(fnd(
-                    "DISCOVERY_DOMAIN_AS_PRIMARY", WARN, 3, cid,
-                    "把通常只用于发现线索的平台声明为一手来源，需确认发布者确为当事人或官方账号",
-                    url))
+        if s_tier == "primary" and not declared and not cls["justified_first_party"]:
+            findings.append(fnd(
+                "PRIMARY_TIER_NOT_JUSTIFIED", BLOCK, 1, cid,
+                "域名不在 primary 清单中，且未声明 is_first_party + tier_reason",
+                url))
+            continue
+        if cls["is_primary"] and domain_hit(host, ctx.get("discovery_domains") or []):
+            findings.append(fnd(
+                "DISCOVERY_DOMAIN_AS_PRIMARY", WARN, 3, cid,
+                "把通常只用于发现线索的平台声明为一手来源，需确认发布者确为当事人或官方账号",
+                url))
+        if cls.get("justified_trusted_secondary"):
+            findings.append(fnd(
+                "SOURCE_TIER_JUSTIFIED", INFO, 5, cid,
+                "来源域名不在 trusted_secondary 清单中，凭声明与分层理由计入可信二手",
+                url))
         valid_srcs.append(s)
+        valid_classes.append(cls)
 
     if not valid_srcs:
         return
 
-    primary_srcs = [s for s in valid_srcs if s.get("tier") == "primary"]
-    quasi_srcs = [
-        s for s in valid_srcs
-        if domain_hit(host_of(str(s.get("url"))), ctx.get("quasi_primary_domains") or [])
-    ]
+    pairs = list(zip(valid_srcs, valid_classes))
+    primary_srcs = [s for s, c in pairs if c["is_primary"]]
+    quasi_srcs = [s for s, c in pairs if c["quasi_primary"]]
 
-    if tier == "VERIFIED_PRIMARY" and not primary_srcs:
+    if tier == "VERIFIED_PRIMARY" and not d.get("has_primary_source"):
         findings.append(fnd("PRIMARY_SOURCE_MISSING", _sev_for_status(cand), 1, cid,
-                            "声明 VERIFIED_PRIMARY 但没有任何 primary 来源"))
+                            "声明 VERIFIED_PRIMARY 但没有任何一手来源"))
 
     if tier == "VERIFIED_CROSS_SOURCE":
-        publishers = {
-            str(s.get("publisher") or host_of(str(s.get("url"))))
-            for s in valid_srcs
-            if s.get("tier") in ("primary", "trusted_secondary")
-        }
-        if len(publishers) < 2:
+        if d.get("verification_source_count", 0) < 2:
             findings.append(fnd("INSUFFICIENT_CROSS_SOURCE", _sev_for_status(cand), 1, cid,
                                 "声明多源交叉印证，但可信来源不足 2 家",
-                                ", ".join(sorted(publishers))))
-        if primary_srcs:
+                                ", ".join(d.get("verification_publishers") or [])))
+        if d.get("has_primary_source"):
             findings.append(fnd("CROSS_SOURCE_HAS_PRIMARY", _sev_for_status(cand, WARN), 3, cid,
                                 "已存在一手来源，evidence_status 宜升为 VERIFIED_PRIMARY"))
 
-    if tier == "SECONDARY_ONLY" and cand.get("disclosure") != DISCLOSURE_SECONDARY:
-        findings.append(fnd("MISSING_DISCLOSURE", _sev_for_status(cand), 1, cid,
-                            "仅有可信二手报道，必须标注「%s」" % DISCLOSURE_SECONDARY,
-                            "disclosure=%s" % cand.get("disclosure")))
+    if tier == "SECONDARY_ONLY":
+        if cand.get("disclosure") != DISCLOSURE_SECONDARY:
+            findings.append(fnd("MISSING_DISCLOSURE", _sev_for_status(cand), 1, cid,
+                                "仅有可信二手报道，必须标注「%s」" % DISCLOSURE_SECONDARY,
+                                "disclosure=%s" % cand.get("disclosure")))
+        # 「仅有可信二手」这句话本身也要能被程序验证。
+        # v0.1.1 早期版本只检查 disclosure 标记，导致「随便挂一条清单外域名、
+        # 只要写上『尚未见一手确认』就能放行」—— 放行依据又回到了模型身上。
+        # 现在改为：程序按来源分类器算出的可信来源（一手或可信二手）发布者数
+        # 必须 ≥ 1；一条都算不出来，就说明它并不是「仅有可信二手」。
+        if d.get("verification_source_count", 0) < 1:
+            findings.append(fnd(
+                "SECONDARY_SOURCE_MISSING", _sev_for_status(cand), 1, cid,
+                "声明「仅有可信二手」，但程序按来源分类器算不出一条可信来源",
+                "计算类别：%s" % json.dumps(d.get("source_class_counts") or {},
+                                          ensure_ascii=False)))
 
     if tier == "UNVERIFIED":
         if cand.get("disclosure") != DISCLOSURE_UNVERIFIED:
@@ -882,8 +1128,7 @@ def _check_sources(cand, ctx, findings):
                                 "UNVERIFIED 只允许出现在「意外但重要」，且国内普通新闻应直接删除",
                                 "section=%s" % cand.get("section")))
 
-    if len(valid_srcs) == len([
-            s for s in valid_srcs if s.get("tier") == "discovery_only"]):
+    if d.get("only_discovery_source"):
         findings.append(fnd("DISCOVERY_ONLY_AS_SOLE_EVIDENCE", _sev_for_status(cand), 1, cid,
                             "只有社交平台作为来源，不能单独作为重要事实的证据"))
 
@@ -909,15 +1154,60 @@ def _check_sources(cand, ctx, findings):
                                 host_of(str(quasi_srcs[0].get("url")))))
 
 
-def _check_section_gate(cand, findings):
-    """栏目准入门槛。
+def _check_importance(cand, ctx, d, findings):
+    """重要性 Gate：这条信息是否值得占用用户注意力？
+
+    重要性本身不可判定，所以这里**保留模型的语义判断**，
+    但要求它留下可审计的理由（material_update 事实块），而不是一个 `important=true`。
 
     门槛类问题只在条目真的进入输出时才是阻断项 —— 一个已经被丢弃的候选
     不需要再满足栏目准入条件，否则报告会被无关噪声淹没。
     """
+    cid = cand.get("id")
+    sec = cand.get("section")
+    status = cand.get("status")
+
+    if sec in ("investment", "ai"):
+        mu = cand.get("material_update")
+        if isinstance(mu, dict):
+            if not d.get("material_update_substantiated"):
+                missing = [f for f in MATERIAL_UPDATE_FIELDS
+                           if not str(mu.get(f) or "").strip()]
+                findings.append(fnd(
+                    "MATERIAL_UPDATE_UNSUBSTANTIATED", _sev_for_status(cand), 3, cid,
+                    "material_update 未能自证：需要非空 claim、窗口内的 published_at、可用的 source_url",
+                    ("缺少字段：%s" % "、".join(missing)) if missing
+                    else "字段齐全但时间不在窗口内或来源不可用"))
+        elif d.get("legacy_material_flag"):
+            findings.append(fnd(
+                "LEGACY_MATERIAL_FLAG", INFO, 5, cid,
+                "使用 v0.1.0 的 has_material_event 自报字段；建议改为 material_update 事实块"))
+        else:
+            findings.append(fnd(
+                "MATERIAL_UPDATE_MISSING", _sev_for_status(cand), 3, cid,
+                "投资／AI 条目必须给出 material_update 事实块，缺失即无法证明存在实质事件",
+                "应有字段：%s" % "、".join(MATERIAL_UPDATE_FIELDS)))
+
+        if not d.get("has_material_event"):
+            if is_output(cand) or cand.get("top_pick"):
+                findings.append(fnd("LOW_VALUE_PRICE_ONLY", BLOCK, 3, cid,
+                                    "仅有正常价格波动、无实质事件，不得因「用户关注」而强行输出"))
+            elif status == "LOW_VALUE":
+                findings.append(fnd("LOW_VALUE_PRICE_ONLY", INFO, 5, cid,
+                                    "价格波动类信息已正确判为 LOW_VALUE"))
+
+    pool = " ".join(_text_pool(cand))
+    for marker in LOW_VALUE_MARKERS:
+        if marker in pool:
+            findings.append(fnd("LOW_VALUE_BOILERPLATE", WARN, 3, cid,
+                                "疑似凑数内容，需确认是否属于应过滤的类型", marker))
+            break
+
+
+def _check_category(cand, ctx, d, findings):
+    """栏目 Gate：归类是否合理、门槛是否满足、同一事件只进一个栏目。"""
     sec = cand.get("section")
     cid = cand.get("id")
-    status = cand.get("status")
 
     if sec == "unexpected":
         if not cand.get("unexpected_gate"):
@@ -940,57 +1230,67 @@ def _check_section_gate(cand, findings):
             findings.append(fnd("IDEA_SIGNAL_MISSING", _sev_for_status(cand), 3, cid,
                                 "人物与思想信号必须至少命中一项：新观点/新数据/新方法/新判断/新技术细节"))
 
-    if sec in ("investment", "ai"):
-        if "has_material_event" not in cand:
-            findings.append(fnd("GATE_FIELD_UNCHECKED", BLOCK, 0, cid,
-                                "has_material_event 缺席 —— 未检查 ≠ 已通过",
-                                "section=%s" % sec))
-        elif cand.get("has_material_event") is False:
-            if is_output(cand) or cand.get("top_pick"):
-                findings.append(fnd("LOW_VALUE_PRICE_ONLY", BLOCK, 3, cid,
-                                    "仅有正常价格波动、无实质事件，不得因「用户关注」而强行输出"))
-            elif status == "LOW_VALUE":
-                findings.append(fnd("LOW_VALUE_PRICE_ONLY", INFO, 5, cid,
-                                    "价格波动类信息已正确判为 LOW_VALUE"))
-
-    pool = " ".join(_text_pool(cand))
-    for marker in LOW_VALUE_MARKERS:
-        if marker in pool:
-            findings.append(fnd("LOW_VALUE_BOILERPLATE", WARN, 3, cid,
-                                "疑似凑数内容，需确认是否属于应过滤的类型", marker))
-            break
+    _check_investment_subject(cand, ctx, d, findings)
 
 
-def _check_gates(cand, findings):
-    if not is_output(cand):
+def _check_investment_subject(cand, ctx, d, findings):
+    """投资栏目的主体必须落到关注清单上 —— 对着 config 校验，不采信模型判断。
+
+    模型可以做的是「指明这条对应清单里的哪一项」（watchlist_subject），
+    程序做的是「这一项到底在不在清单里」。声明一个引用，比声明一个结论
+    更容易被程序否掉。
+    """
+    if cand.get("section") != "investment":
         return
+    cid = cand.get("id")
+    ref = str(cand.get("watchlist_subject") or "").strip()
+    known = ctx.get("investment_subjects") or set()
+    if not ref:
+        findings.append(fnd(
+            "INVESTMENT_SUBJECT_UNBOUND", _sev_for_status(cand), 2, cid,
+            "投资条目必须声明 watchlist_subject，指明它对应关注清单里的哪个机构／标的／类别",
+            "entity=%s" % cand.get("entity")))
+    elif ref not in known:
+        findings.append(fnd(
+            "INVESTMENT_SUBJECT_UNKNOWN", _sev_for_status(cand), 2, cid,
+            "watchlist_subject 不在 config/watchlist.yaml 的投资主体里",
+            "%s（清单内共 %d 项）" % (ref, len(known))))
+
+
+def _check_legacy_checked(cand, findings):
+    """v0.1.0 的模型自报闸门字段 —— v0.1.1 起降级为参考信息。
+
+    为什么不再阻断：时效与证据现在由程序按事实字段自行计算，
+    模型说"我查过了"既不能加信任，也不能减信任。
+    因此：字段缺席不报错；字段存在只记 INFO；显式为 false 记 WARN
+    （那说明产出流程本身可能没做完，值得看一眼，但不该拦住一条事实齐全的新闻）。
+    """
     gates = cand.get("gates")
     cid = cand.get("id")
-    if not isinstance(gates, dict):
-        findings.append(fnd("GATE_FIELD_UNCHECKED", BLOCK, 0, cid,
-                            "gates 整体缺席 —— 未检查 ≠ 已通过"))
+    if gates is None:
         return
-    for key in REQUIRED_GATES:
-        if key not in gates:
-            findings.append(fnd("GATE_FIELD_UNCHECKED", BLOCK, 0, cid,
-                                "闸门字段缺席，视同未检查", key))
-        elif gates.get(key) is not True:
-            findings.append(fnd("GATE_NOT_PASSED", BLOCK, 0, cid,
-                                "闸门未通过却标记为 PASS", key))
+    if not isinstance(gates, dict):
+        findings.append(fnd("LEGACY_CHECKED_FIELDS_IGNORED", INFO, 5, cid,
+                            "gates 不是对象，已完全忽略"))
+        return
+    findings.append(fnd("LEGACY_CHECKED_FIELDS_IGNORED", INFO, 5, cid,
+                        "检测到 v0.1.0 的模型自报 checked 字段；v0.1.1 起不再作为放行依据",
+                        "结论由程序按事实字段自行计算"))
+    for key in LEGACY_CHECKED_FIELDS:
+        if key in gates and gates.get(key) is not True:
+            findings.append(fnd("LEGACY_GATE_REPORTED_FALSE", WARN, 3, cid,
+                                "模型自报某项检查未通过；该字段已不再阻断，但说明流程可能没做完",
+                                key))
 
 
-def _check_history(cand, ctx, findings):
+def _check_history(cand, ctx, d, findings):
+    """跨日去重。是否"有实质新进展"取自派生层。"""
     cid = cand.get("id")
-    fp = candidate_fingerprint(cand, ctx.get("aliases"))
+    fp = d.get("fingerprint") or candidate_fingerprint(cand, ctx.get("aliases"))
     days = ctx.get("history_dedup_days", HISTORY_DEDUP_DAYS)
     now = ctx["now"]
 
-    np_at = parse_dt(cand.get("new_progress_at"))
-    has_new_progress = (
-        cand.get("new_progress_type") in NEW_PROGRESS_TYPES
-        and np_at is not None
-        and (now - np_at) >= timedelta(0)
-    )
+    has_new_progress = bool(d.get("has_new_progress"))
 
     for rec in ctx.get("history_records") or []:
         if not isinstance(rec, dict):
@@ -1018,52 +1318,175 @@ def _check_history(cand, ctx, findings):
                                 "%s（%s 天前输出：%s）" % (fp, age, rec.get("title"))))
 
 
-def check_candidate(cand, ctx):
-    """对单条候选执行全部可判定检查。"""
-    findings = []
-    if not isinstance(cand, dict):
-        return [fnd("CANDIDATE_NOT_OBJECT", BLOCK, 0, "?", "候选不是对象")]
+# ────────────────────────────────────────────────────────────────
+# 七个顶层 Gate —— 读懂这份代码从这里开始
+# ────────────────────────────────────────────────────────────────
 
+
+def run_structure_gate(cand, ctx, d):
+    """结构 Gate：schema、必填字段、URL、时间格式、枚举、输入结构。
+
+    结构缺陷任何情况下都是 BLOCK —— 一条连字段都不完整的候选，
+    没有讨论时效与证据的必要。
+    """
+    if not isinstance(cand, dict):
+        return [fnd("CANDIDATE_NOT_OBJECT", BLOCK, 0, "?", "候选不是对象",
+                    gate="structure")]
+
+    out = []
     cid = cand.get("id") or "?"
 
     if cand.get("status") not in STATUSES:
-        findings.append(fnd("STATUS_INVALID", BLOCK, 0, cid,
-                            "status 非法", str(cand.get("status"))))
+        out.append(fnd("STATUS_INVALID", BLOCK, 0, cid,
+                       "status 非法", str(cand.get("status"))))
 
     sec = cand.get("section")
     if sec in (ctx.get("banned_sections") or []):
-        findings.append(fnd("BANNED_SECTION", BLOCK, 2, cid,
-                            "该栏目已被明确排除", str(sec)))
+        out.append(fnd("BANNED_SECTION", BLOCK, 2, cid,
+                       "该栏目已被明确排除", str(sec)))
     elif sec not in (ctx.get("sections") or {}):
-        findings.append(fnd("SECTION_NOT_IN_WATCHLIST", BLOCK, 3, cid,
-                            "栏目不在 watchlist 的 priority/sections 中", str(sec)))
+        out.append(fnd("SECTION_NOT_IN_WATCHLIST", BLOCK, 3, cid,
+                       "栏目不在 watchlist 的 priority/sections 中", str(sec)))
 
     for field in ("entity", "action", "object"):
         if not norm_text(cand.get(field)):
-            findings.append(fnd("FINGERPRINT_INCOMPLETE", BLOCK, 1, cid,
-                                "fingerprint 组成部分缺失", field))
+            out.append(fnd("FINGERPRINT_INCOMPLETE", BLOCK, 1, cid,
+                           "fingerprint 组成部分缺失", field))
 
-    _check_time(cand, ctx, findings)
-    _check_sources(cand, ctx, findings)
-    _check_language(cand, findings)
-    _check_section_gate(cand, findings)
-    _check_gates(cand, findings)
-    _check_history(cand, ctx, findings)
+    if parse_dt(cand.get("published_at") or cand.get("event_date")) is None:
+        out.append(fnd("TIME_FIELD_MISSING", BLOCK, 0, cid,
+                       "published_at / event_date 缺失或无法解析",
+                       str(cand.get("published_at") or cand.get("event_date"))))
 
+    mu = cand.get("material_update")
+    if mu is not None and not isinstance(mu, dict):
+        out.append(fnd("MATERIAL_UPDATE_INVALID", BLOCK, 1, cid,
+                       "material_update 必须是对象", type(mu).__name__))
+
+    # 字面违规（标题党、建议、分析、把"没搜到"写成"没新闻"、事实句计数）
+    _check_language(cand, out)
+    return tag_gate(out, "structure")
+
+
+def run_freshness_gate(cand, ctx, d):
+    """时效 Gate：24 小时窗口、旧闻、实质新进展、UPDATED 是否成立。"""
+    out = []
+    _check_time(cand, ctx, d, out)
+    return tag_gate(out, "freshness")
+
+
+def run_evidence_gate(cand, ctx, d):
+    """证据 Gate：一手来源、交叉印证、evidence_status 是否合理、披露标记。"""
+    out = []
+    _check_sources(cand, ctx, d, out)
+    return tag_gate(out, "evidence")
+
+
+def run_duplication_gate(cand, ctx, d):
+    """去重 Gate：跨日历史、fingerprint、UPDATED（本期内部去重在整期层做）。"""
+    out = []
+    _check_history(cand, ctx, d, out)
+    return tag_gate(out, "duplication")
+
+
+def run_importance_gate(cand, ctx, d):
+    """重要性 Gate：这条信息是否值得占用用户注意力。"""
+    out = []
+    _check_importance(cand, ctx, d, out)
+    return tag_gate(out, "importance")
+
+
+def run_category_gate(cand, ctx, d):
+    """栏目 Gate：归类是否合理、门槛是否满足。"""
+    out = []
+    _check_category(cand, ctx, d, out)
+    return tag_gate(out, "category")
+
+
+def run_output_gate(cand, ctx, d):
+    """输出 Gate：PASS / UPDATED 是否可以真的进入输出。
+
+    v0.1.0 的裁决保留：PASS 与 UPDATED 都是可输出终态，不退回"只有 PASS"。
+    同时把 v0.1.0 的模型自报 checked 字段收口在这里并降级为参考信息。
+    """
+    out = []
     if cand.get("top_pick") and not is_output(cand):
-        findings.append(fnd("STATUS_NOT_PASS", BLOCK, 0, cid,
-                            "非可输出状态的条目被放进了「今天最值得看的 N 件事」",
-                            "status=%s" % cand.get("status")))
+        out.append(fnd("STATUS_NOT_PASS", BLOCK, 0, cand.get("id"),
+                       "非可输出状态的条目被放进了「今天最值得看的 N 件事」",
+                       "status=%s" % cand.get("status")))
+    _check_legacy_checked(cand, out)
+    return tag_gate(out, "output")
 
-    return sort_findings(findings)
+
+GATE_RUNNERS = [
+    ("structure", run_structure_gate),
+    ("freshness", run_freshness_gate),
+    ("evidence", run_evidence_gate),
+    ("duplication", run_duplication_gate),
+    ("importance", run_importance_gate),
+    ("category", run_category_gate),
+    ("output", run_output_gate),
+]
+
+
+def check_candidate(cand, ctx, want_audit=False):
+    """对单条候选依次执行七个 Gate。
+
+    返回 findings（列表）；want_audit=True 时返回 (findings, audit)。
+    audit 里含 decision / decision_reasons / gate_results / derived ——
+    目的是让人一眼看出"为什么收录 / 为什么丢弃"。
+    """
+    if not isinstance(cand, dict):
+        f = [fnd("CANDIDATE_NOT_OBJECT", BLOCK, 0, "?", "候选不是对象",
+                 gate="structure")]
+        return (f, None) if want_audit else f
+
+    d = derive(cand, ctx)
+    findings = []
+    for _name, runner in GATE_RUNNERS:
+        findings.extend(runner(cand, ctx, d))
+    findings = sort_findings(findings)
+
+    if not want_audit:
+        return findings
+
+    blocks = [x["code"] for x in findings if x["severity"] == BLOCK]
+    warns = [x["code"] for x in findings if x["severity"] == WARN]
+    if blocks:
+        decision = "BLOCKED"
+    elif is_output(cand):
+        decision = cand.get("status")
+    else:
+        decision = "DROP"
+    audit = {
+        "id": cand.get("id"),
+        "title": cand.get("title"),
+        "section": cand.get("section"),
+        "declared_status": cand.get("status"),
+        "evidence_status": cand.get("evidence_status"),
+        "reject_reason": cand.get("reject_reason"),
+        "primary_url": cand.get("primary_url"),
+        "decision": decision,
+        "decision_reasons": sorted(set(blocks + warns)),
+        "blocked_by": sorted(set(blocks)),
+        "warned_by": sorted(set(warns)),
+        "gate_results": gate_results(findings),
+        "derived": d,
+    }
+    return findings, audit
 
 
 def best_source_rank(cand):
-    """来源质量排序键：越小越好。一手 > 二手 > 社交；同为来源时优先第一方。"""
+    """来源质量排序键：越小越好。一手 > 二手 > 社交；同为来源时优先第一方。
+
+    第三项是「来源条数」，用负数是为了让**更多来源**排在前面。
+    早先写成正数，等于把"只有一条来源"当成更好的选择，
+    结果同一事件同时有一手版和转载版时，会保转载、丢一手。
+    """
     srcs = [s for s in (cand.get("sources") or []) if isinstance(s, dict)]
     ranks = [TIER_RANK.get(s.get("tier"), 9) for s in srcs]
     first_party = 0 if any(s.get("is_first_party") for s in srcs) else 1
-    return (min(ranks) if ranks else 9, first_party, len(srcs))
+    return (min(ranks) if ranks else 9, first_party, -len(srcs))
 
 
 def resolve_issue_duplicates(cands, aliases=None):
@@ -1133,15 +1556,40 @@ def check_issue(issue, ctx):
         findings.append(fnd("EMPTY_ISSUE", INFO, 5, "issue",
                             "本期无合格条目，应输出标准说明而非「没有新闻」"))
 
+    # 同一个 URL 被多条内容当来源：通常意味着没有为每条内容找到各自的原文，
+    # 而是拿一个周报/汇总页凑数。聚合页本身可信，但它不是「这条新闻」的来源。
+    url_users = {}
+    for cand in output:
+        for s in (cand.get("sources") or []):
+            if not isinstance(s, dict):
+                continue
+            u = str(s.get("url") or "")
+            if u:
+                url_users.setdefault(u, []).append(str(cand.get("id")))
+    for url, ids in sorted(url_users.items()):
+        if len(ids) >= 3:
+            findings.append(fnd("SOURCE_URL_REUSED", WARN, 4, "issue",
+                                "同一个来源 URL 被 3 条以上内容引用，通常说明没有找到各自的一手来源",
+                                "%s ← %s" % (url, "、".join(ids))))
+
     order = ctx.get("sections_order") or []
     for cand in output:
         if cand.get("section") not in order:
             findings.append(fnd("SECTION_NOT_IN_PRIORITY", BLOCK, 3, cand.get("id"),
                                 "栏目不在 priority 中，不得输出", str(cand.get("section"))))
 
+    # deliverable：既声明可输出、又没有 BLOCK 的条目。
+    # `pass` 统计的是"声明为可输出"，会被阻断项打脸；真正能发出去的是 deliverable。
+    blocked_ids = {
+        x.get("scope") for x in findings
+        if x["severity"] == BLOCK and x.get("scope") not in (None, "issue")
+    }
+    deliverable = [c for c in output if c.get("id") not in blocked_ids]
+
     stats = {
         "candidates": len(cands),
         "pass": len(output),
+        "deliverable": len(deliverable),
         "top_pick": len(top),
         "kept": len(kept),
         "dropped": len(dropped),
@@ -1405,6 +1853,171 @@ def prune_history(records, now, days=HISTORY_RETENTION_DAYS):
     return kept
 
 # ────────────────────────────────────────────────────────────────
+# 审计：一眼看出为什么收录 / 为什么丢弃
+# ────────────────────────────────────────────────────────────────
+
+
+DECISION_DROPPED_IN_ISSUE = "DROPPED_IN_ISSUE"
+
+
+def audit_issue(issue, ctx, run_date=None):
+    """对整期候选逐条执行 Gate，并给出可审计的收录/丢弃理由。
+
+    输出既是机器可读的 JSON，也能渲染成 audit.md。
+    目的不是增加复杂度，而是回答"这条为什么进来了 / 为什么没进来"。
+    """
+    cands = list(iter_candidates(issue))
+    findings_all, audits = [], []
+    for c in cands:
+        f, a = check_candidate(c, ctx, want_audit=True)
+        findings_all.extend(f)
+        audits.append(a)
+
+    kept, dropped = resolve_issue_duplicates(cands, ctx.get("aliases"))
+    dropped_ids = {c.get("id") for c in dropped}
+    for a in audits:
+        if a and a["id"] in dropped_ids and a["decision"] in OUTPUT_STATUSES:
+            a["decision"] = DECISION_DROPPED_IN_ISSUE
+            a["decision_reasons"] = sorted(set(a["decision_reasons"] + ["DUPLICATE_IN_ISSUE"]))
+
+    issue_findings, stats = check_issue(issue, ctx)
+
+    accepted = [a for a in audits if a and a["decision"] in OUTPUT_STATUSES]
+    rejected = [a for a in audits if a and a["decision"] not in OUTPUT_STATUSES]
+
+    # 发现项计数：每个 Gate 报了多少条 BLOCK。
+    blocked_by_gate = {}
+    for x in findings_all:
+        if x["severity"] == BLOCK:
+            g = x.get("gate") or "ungated"
+            blocked_by_gate[g] = blocked_by_gate.get(g, 0) + 1
+
+    # 条目归口：每个 Gate「挡下」了多少条候选。
+    # 归口规则：优先 BLOCK，其次 WARN，最后 INFO；同级按 Gate 顺序取第一个。
+    # 一个发现项都没有的条目，说明是 output Gate 按状态挡下的（如 LOW_VALUE、OLD）。
+    by_scope = {}
+    for x in findings_all:
+        sc = x.get("scope")
+        if sc in (None, "issue", "?"):
+            continue
+        by_scope.setdefault(sc, []).append(x)
+    gate_order = {g: i for i, g in enumerate(GATES)}
+
+    rejected_by_gate = {}
+    for a in rejected:
+        if a["decision"] == DECISION_DROPPED_IN_ISSUE:
+            rejected_by_gate["duplication"] = rejected_by_gate.get("duplication", 0) + 1
+            continue
+        cand_findings = [x for x in by_scope.get(a["id"], [])
+                         if x.get("gate") in gate_order]
+        cand_findings.sort(key=lambda x: (_SEV_RANK[x["severity"]],
+                                          gate_order[x["gate"]]))
+        g = cand_findings[0]["gate"] if cand_findings else "output"
+        rejected_by_gate[g] = rejected_by_gate.get(g, 0) + 1
+
+    accepted_by_status = {}
+    for a in accepted:
+        accepted_by_status[a["decision"]] = accepted_by_status.get(a["decision"], 0) + 1
+    accepted_by_section = {}
+    for a in accepted:
+        sec = a.get("section") or "?"
+        accepted_by_section[sec] = accepted_by_section.get(sec, 0) + 1
+
+    return {
+        "date": str(issue.get("date") or (run_date or ctx["now"].strftime("%Y-%m-%d")))[:10],
+        "now": ctx["now"].isoformat(),
+        "candidates": len(cands),
+        "accepted_count": len(accepted),
+        "rejected_count": len(rejected),
+        "final_items": stats.get("deliverable", stats.get("pass", 0)),
+        "stats": stats,
+        "blocked_by_gate": blocked_by_gate,
+        "rejected_by_gate": rejected_by_gate,
+        "accepted_by_status": accepted_by_status,
+        "accepted_by_section": accepted_by_section,
+        "accepted": accepted,
+        "rejected": rejected,
+        "issue_findings": issue_findings,
+    }
+
+
+_AUDIT_GLYPH = {"PASS": "✓", "WARN": "!", "BLOCK": "✗"}
+
+
+def render_audit_md(rep):
+    """把审计结果写成 markdown。给人看的，栏目与顺序保持稳定。"""
+    lines = []
+    lines.append("# 审计 · %s" % rep["date"])
+    lines.append("")
+    lines.append("统计窗口终点：%s" % rep["now"])
+    lines.append("")
+    lines.append("## 总量")
+    lines.append("")
+    lines.append("- 候选总数：%d" % rep["candidates"])
+    lines.append("- 收录（PASS/UPDATED）：%d" % rep["accepted_count"])
+    if rep.get("accepted_by_status"):
+        lines.append("  - 其中：" + "、".join(
+            "%s %d" % (k, v) for k, v in sorted(rep["accepted_by_status"].items())))
+    lines.append("- 丢弃：%d" % rep["rejected_count"])
+    lines.append("- 最终条目数：%d" % rep["final_items"])
+    lines.append("")
+
+    if rep.get("accepted_by_section"):
+        lines.append("## 收录分布")
+        lines.append("")
+        seen_sections = []
+        for sec in list(SECTIONS) + sorted(rep["accepted_by_section"]):
+            if sec in rep["accepted_by_section"] and sec not in seen_sections:
+                seen_sections.append(sec)
+                lines.append("- %s：%d" % (sec, rep["accepted_by_section"][sec]))
+        lines.append("")
+
+    if rep["rejected_by_gate"]:
+        lines.append("## 各 Gate 拒绝数")
+        lines.append("")
+        for g in GATES:
+            n = rep["rejected_by_gate"].get(g, 0)
+            if n:
+                lines.append("- %s：%d" % (g, n))
+        extra = [g for g in rep["rejected_by_gate"] if g not in GATES]
+        for g in sorted(extra):
+            lines.append("- %s：%d" % (g, rep["rejected_by_gate"][g]))
+        lines.append("")
+
+    lines.append("## 逐条审计")
+    lines.append("")
+    for a in rep["accepted"] + rep["rejected"]:
+        lines.append("### %s · %s" % (a["id"], a["decision"]))
+        lines.append("")
+        lines.append("- 标题：%s" % (a["title"] or ""))
+        lines.append("- 栏目：%s｜声明状态：%s｜证据：%s"
+                     % (a["section"], a["declared_status"], a["evidence_status"]))
+        gr = a["gate_results"]
+        lines.append("- Gate：" + "  ".join(
+            "%s %s%s" % (g, gr.get(g, "PASS"), _AUDIT_GLYPH.get(gr.get(g, "PASS"), ""))
+            for g in GATES))
+        d = a["derived"]
+        lines.append("- 派生：窗口内=%s｜一手=%s｜交叉来源=%d｜历史命中=%s｜实质事件=%s｜可输出=%s"
+                     % (d.get("is_within_24h"), d.get("has_primary_source"),
+                        d.get("verification_source_count", 0), d.get("history_match"),
+                        d.get("has_material_event"), d.get("is_output_eligible")))
+        if a["decision_reasons"]:
+            lines.append("- 理由：%s" % "、".join(a["decision_reasons"]))
+        if a.get("reject_reason"):
+            lines.append("- 丢弃说明：%s" % a["reject_reason"])
+        lines.append("")
+
+    if rep["issue_findings"]:
+        lines.append("## 整期级发现")
+        lines.append("")
+        for x in rep["issue_findings"]:
+            lines.append("- [%s] %s（%s）" % (x["severity"], x["code"], x["scope"]))
+        lines.append("")
+
+    return "\n".join(lines).rstrip() + "\n"
+
+
+# ────────────────────────────────────────────────────────────────
 # 打印
 # ────────────────────────────────────────────────────────────────
 
@@ -1416,9 +2029,10 @@ def print_findings(findings, limit=None):
     if not shown:
         print("  （无发现）")
     for x in shown:
-        print("  %s [P%d] %-34s %s" % (
+        print("  %s [P%d] %-34s %s%s" % (
             _SEV_TAG.get(x["severity"], x["severity"]),
-            x["priority"], x["code"], x["scope"]))
+            x["priority"], x["code"], x["scope"],
+            ("  <%s>" % x["gate"]) if x.get("gate") else ""))
         print("        %s" % x["message"])
         if x["detail"]:
             print("        → %s" % x["detail"])
@@ -1446,7 +2060,7 @@ def main(argv=None):
         description="早间情报确定性规则层（零依赖）")
     parser.add_argument("command", choices=[
         "check-issue", "check-candidate", "check-render", "check-config",
-        "fingerprint", "record", "prune"])
+        "audit", "derive", "fingerprint", "record", "prune"])
     parser.add_argument("path", nargs="?", help="输入文件路径")
     parser.add_argument("--repo", default=".", help="仓库根目录（默认当前目录）")
     parser.add_argument("--issue", help="check-render 用的候选文件")
@@ -1458,6 +2072,7 @@ def main(argv=None):
     parser.add_argument("--days", type=int, default=HISTORY_RETENTION_DAYS)
     parser.add_argument("--write", action="store_true", help="真正写入历史文件")
     parser.add_argument("--json", action="store_true", help="以 JSON 输出")
+    parser.add_argument("--out-md", help="audit 子命令：把审计报告写成 markdown")
     parser.add_argument("--limit", type=int, default=3, help="前台展示条数上限")
     args = parser.parse_args(argv)
 
@@ -1491,6 +2106,36 @@ def main(argv=None):
         return emit(check_config(repo, now=now))
 
     ctx = make_ctx(repo, now=now)
+
+    if args.command == "derive":
+        payload = _read_json(args.path)
+        rows = []
+        for issue in iter_issues(payload):
+            for c in iter_candidates(issue):
+                rows.append({"id": c.get("id"), "derived": derive(c, ctx)})
+        if args.json:
+            print(json.dumps({"derived": rows}, ensure_ascii=False, indent=2))
+        else:
+            for row in rows:
+                d = row["derived"]
+                print("%-6s 窗口内=%-5s 一手=%-5s 交叉=%d 历史命中=%-5s 实质事件=%-5s 可输出=%s"
+                      % (row["id"], d.get("is_within_24h"), d.get("has_primary_source"),
+                         d.get("verification_source_count", 0), d.get("history_match"),
+                         d.get("has_material_event"), d.get("is_output_eligible")))
+        return 0
+
+    if args.command == "audit":
+        payload = _read_json(args.path)
+        first = next(iter_issues(payload), {})
+        rep = audit_issue(first, ctx)
+        if args.out_md:
+            with open(args.out_md, "w", encoding="utf-8", newline="\n") as fh:
+                fh.write(render_audit_md(rep))
+        if args.json:
+            print(json.dumps(rep, ensure_ascii=False, indent=2))
+        else:
+            sys.stdout.write(render_audit_md(rep))
+        return 1 if has_block(rep["issue_findings"]) else 0
 
     if args.command == "check-candidate":
         payload = _read_json(args.path)

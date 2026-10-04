@@ -30,7 +30,9 @@
               }
             ],
             "primary_url": "https://www.sse.com.cn/market/price/600305/",
-            "body_facts": ["恒顺醋业今日收盘价较前一交易日上涨2.1%。"],
+            "body_facts": [
+              "恒顺醋业今日收盘价较前一交易日上涨2.1%。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -38,13 +40,18 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "恒顺醋业"
           }
         ]
       },
       "expect": {
-        "block_codes": ["LOW_VALUE_PRICE_ONLY"],
-        "severity": { "LOW_VALUE_PRICE_ONLY": "BLOCK" }
+        "block_codes": [
+          "LOW_VALUE_PRICE_ONLY"
+        ],
+        "severity": {
+          "LOW_VALUE_PRICE_ONLY": "BLOCK"
+        }
       }
     },
     {
@@ -72,21 +79,32 @@
                 "is_first_party": true
               }
             ],
-            "body_facts": ["恒顺醋业今日收盘价较前一交易日上涨2.1%。"]
+            "body_facts": [
+              "恒顺醋业今日收盘价较前一交易日上涨2.1%。"
+            ],
+            "watchlist_subject": "恒顺醋业"
           }
         ]
       },
       "expect": {
         "block_count": 0,
-        "any_codes": ["LOW_VALUE_PRICE_ONLY"],
-        "severity": { "LOW_VALUE_PRICE_ONLY": "INFO" },
-        "stats": { "pass": 0 },
+        "any_codes": [
+          "LOW_VALUE_PRICE_ONLY"
+        ],
+        "severity": {
+          "LOW_VALUE_PRICE_ONLY": "INFO"
+        },
+        "stats": {
+          "pass": 0
+        },
         "render_block_count": 0,
-        "render_excludes": ["恒顺醋业今日收盘上涨2.1%"]
+        "render_excludes": [
+          "恒顺醋业今日收盘上涨2.1%"
+        ]
       }
     },
     {
-      "desc": "反例：has_material_event 字段整体缺席 —— 未检查 ≠ 已通过",
+      "desc": "反例：投资条目既没有 material_update 事实块，也没有 v0.1.0 自报字段 —— 无法证明存在实质事件",
       "input": {
         "date": "2026-10-04",
         "candidates": [
@@ -109,7 +127,9 @@
               }
             ],
             "primary_url": "https://www.sse.com.cn/market/price/600305/",
-            "body_facts": ["恒顺醋业今日收盘价较前一交易日上涨2.1%。"],
+            "body_facts": [
+              "恒顺醋业今日收盘价较前一交易日上涨2.1%。"
+            ],
             "gates": {
               "time_window_checked": true,
               "history_dedup_checked": true,
@@ -117,13 +137,19 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "恒顺醋业"
           }
         ]
       },
       "expect": {
-        "block_codes": ["GATE_FIELD_UNCHECKED"],
-        "severity": { "GATE_FIELD_UNCHECKED": "BLOCK" }
+        "block_codes": [
+          "MATERIAL_UPDATE_MISSING",
+          "LOW_VALUE_PRICE_ONLY"
+        ],
+        "severity": {
+          "MATERIAL_UPDATE_MISSING": "BLOCK"
+        }
       }
     },
     {
@@ -162,20 +188,25 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "恒顺醋业"
           }
         ]
       },
       "expect": {
         "block_count": 0,
         "warn_count": 0,
-        "stats": { "pass": 1 },
+        "stats": {
+          "pass": 1
+        },
         "render_block_count": 0,
-        "render_contains": ["恒顺醋业股东披露减持计划"]
+        "render_contains": [
+          "恒顺醋业股东披露减持计划"
+        ]
       }
     },
     {
-      "desc": "反例：gates 字典里少了一个闸门键 —— 契约缺席即视同未检查",
+      "desc": "正向对照：完全不写模型自报 checked 字段，只给事实字段 —— 仍然放行（v0.1.1 起结论由程序算）",
       "input": {
         "date": "2026-10-04",
         "candidates": [
@@ -189,7 +220,6 @@
             "event_date": "2026-10-04T08:30:00+08:00",
             "status": "PASS",
             "evidence_status": "VERIFIED_PRIMARY",
-            "has_material_event": true,
             "sources": [
               {
                 "url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_hengshun.html",
@@ -199,20 +229,25 @@
               }
             ],
             "primary_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_hengshun.html",
-            "body_facts": ["恒顺醋业今日披露股东减持计划公告。"],
-            "gates": {
-              "time_window_checked": true,
-              "history_dedup_checked": true,
-              "issue_dedup_checked": true,
-              "primary_source_checked": true,
-              "no_analysis_checked": true
-            }
+            "body_facts": [
+              "恒顺醋业今日披露股东减持计划公告。"
+            ],
+            "material_update": {
+              "claim": "恒顺醋业披露股东减持计划公告",
+              "published_at": "2026-10-04T08:30:00+08:00",
+              "source_url": "https://www.sse.com.cn/disclosure/listedinfo/announcement/c/20261004_hengshun.html"
+            },
+            "watchlist_subject": "恒顺醋业"
           }
         ]
       },
       "expect": {
-        "block_codes": ["GATE_FIELD_UNCHECKED"],
-        "severity": { "GATE_FIELD_UNCHECKED": "BLOCK" }
+        "block_count": 0,
+        "warn_count": 0,
+        "info_count": 0,
+        "stats": {
+          "pass": 1
+        }
       }
     }
   ]

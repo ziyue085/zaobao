@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-29",
+  "window_start": "2026-09-28T09:00:00+08:00",
+  "window_end": "2026-09-29T09:00:00+08:00",
+  "note": "Round 5 · Day1：事件首次出现，应判 PASS 并输出。已知限制：检索时只能拿到回溯报道（原文为《华尔街日报》9月28日，未能取到原文 URL），因此引用的是 10 月 3—4 日的回溯稿 —— 这属于事后复盘固有的困难，不影响本轮要验证的跨日去重链路。",
+  "candidates": [
+    {
+      "id": "c01",
+      "title": "OpenAI 取消 GPT-6.1 Astra 的10月发布",
+      "section": "ai",
+      "entity": "OpenAI",
+      "action": "取消",
+      "object": "GPT-6.1 Astra的10月发布",
+      "event_date": "2026-09-28T22:00:00+08:00",
+      "published_at": "2026-09-28T22:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "top_pick": true,
+      "top_pick_line": "OpenAI 取消新一代模型 GPT-6.1 Astra 的10月发布。",
+      "importance_reason": "前沿实验室因内部安全测试不达标放弃既定发布计划，属模型能力与安全治理的实质事件。",
+      "sources": [
+        {
+          "url": "https://www.thecyberwire.com/newsletters/week-that-was/10/38",
+          "publisher": "The CyberWire",
+          "tier": "trusted_secondary",
+          "tier_reason": "网络安全行业媒体，站点不在清单内",
+          "published_at": "2026-10-03T12:00:00+08:00"
+        },
+        {
+          "url": "https://www.163.com/dy/article/L8DIMK980519QIKK.html",
+          "publisher": "金融界",
+          "tier": "trusted_secondary",
+          "tier_reason": "财经媒体网易号转载稿，站点不在清单内",
+          "published_at": "2026-10-04T15:51:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.thecyberwire.com/newsletters/week-that-was/10/38",
+      "body_facts": [
+        "OpenAI 已取消新一代模型 GPT-6.1 Astra 原定10月的发布计划。",
+        "内部测试发现该模型在授权范围、以及向用户披露自身行为方面未达到公司的安全与对齐标准。"
+      ],
+      "material_update": {
+        "claim": "OpenAI 因内部安全测试不达标，取消 GPT-6.1 Astra 的10月发布",
+        "published_at": "2026-09-28T22:00:00+08:00",
+        "source_url": "https://www.thecyberwire.com/newsletters/week-that-was/10/38"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "round": "round-05",
+  "date": "2026-10-04",
+  "window": "2026-10-03T09:00+08:00 → 2026-10-04T09:00+08:00",
+  "issue_note": "跨日重复与 UPDATED 压力测试（单期三条同时存在）：c01 是历史里已有同一 fingerprint 且窗口内无新进展 → 应当不出；c02 是历史事件的实质进展 → 应当以 UPDATED 出；c03 是全新事件 → 应当以 PASS 出。三种判定在一期里同时命中，系统结果 3 取 2，把 c01 判 DUPLICATE 挡在门外，c02 标 UPDATED、c03 标 PASS。这一轮的核心价值是：『同一件事第二天再被报道』不再需要模型自己举手说『这条我见过』—— 去重由 history.jsonl + fingerprint 程序化完成。",
+  "note": "逐条人工复核。此轮的同日三段链路（Day1 PASS / Day2 DUPLICATE 零输出 / Day3 UPDATED）另存于 round-05-day1、round-05-day2、round-05-day3。",
+  "items": [
+    {
+      "id": "c02",
+      "title": "商务部对原产于欧盟的进口对硝基甲苯反倾销立案调查：公布调查问卷",
+      "label": "GOOD",
+      "note": "相对历史里的『立案调查』是实质推进（公布调查问卷 + 登记时限），不是同义改写，标 UPDATED 输出正确。来源为商务部官网原文。"
+    },
+    {
+      "id": "c03",
+      "title": "教育部部署开展2027届高校毕业生校园招聘月活动",
+      "label": "SHOULD_NOT_INCLUDE",
+      "note": "年度例行部署，与 9 月已发生过的同类动作同构；来源是新华社稿的地方媒体转载（尚未见一手确认）。与 round-03 判掉『科技部发布会表态』的理由一致 —— 部署类动作不等于新事实。"
+    }
+  ],
+  "rejected_review": [
+    {"id": "c01", "label": "DUPLICATE", "agree": true, "note": "青岛胶州湾第二隧道盾构掘进完成的同义改写，fingerprint 命中历史且窗口内无新进展。判重复正确 —— 这正是要防的『旧闻重新包装成新闻』。"}
+  ],
+  "missed_important": [],
+  "comment": "判定链路正确：重复拦住、进展放行、新事件放行。扣分点不在去重，而在 c03 这类『例行部署』仍被 Importance Gate 放过，与 round-03 是同一个成因。"
+}

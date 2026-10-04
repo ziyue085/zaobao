@@ -1,0 +1,142 @@
+{
+  "date": "2026-10-04",
+  "window_start": "2026-10-03T09:00:00+08:00",
+  "window_end": "2026-10-04T09:00:00+08:00",
+  "note": "同一时间窗，五条内容分别只用一种来源形态取证。要求：官方原文 > 权威二手 > discovery；搜索摘要页与内容农场永远不能当来源。",
+  "candidates": [
+    {
+      "id": "c01",
+      "title": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查",
+      "section": "universal_policy",
+      "entity": "商务部",
+      "action": "发起",
+      "object": "对原产于欧盟的进口对硝基甲苯反倾销立案调查",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "importance_reason": "部委级贸易救济立案，对相关化工产业构成制度性变更。",
+      "sources": [
+        {
+          "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html",
+          "publisher": "商务部",
+          "tier": "primary",
+          "is_first_party": true,
+          "published_at": "2026-10-03T12:00:00+08:00"
+        }
+      ],
+      "primary_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_97459d25c9174ec4a9679b689eb495a5.html",
+      "body_facts": [
+        "商务部公告2026年第44号称，自2026年10月3日起对原产于欧盟的进口对硝基甲苯进行反倾销立案调查。"
+      ]
+    },
+    {
+      "id": "c02",
+      "title": "国铁集团优化老年旅客淡季购票优惠措施",
+      "section": "universal_policy",
+      "entity": "中国国家铁路集团",
+      "action": "优化",
+      "object": "老年旅客淡季购票优惠",
+      "published_at": "2026-10-03T17:15:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_CROSS_SOURCE",
+      "importance_reason": "面向全国老年旅客的票价优惠规则调整，具公共政策属性。",
+      "sources": [
+        {
+          "url": "https://m.chinanews.com/wap/detail/chs/zw/10707395.shtml",
+          "publisher": "中国新闻网",
+          "tier": "trusted_secondary",
+          "published_at": "2026-10-03T17:15:00+08:00"
+        },
+        {
+          "url": "https://big5.china.com.cn/gate/big5/news.china.com.cn/2026-10/03/content_118721553.shtml",
+          "publisher": "中国网（新华社稿）",
+          "tier": "trusted_secondary",
+          "tier_reason": "新华社北京10月3日电，中央重点新闻网站全文转载",
+          "published_at": "2026-10-03T17:15:00+08:00"
+        }
+      ],
+      "primary_url": "https://m.chinanews.com/wap/detail/chs/zw/10707395.shtml",
+      "body_facts": [
+        "国铁集团10月3日称，年满60周岁老年人购买10月18日至12月30日标注「敬」字车次的火车票可享执行票价9折的「折上折」优惠。"
+      ]
+    },
+    {
+      "id": "c03",
+      "title": "我国首个深水油田二次开发项目累产原油突破200万吨",
+      "section": "investment",
+      "watchlist_subject": "大型央企",
+      "entity": "中国海油",
+      "action": "宣布",
+      "object": "流花油田二次开发累产原油突破200万吨",
+      "published_at": "2026-10-03T12:09:00+08:00",
+      "status": "PASS",
+      "evidence_status": "VERIFIED_PRIMARY",
+      "importance_reason": "大型央企重大产能项目的里程碑式运营数据。",
+      "sources": [
+        {
+          "url": "https://www.baidu.com/s?wd=%E6%B5%81%E8%8A%B1%E6%B2%B9%E7%94%B0+200%E4%B8%87%E5%90%A8",
+          "publisher": "百度搜索结果页",
+          "tier": "discovery_only"
+        }
+      ],
+      "primary_url": "https://www.baidu.com/s?wd=%E6%B5%81%E8%8A%B1%E6%B2%B9%E7%94%B0+200%E4%B8%87%E5%90%A8",
+      "body_facts": [
+        "中国海油称流花油田二次开发项目累计生产原油突破200万吨。"
+      ],
+      "material_update": {
+        "claim": "流花油田二次开发累产原油突破200万吨",
+        "published_at": "2026-10-03T12:09:00+08:00",
+        "source_url": "https://www.baidu.com/s?wd=%E6%B5%81%E8%8A%B1%E6%B2%B9%E7%94%B0+200%E4%B8%87%E5%90%A8"
+      }
+    },
+    {
+      "id": "c04",
+      "title": "国家医保局统一7类医用耗材医保通用名",
+      "section": "universal_policy",
+      "entity": "国家医保局",
+      "action": "发布",
+      "object": "7类医用耗材分类与代码及医保通用名",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "全国统一耗材医保通用名，影响挂网、采购与支付环节。",
+      "sources": [
+        {
+          "url": "https://www.sohu.com/a/1083596932_439193",
+          "publisher": "搜狐（地方媒体转载）",
+          "tier": "trusted_secondary"
+        }
+      ],
+      "primary_url": "https://www.sohu.com/a/1083596932_439193",
+      "body_facts": [
+        "国家医保局发布7类医用耗材分类与代码及医保通用名，共136个通用名。"
+      ]
+    },
+    {
+      "id": "c05",
+      "title": "国庆档电影总票房突破3亿元",
+      "section": "social",
+      "topic_type": "culture_market",
+      "entity": "国庆档",
+      "action": "突破",
+      "object": "国庆档电影总票房3亿元",
+      "published_at": "2026-10-03T12:00:00+08:00",
+      "status": "PASS",
+      "evidence_status": "SECONDARY_ONLY",
+      "disclosure": "尚未见一手确认",
+      "importance_reason": "档期票房属可核实的市场数据。",
+      "sources": [
+        {
+          "url": "https://www.toutiao.com/article/7692034473646375470/",
+          "publisher": "今日头条（新华社夜览）",
+          "tier": "discovery_only"
+        }
+      ],
+      "primary_url": "https://www.toutiao.com/article/7692034473646375470/",
+      "body_facts": [
+        "据网络平台数据，2026年国庆档总票房含预售突破3亿元。"
+      ]
+    }
+  ]
+}

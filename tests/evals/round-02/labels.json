@@ -1,0 +1,58 @@
+{
+  "round": "round-02",
+  "date": "2026-10-04",
+  "window": "2026-10-03T09:00+08:00 → 2026-10-04T09:00+08:00",
+  "issue_note": "同一窗口的第二遍独立检索。本轮暴露的两个问题都已就地修掉：①投资栏目只校验事件类型、不校验主体，导致清单外个股并购被误收 —— 现改为投资条目必须声明 watchlist_subject，由程序对着 config 校验引用；②『仅有可信二手』原先只要写上披露标记就能放行 —— 现改为必须真有一条程序能算出来的可信来源。修完后 c07 被 Gate 挡下，本轮输出从 4 条收敛到 3 条。",
+  "note": "查询入口换成了『当日要闻汇总 / 公司公告 / 部委印发』，与 Round 1 不共用查询词。",
+  "items": [
+    {
+      "id": "c01",
+      "title": "商务部对原产于欧盟的进口对硝基甲苯发起反倾销立案调查",
+      "label": "GOOD",
+      "note": "与 Round 1 重叠，两轮结论一致。"
+    },
+    {
+      "id": "c02",
+      "title": "国铁集团优化老年旅客淡季购票优惠措施",
+      "label": "GOOD",
+      "note": "与 Round 1 重叠，两轮结论一致。"
+    },
+    {
+      "id": "c04",
+      "title": "自然资源部公布1—8月新一轮找矿突破进展",
+      "label": "GOOD",
+      "note": "战略性矿产新增储量，属部委级实质数据发布。来源只有央视网，已按 SECONDARY_ONLY 标注『尚未见一手确认』。"
+    }
+  ],
+  "rejected_review": [
+    {"id": "c03", "label": "OLD", "agree": true, "note": "医保局官网通知公告日期为 9 月 18 日，判 OLD 正确。"},
+    {"id": "c05", "label": "OLD", "agree": true, "note": "储能项目 10 月 2 日并网，判 OLD 正确。"},
+    {"id": "c06", "label": "REJECTED", "agree": true, "note": "只有今日头条一条转载，Gate 判 DISCOVERY_ONLY_AS_SOLE_EVIDENCE + SECONDARY_SOURCE_MISSING 正确 —— 应去找交易所／巨潮公告，没找到就不发。"},
+    {"id": "c07", "label": "SHOULD_NOT_INCLUDE", "agree": true, "note": "峰岹科技不在关注清单的投资主体里，agent 也给不出合法的 watchlist_subject，Gate 直接挡下。这是本轮最重要的一处改进：误收在系统层被拦住，而不是靠事后人工发现。"},
+    {"id": "c08", "label": "LOW_VALUE", "agree": true, "note": "活动自 9 月即已开展，属部署类通稿，判 LOW_VALUE 正确。"}
+  ],
+  "missed_important": [
+    {
+      "title": "OpenAI 暂停最先进模型训练并取消 GPT-6.1 Astra 的 10 月发布",
+      "reason": "两轮都没找到。AI 线索一直按『新模型发布』找，没有覆盖『安全事件 / 人事变动』这条线。这是检索环节的系统性盲区。",
+      "expected_gate": "ai / importance"
+    },
+    {
+      "title": "中国海油流花油田二次开发累产原油突破 200 万吨",
+      "reason": "第二轮没再发现。第一轮找到了、且人工评为 GOOD —— 说明同一窗口换一批查询词，高质量的条目会整条消失。",
+      "expected_gate": "investment"
+    },
+    {
+      "title": "Aleph Alpha 开源发布 780 亿参数模型 Kolibri-1",
+      "reason": "第二轮没再发现。同上：靠单一轮检索无法保证覆盖。",
+      "expected_gate": "ai"
+    }
+  ],
+  "instability": {
+    "same_event_overlap": 2,
+    "newly_added": 6,
+    "missing_from_second_run": 9,
+    "decision_changed": 0,
+    "comment": "重叠率仅 2/11。裁决零变化说明规则层是稳定的；不稳定的是候选池。"
+  }
+}

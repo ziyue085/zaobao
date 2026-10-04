@@ -79,17 +79,25 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "中芯国际"
           }
         ]
       },
       "expect": {
         "block_count": 0,
         "warn_count": 0,
-        "stats": { "pass": 2, "top_pick": 2 },
+        "stats": {
+          "pass": 2,
+          "top_pick": 2
+        },
         "render_block_count": 0,
-        "render_contains": ["今天最值得看的2件事"],
-        "render_excludes": ["今天最值得看的3件事"]
+        "render_contains": [
+          "今天最值得看的2件事"
+        ],
+        "render_excludes": [
+          "今天最值得看的3件事"
+        ]
       }
     },
     {
@@ -118,7 +126,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
-            "body_facts": ["中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。"],
+            "body_facts": [
+              "中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -151,7 +161,9 @@
               }
             ],
             "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
-            "body_facts": ["中芯国际今日发布2026年三季度报告。"],
+            "body_facts": [
+              "中芯国际今日发布2026年三季度报告。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -160,15 +172,20 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "中芯国际"
           }
         ]
       },
       "render_text": "# 早间情报 · 2026-10-04\n\n统计窗口：2026-10-03 10:00 → 2026-10-04 10:00（北京时间）\n\n## 今天最值得看的3件事\n\n- 中国人民银行开展6000亿元中期借贷便利操作。\n- 中芯国际发布2026年三季度报告。\n\n## 普适性政策\n\n**中国人民银行开展6000亿元中期借贷便利操作**\n\n中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。\n\n来源：[中国人民银行](https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html)\n\n## 投资\n\n**中芯国际发布2026年三季度报告**\n\n中芯国际今日发布2026年三季度报告。\n\n来源：[中芯国际](https://www.smic.com/investor/announcement/2026q3.html)\n",
       "expect": {
         "render_block_count": 1,
-        "render_codes": ["TOP_COUNT_MISMATCH"],
-        "severity": { "TOP_COUNT_MISMATCH": "BLOCK" }
+        "render_codes": [
+          "TOP_COUNT_MISMATCH"
+        ],
+        "severity": {
+          "TOP_COUNT_MISMATCH": "BLOCK"
+        }
       }
     },
     {
@@ -197,7 +214,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
-            "body_facts": ["中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。"],
+            "body_facts": [
+              "中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -230,14 +249,20 @@
                 "tier_reason": "公司官网新闻稿"
               }
             ],
-            "body_facts": ["该公司今日更新了官网产品页面文案。"],
+            "body_facts": [
+              "该公司今日更新了官网产品页面文案。"
+            ],
             "has_material_event": true
           }
         ]
       },
       "expect": {
-        "block_codes": ["STATUS_NOT_PASS"],
-        "severity": { "STATUS_NOT_PASS": "BLOCK" }
+        "block_codes": [
+          "STATUS_NOT_PASS"
+        ],
+        "severity": {
+          "STATUS_NOT_PASS": "BLOCK"
+        }
       }
     },
     {
@@ -266,7 +291,9 @@
               }
             ],
             "primary_url": "https://www.pbc.gov.cn/goutongjiaoliu/113456/20261004.html",
-            "body_facts": ["中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。"],
+            "body_facts": [
+              "中国人民银行今日公告，开展6000亿元中期借贷便利操作，期限1年。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -299,7 +326,9 @@
               }
             ],
             "primary_url": "https://www.smic.com/investor/announcement/2026q3.html",
-            "body_facts": ["中芯国际今日发布2026年三季度报告。"],
+            "body_facts": [
+              "中芯国际今日发布2026年三季度报告。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -308,7 +337,8 @@
               "primary_source_checked": true,
               "url_checked": true,
               "no_analysis_checked": true
-            }
+            },
+            "watchlist_subject": "中芯国际"
           },
           {
             "id": "t3",
@@ -332,7 +362,9 @@
               }
             ],
             "primary_url": "https://www.mem.gov.cn/xw/yjglbgzdt/20261004.shtml",
-            "body_facts": ["应急管理部今日通报某地事故救援进展。"],
+            "body_facts": [
+              "应急管理部今日通报某地事故救援进展。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -364,7 +396,9 @@
               }
             ],
             "primary_url": "https://openai.com/index/video-input-model/",
-            "body_facts": ["OpenAI 今日在其官网发布支持视频输入的多模态模型。"],
+            "body_facts": [
+              "OpenAI 今日在其官网发布支持视频输入的多模态模型。"
+            ],
             "has_material_event": true,
             "gates": {
               "time_window_checked": true,
@@ -378,9 +412,16 @@
         ]
       },
       "expect": {
-        "block_codes": ["TOP3_PADDING"],
-        "severity": { "TOP3_PADDING": "BLOCK" },
-        "stats": { "pass": 4, "top_pick": 4 }
+        "block_codes": [
+          "TOP3_PADDING"
+        ],
+        "severity": {
+          "TOP3_PADDING": "BLOCK"
+        },
+        "stats": {
+          "pass": 4,
+          "top_pick": 4
+        }
       }
     }
   ]
